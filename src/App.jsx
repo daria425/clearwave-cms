@@ -11,6 +11,7 @@ export const appContext = createContext({
   refreshToken: "",
   updateAccessToken: () => {},
   updateRefreshToken: () => {},
+  handleDelete: () => {},
 });
 
 function App() {
@@ -30,6 +31,10 @@ function App() {
     setRefreshToken(newToken);
   }
 
+  function handleDelete(e) {
+    const newPosts = blogPosts.filter((post) => post._id !== e.target.id);
+    setBlogPosts(newPosts);
+  }
   return (
     <appContext.Provider
       value={{
@@ -38,6 +43,7 @@ function App() {
         refreshToken,
         updateAccessToken,
         updateRefreshToken,
+        handleDelete,
       }}
     >
       <BrowserRouter>
