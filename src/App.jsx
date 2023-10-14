@@ -31,9 +31,11 @@ function App() {
     setRefreshToken(newToken);
   }
 
-  function handleDelete(e) {
-    const newPosts = blogPosts.filter((post) => post._id !== e.target.id);
-    setBlogPosts(newPosts);
+  function handleDelete(e, error) {
+    if (!error) {
+      const newPosts = blogPosts.filter((post) => post._id !== e.target.id);
+      setBlogPosts(newPosts);
+    }
   }
   return (
     <appContext.Provider

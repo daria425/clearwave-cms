@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
 
 function useTokenRefresh(accessToken, refreshToken, updateAccessToken) {
+  const [error, setError] = useState(false);
   useEffect(() => {
     async function refreshAccessToken() {
       try {
@@ -28,6 +29,7 @@ function useTokenRefresh(accessToken, refreshToken, updateAccessToken) {
               const newToken = await response.json();
               updateAccessToken(newToken);
             } else {
+              setError(true);
               throw new Error(
                 `Refresh failed with status code ${response.status}`
               );
@@ -36,13 +38,14 @@ function useTokenRefresh(accessToken, refreshToken, updateAccessToken) {
         }
       } catch (err) {
         console.log(`Error: ${err}`);
+        setError(true);
       }
     }
 
     refreshAccessToken();
   }, [accessToken, refreshToken, updateAccessToken]);
 
-  return {};
+  return error;
 }
 function useData(query) {
   const [error, setError] = useState(false);
