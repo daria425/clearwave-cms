@@ -2,53 +2,68 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { appContext } from "../../../App";
 import jwtDecode from "jwt-decode";
+import { useTokenRefresh } from "../../../Hooks";
 export default function BlogCard({ post }) {
   const { handleDelete, accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
-
+  useTokenRefresh(accessToken, updateAccessToken, refreshToken);
   async function handleSubmit(e) {
     console.log(e.target.id);
     e.preventDefault();
-    if (accessToken) {
-      const decodedToken = jwtDecode(accessToken);
-      const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+    // try {
+    //   if (accessToken) {
+    //     const decodedToken = jwtDecode(accessToken);
+    //     const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
 
-      if (decodedToken.exp < currentTime) {
-        // Access token is expired
-        // You can handle token refresh or re-authentication here
-        console.log("Access token is expired. Refreshing...");
+    //     if (decodedToken.exp < currentTime) {
+    //       // Access token is expired
+    //       // You can handle token refresh or re-authentication here
+    //       console.log("Access token is expired. Refreshing...");
 
-        const data = await fetch("http://localhost:3000/api/refresh", {
-          method: "POST",
-          credentials: "include", // Include credentials (cookies)
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${refreshToken}`,
-            "x-api-key": "svintus2", // Include your API key
-          },
-        });
-        const newToken = await data.json();
-        console.log(newToken);
-        updateAccessToken(newToken);
-        // Perform token refresh or re-authentication and update the access token
-        // Example: const newAccessToken = await refreshAccessToken();
-        // updateAccessToken(newAccessToken);
+    //       const response = await fetch("http://localhost:3000/api/refresh", {
+    //         method: "POST",
+    //         credentials: "include", // Include credentials (cookies)
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           "Authorization": `Bearer ${refreshToken}`,
+    //           "x-api-key": "svintus2", // Include your API key
+    //         },
+    //       });
+    //       if (response.ok) {
+    //         const newToken = await data.json();
+    //         console.log(newToken);
+    //         updateAccessToken(newToken);
+    //         // Perform token refresh or re-authentication and update the access token
+    //         // Example: const newAccessToken = await refreshAccessToken();
+    //         // updateAccessToken(newAccessToken);
 
-        return;
-      }
+    //         return;
+    //       } else {
+    //         throw new Error(
+    //           `Refresh failed with status code ${response.status}`
+    //         );
+    //       }
+    //     }
+    //   }
+    // } catch (err) {
+    //   console.log(`Error: ${err}`);
+    // }
+
+    try {
+      await fetch("http://localhost:3000/api/posts/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${accessToken}`,
+          "x-api-key": "svintus", // Include your API key
+        },
+        body: JSON.stringify({
+          postid: e.target.id,
+        }),
+      });
+    } catch (err) {
+      console.log(err);
     }
-
-    await fetch("http://localhost:3000/api/posts/delete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${accessToken}`,
-        "x-api-key": "svintus", // Include your API key
-      },
-      body: JSON.stringify({
-        postid: e.target.id,
-      }),
-    });
   }
   return (
     <div role="article" key={post._id} id={post._id}>
