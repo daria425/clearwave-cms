@@ -10,9 +10,7 @@ function useData(query) {
 
     async function startFetching() {
       try {
-        const json = await fetch(
-          `https://blog-api-production-f4a3.up.railway.app/${query}`
-        );
+        const json = await fetch(`http://localhost:3000/${query}`);
         const data = await json.json();
         if (!ignore) {
           console.log(data);
