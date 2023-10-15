@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { appContext } from "../../../App";
 import { useTokenRefresh } from "../../../Hooks";
 export default function BlogCard({ post }) {
+  const navigate = useNavigate();
   const { handleDelete, accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
   const error = useTokenRefresh(accessToken, updateAccessToken, refreshToken);
@@ -31,7 +32,7 @@ export default function BlogCard({ post }) {
       <h2>Title:{post.title}</h2>
       <p>Category:{post.category.name}</p>
       <p>{post.createdAt}</p>
-      <button>Edit</button>
+      <button onClick={() => navigate(`/edit/${post._id}`)}>Edit</button>
       <form>
         <input
           id={post._id}

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import EditPage from "./pages/Edit/EditPage";
 
 export const appContext = createContext({
   blogPosts: [],
@@ -12,6 +13,7 @@ export const appContext = createContext({
   updateAccessToken: () => {},
   updateRefreshToken: () => {},
   handleDelete: () => {},
+  isLoading: "",
 });
 
 function App() {
@@ -46,15 +48,14 @@ function App() {
         updateAccessToken,
         updateRefreshToken,
         handleDelete,
+        isLoading,
       }}
     >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route
-            path="/dashboard"
-            element={<Dashboard isLoading={isLoading} />}
-          />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/edit/:id" element={<EditPage />} />
         </Routes>
       </BrowserRouter>
     </appContext.Provider>

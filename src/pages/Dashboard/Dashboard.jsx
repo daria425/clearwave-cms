@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { appContext } from "../../App";
 import BlogCard from "./components/BlogCard";
-export default function Dashboard({ isLoading }) {
-  const { blogPosts } = useContext(appContext);
+export default function Dashboard() {
+  const { blogPosts, isLoading } = useContext(appContext);
   if (!isLoading) {
     console.log(blogPosts);
   }
