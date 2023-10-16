@@ -3,6 +3,7 @@ import { useData } from "../../../Hooks";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { appContext } from "../../../App";
+import { useTokenRefresh } from "../../../Hooks";
 export default function EditForm({
   selectedPost,
   handleChange,
@@ -15,7 +16,46 @@ export default function EditForm({
   const { data, error, isLoading } = useData("api/category");
   const { id } = useParams();
   const [categories, setCategories] = useState([]);
-  const { handlePostUpdate } = useContext(appContext);
+  const { handlePostUpdate, accessToken, updateAccessToken, refreshToken } =
+    useContext(appContext);
+  const serverError = useTokenRefresh(
+    accessToken,
+    updateAccessToken,
+    refreshToken
+  );
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      console.log(accessToken);
+      const response = await fetch(
+        `http://localhost:3000/api/posts/${selectedPost._id}/update`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${accessToken}`,
+            "x-api-key": "svintus", // Include your API key
+          },
+          body: JSON.stringify({
+            title: selectedPost.title,
+            content: {
+              subheadings: selectedPost.subheadings,
+              snippets: selectedPost.snippets,
+              main_text: selectedPost.main_text,
+            },
+            category: selectedPost.category._id,
+            tags: selectedPost.tags,
+            is_published: selectedPost.is_published,
+          }),
+        }
+      );
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   useEffect(() => {
     if (!isLoading) {
       setCategories(data);
@@ -129,6 +169,7 @@ export default function EditForm({
       <button
         id={selectedPost._id}
         onClick={(e) => {
+          handleSubmit(e);
           handlePostUpdate(e, selectedPost);
         }}
       >
