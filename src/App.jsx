@@ -13,6 +13,7 @@ export const appContext = createContext({
   updateAccessToken: () => {},
   updateRefreshToken: () => {},
   handleDelete: () => {},
+  handlePostUpdate: () => {},
   isLoading: "",
 });
 
@@ -39,6 +40,13 @@ function App() {
       setBlogPosts(newPosts);
     }
   }
+
+  function handlePostUpdate(e, changedPost) {
+    const newPosts = blogPosts.map((post) =>
+      post._id === e.target.id ? changedPost : post
+    );
+    setBlogPosts(newPosts);
+  }
   return (
     <appContext.Provider
       value={{
@@ -48,6 +56,7 @@ function App() {
         updateAccessToken,
         updateRefreshToken,
         handleDelete,
+        handlePostUpdate,
         isLoading,
       }}
     >
