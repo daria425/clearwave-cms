@@ -20,6 +20,7 @@ export default function LoginForm() {
     try {
       const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -39,6 +40,7 @@ export default function LoginForm() {
       updateAccessToken(accessToken);
       updateRefreshToken(refreshToken);
       setSuccessfulLogin(true);
+      localStorage.setItem("refreshToken", refreshToken);
       nav("/dashboard");
     } catch (error) {
       console.error("Error:", error.message);

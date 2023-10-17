@@ -28,27 +28,45 @@ export default function EditForm({
     e.preventDefault();
 
     try {
+      const contentObj = {
+        subheadings: selectedPost.content.subheadings[0] ?? "",
+        snippets: selectedPost.content.snippets[0] ?? "",
+        main_text: selectedPost.content.main_text,
+      };
+      console.log(JSON.stringify(selectedPost.tags));
+      const formData = new FormData();
+      formData.append("title", selectedPost.title);
+      // formData.append(
+      //   "content.subheadings",
+      //   selectedPost.content.subheadings[0] ?? ""
+      // );
+      // formData.append(
+      //   "content.snippets",
+      //   selectedPost.content.snippets[0] ?? ""
+      // );
+      // formData.append("content.main_text", selectedPost.content.main_text);
+      formData.append("content", JSON.stringify(contentObj));
+      formData.append("category", selectedPost.category._id);
+      formData.append("tags", JSON.stringify(selectedPost.tags));
+      formData.append("is_published", selectedPost.is_published);
+
+      // Add image files to formData if any
+      const imageInput = document.querySelector('input[name="image_sources"]');
+      for (const file of imageInput.files) {
+        formData.append("image_sources", file);
+      }
       console.log(accessToken);
       const response = await fetch(
         `http://localhost:3000/api/posts/${selectedPost._id}/update`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
-            "Content-Type": "application/json",
+            // "Content-Type": "multipart/form-data",
             "Authorization": `Bearer ${accessToken}`,
             "x-api-key": "svintus", // Include your API key
           },
-          body: JSON.stringify({
-            title: selectedPost.title,
-            content: {
-              subheadings: selectedPost.subheadings,
-              snippets: selectedPost.snippets,
-              main_text: selectedPost.main_text,
-            },
-            category: selectedPost.category._id,
-            tags: selectedPost.tags,
-            is_published: selectedPost.is_published,
-          }),
+          body: formData,
         }
       );
       console.log(response);
@@ -65,7 +83,10 @@ export default function EditForm({
     return <p>Loading...</p>;
   }
   return (
-    <form action={`http://localhost:3000/api/posts/${id}/update`}>
+    <form
+      action={`http://localhost:3000/api/posts/${id}/update`}
+      encType="multipart/form-data"
+    >
       <label htmlFor="title">
         Post Title:
         <input
