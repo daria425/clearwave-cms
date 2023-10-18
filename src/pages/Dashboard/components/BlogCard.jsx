@@ -14,6 +14,7 @@ export default function BlogCard({ post }) {
     try {
       await fetch("http://localhost:3000/api/posts/delete", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${accessToken}`,

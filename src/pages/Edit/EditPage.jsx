@@ -31,6 +31,9 @@ export default function EditPage() {
       },
     });
   }
+  function handleFileUpload(e) {
+    console.log(e.target.files);
+  }
 
   function handleNestedTextChange(e) {
     const [firstProp, nestedProp] = e.target.name.split(".");
@@ -78,6 +81,7 @@ export default function EditPage() {
             handleNestedTextChange={handleNestedTextChange}
             handleCheckbox={handleCheckbox}
             handleArrayChange={handleArrayChange}
+            handleFileUpload={handleFileUpload}
           />
         </>
       )}

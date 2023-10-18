@@ -12,6 +12,7 @@ export default function EditForm({
   handleNestedTextChange,
   handleCheckbox,
   handleArrayChange,
+  handleFileUpload,
 }) {
   const { data, error, isLoading } = useData("api/category");
   const { id } = useParams();
@@ -154,7 +155,14 @@ export default function EditForm({
         ))}
       </select>
       <label htmlFor="image_sources">
-        <input type="file" name="image_sources" multiple></input>
+        <input
+          type="file"
+          name="image_sources"
+          onChange={(e) => {
+            handleFileUpload(e);
+          }}
+          multiple
+        ></input>
       </label>
       <label htmlFor="tags-group">
         <fieldset>

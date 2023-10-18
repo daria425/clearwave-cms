@@ -26,7 +26,7 @@ function useTokenRefresh(accessToken, refreshToken, updateAccessToken) {
             });
 
             if (response.ok) {
-              const newToken = await response.json();
+              const { newToken, user } = await response.json();
               updateAccessToken(newToken);
             } else {
               setError(true);
