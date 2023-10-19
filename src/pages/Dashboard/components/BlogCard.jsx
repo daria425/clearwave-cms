@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { appContext } from "../../../App";
 import { useTokenRefresh } from "../../../Hooks";
 export default function BlogCard({ post }) {
   const navigate = useNavigate();
   const { handleDelete, accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
-  const error = useTokenRefresh(accessToken, updateAccessToken, refreshToken);
+  useTokenRefresh(accessToken, updateAccessToken, refreshToken);
+  const [error, setError] = useState(null);
   async function handleSubmit(e) {
     console.log(e.target.id);
     e.preventDefault();
 
     try {
-      await fetch("http://localhost:3000/api/posts/delete", {
+      const response = await fetch("http://localhost:3000/api/posts/delete", {
         method: "POST",
         credentials: "include",
         headers: {
@@ -24,36 +25,38 @@ export default function BlogCard({ post }) {
           postid: e.target.id,
         }),
       });
+      if (response.ok) {
+        handleDelete(e);
+      } else {
+        throw new Error(
+          `Server response failed with status code: ${response.statusText}`
+        );
+      }
     } catch (err) {
-      console.log(err);
+      setError(err.message);
     }
   }
   return (
     <div role="article" key={post._id} id={post._id}>
-      <h2>Title:{post.title}</h2>
-      <p>Category:{post.category.name}</p>
-      <p>{post.createdAt}</p>
-      <button onClick={() => navigate(`/edit/${post._id}`)}>Edit</button>
-      <form>
-        <input
-          id={post._id}
-          className="form-control"
-          type="hidden"
-          name="postid"
-          required={true}
-          value={post._id}
-        />
-        <button
-          type="submit"
-          id={post._id}
-          onClick={(e) => {
-            handleSubmit(e);
-            handleDelete(e, error);
-          }}
-        >
-          Delete
-        </button>
-      </form>
+      {error ? (
+        <p style={{ color: "red" }}>{error}</p>
+      ) : (
+        <>
+          <h2>Title: {post.title}</h2>
+          <p>Category: {post.category.name}</p>
+          <p>{post.createdAt}</p>
+          <button onClick={() => navigate(`/edit/${post._id}`)}>Edit</button>
+          <button
+            type="submit"
+            id={post._id}
+            onClick={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            Delete
+          </button>
+        </>
+      )}
     </div>
   );
 }

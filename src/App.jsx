@@ -42,6 +42,7 @@ function App() {
   }
 
   function handlePostUpdate(e, changedPost) {
+    //syncs selected post update to updating the allblogposts array
     const newPosts = blogPosts.map((post) =>
       post._id === e.target.id ? changedPost : post
     );

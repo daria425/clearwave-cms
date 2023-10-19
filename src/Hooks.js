@@ -52,6 +52,7 @@ function useData(query) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    console.log(`data refresh for : ${query}`);
     let ignore = false;
 
     async function startFetching() {

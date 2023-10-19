@@ -65,12 +65,15 @@ export default function EditForm({
           headers: {
             // "Content-Type": "multipart/form-data",
             "Authorization": `Bearer ${accessToken}`,
-            "x-api-key": "svintus", // Include your API key
+            "x-api-key": "svintus", // Include  API key
           },
           body: formData,
         }
       );
       console.log(response);
+      if (response.ok) {
+        handlePostUpdate(e, selectedPost);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -199,7 +202,6 @@ export default function EditForm({
         id={selectedPost._id}
         onClick={(e) => {
           handleSubmit(e);
-          handlePostUpdate(e, selectedPost);
         }}
       >
         Save Changes

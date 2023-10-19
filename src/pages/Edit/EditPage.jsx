@@ -33,6 +33,10 @@ export default function EditPage() {
   }
   function handleFileUpload(e) {
     console.log(e.target.files);
+    const uploaded_images = e.target.files.map((file) =>
+      URL.createObjectURL(file)
+    );
+    setSelectedPost({ ...selectedPost, uploaded_images });
   }
 
   function handleNestedTextChange(e) {
@@ -66,13 +70,22 @@ export default function EditPage() {
     );
     setSelectedPost({ ...selectedPost, tags: newTags });
   }
+  function handleImageDelete(e) {
+    const newImages = selectedPost.image_sources.filter(
+      (image) => image._id !== e.target.id
+    ); //make new array where image id does not equal to btn id
+    setSelectedPost({ ...selectedPost, image_sources: newImages });
+  }
   return (
     <>
       {!selectedPost ? (
         <p>Loading...</p> // Display a loading message or spinner while loading
       ) : (
         <>
-          <PostDetails selectedPost={selectedPost} />
+          <PostDetails
+            selectedPost={selectedPost}
+            handleImageDelete={handleImageDelete}
+          />
           <EditForm
             selectedPost={selectedPost}
             handleChange={handleChange}
