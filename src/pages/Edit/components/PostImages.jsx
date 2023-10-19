@@ -7,16 +7,16 @@ export default function PostImages({ selectedPost, handleImageDelete }) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/api/posts/imgdelete`,
+        `http://localhost:3000/api/posts/${selectedPost._id}/imagedelete`,
         {
           method: "POST",
           credentials: "include",
           headers: {
-            // "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
             "Authorization": `Bearer ${accessToken}`,
             "x-api-key": "svintus", // Include  API key
           },
-          body: e.target.id,
+          body: JSON.stringify({ "image_to_delete": e.target.id }),
         }
       );
       console.log(response);
