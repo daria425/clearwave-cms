@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { appContext } from "../../../App";
 import { useTokenRefresh } from "../../../Hooks";
+import Modal from "./Modal";
 export default function EditForm({
   selectedPost,
   handleChange,
@@ -17,14 +18,15 @@ export default function EditForm({
   const { data, error, isLoading } = useData("api/category");
   const { id } = useParams();
   const [categories, setCategories] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [responseError, setResponseError] = useState(false);
   const { handlePostUpdate, accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
-  const serverError = useTokenRefresh(
-    accessToken,
-    updateAccessToken,
-    refreshToken
-  );
+  useTokenRefresh(accessToken, updateAccessToken, refreshToken);
 
+  function handleModal() {
+    setModalOpen(!modalOpen);
+  }
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -73,9 +75,16 @@ export default function EditForm({
       console.log(response);
       if (response.ok) {
         handlePostUpdate(e, selectedPost);
+      } else {
+        throw new Error(
+          `Server response failed with status code: ${response.statusText}`
+        );
       }
     } catch (err) {
+      setResponseError(err.message);
       console.log(err);
+    } finally {
+      handleModal();
     }
   }
   useEffect(() => {
@@ -87,125 +96,130 @@ export default function EditForm({
     return <p>Loading...</p>;
   }
   return (
-    <form
-      action={`http://localhost:3000/api/posts/${id}/update`}
-      encType="multipart/form-data"
-    >
-      <label htmlFor="title">
-        Post Title:
-        <input
-          name="title"
-          type="text"
-          required
-          value={selectedPost.title}
-          onChange={(e) => {
-            handleChange(e);
-          }}
-        />
-      </label>
-      <label htmlFor="content">
-        <fieldset>
-          <label htmlFor="subheadings">
-            Subheadings:
-            <input
-              name="content.subheadings"
-              value={selectedPost.content.subheadings[0] ?? ""}
-              onChange={(e) => {
-                handleNestedArrayChange(e);
-              }}
-              type="text"
-              required
-            />
-          </label>
-          <label htmlFor="snippets">
-            Snippets:
-            <input
-              name="content.snippets"
-              value={selectedPost.content.snippets[0] ?? ""}
-              onChange={(e) => {
-                handleNestedArrayChange(e);
-              }}
-              type="text"
-              required
-            />
-          </label>
-          <label htmlFor="main_text">
-            Body text:
-            <textarea
-              name="content.main_text"
-              rows={5}
-              cols={10}
-              onChange={(e) => {
-                handleNestedTextChange(e);
-              }}
-              required
-            >
-              {selectedPost.content.main_text}
-            </textarea>
-          </label>
-        </fieldset>
-      </label>
-      <select
-        name="category"
-        onChange={(e) => {
-          handleSelectChange(categories, e);
-        }}
+    <>
+      {modalOpen && (
+        <Modal responseError={responseError} handleModal={handleModal} />
+      )}
+      <form
+        action={`http://localhost:3000/api/posts/${id}/update`}
+        encType="multipart/form-data"
       >
-        {categories.map((category) => (
-          <option key={category._id} value={category._id}>
-            {category.name}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="image_sources">
-        <input
-          type="file"
-          name="image_sources"
+        <label htmlFor="title">
+          Post Title:
+          <input
+            name="title"
+            type="text"
+            required
+            value={selectedPost.title}
+            onChange={(e) => {
+              handleChange(e);
+            }}
+          />
+        </label>
+        <label htmlFor="content">
+          <fieldset>
+            <label htmlFor="subheadings">
+              Subheadings:
+              <input
+                name="content.subheadings"
+                value={selectedPost.content.subheadings[0] ?? ""}
+                onChange={(e) => {
+                  handleNestedArrayChange(e);
+                }}
+                type="text"
+                required
+              />
+            </label>
+            <label htmlFor="snippets">
+              Snippets:
+              <input
+                name="content.snippets"
+                value={selectedPost.content.snippets[0] ?? ""}
+                onChange={(e) => {
+                  handleNestedArrayChange(e);
+                }}
+                type="text"
+                required
+              />
+            </label>
+            <label htmlFor="main_text">
+              Body text:
+              <textarea
+                name="content.main_text"
+                rows={5}
+                cols={10}
+                onChange={(e) => {
+                  handleNestedTextChange(e);
+                }}
+                required
+              >
+                {selectedPost.content.main_text}
+              </textarea>
+            </label>
+          </fieldset>
+        </label>
+        <select
+          name="category"
           onChange={(e) => {
-            handleFileUpload(e);
+            handleSelectChange(categories, e);
           }}
-          multiple
-        ></input>
-      </label>
-      <label htmlFor="tags-group">
-        <fieldset>
-          {selectedPost.tags.map((tag, index) => {
-            return (
-              <label htmlFor="tag" key={index}>
-                Tag {index + 1}
-                <input
-                  type="text"
-                  name={tag}
-                  id={index}
-                  value={tag}
-                  onChange={(e) => {
-                    handleArrayChange(e);
-                  }}
-                ></input>
-              </label>
-            );
-          })}
-        </fieldset>
-      </label>
-      <label htmlFor="is_published">
-        Publish?
-        <input
-          type="checkbox"
-          name="is_published"
-          checked={selectedPost.is_published}
-          onChange={(e) => {
-            handleCheckbox(e);
+        >
+          {categories.map((category) => (
+            <option key={category._id} value={category._id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+        <label htmlFor="image_sources">
+          <input
+            type="file"
+            name="image_sources"
+            onChange={(e) => {
+              handleFileUpload(e);
+            }}
+            multiple
+          ></input>
+        </label>
+        <label htmlFor="tags-group">
+          <fieldset>
+            {selectedPost.tags.map((tag, index) => {
+              return (
+                <label htmlFor="tag" key={index}>
+                  Tag {index + 1}
+                  <input
+                    type="text"
+                    name={tag}
+                    id={index}
+                    value={tag}
+                    onChange={(e) => {
+                      handleArrayChange(e);
+                    }}
+                  ></input>
+                </label>
+              );
+            })}
+          </fieldset>
+        </label>
+        <label htmlFor="is_published">
+          Publish?
+          <input
+            type="checkbox"
+            name="is_published"
+            checked={selectedPost.is_published}
+            onChange={(e) => {
+              handleCheckbox(e);
+            }}
+          ></input>
+        </label>
+        <button
+          id={selectedPost._id}
+          onClick={(e) => {
+            handleSubmit(e);
           }}
-        ></input>
-      </label>
-      <button
-        id={selectedPost._id}
-        onClick={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        Save Changes
-      </button>
-    </form>
+        >
+          Save Changes
+        </button>
+      </form>
+    </>
   );
 }
