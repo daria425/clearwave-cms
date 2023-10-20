@@ -14,6 +14,7 @@ export const appContext = createContext({
   updateRefreshToken: () => {},
   handleDelete: () => {},
   handlePostUpdate: () => {},
+  syncImageDelete: () => {},
   isLoading: "",
 });
 
@@ -48,6 +49,29 @@ function App() {
     );
     setBlogPosts(newPosts);
   }
+
+  function syncImageDelete(e) {
+    // //separate function because for images the post id is a separate data attribute
+    // console.log("images syncing");
+    // const newPosts = blogPosts.map((post) =>
+    //   post._id === e.target.dataset.postid ? changedPost : post
+    // );
+    // setBlogPosts(newPosts);
+    const selectedPost = blogPosts.find(
+      (post) => post._id === e.target.dataset.postid
+    );
+    const newImages = selectedPost.image_sources.filter(
+      (image) => image._id !== e.target.id
+    );
+    const newPost = { ...selectedPost, image_sources: newImages };
+    const newPosts = blogPosts.map((post) =>
+      post._id === e.target.dataset.postid ? newPost : post
+    );
+    setBlogPosts(newPosts);
+  }
+  //make new array where image id does not equal to btn id
+  //change post images to new images, dont re render yet
+
   return (
     <appContext.Provider
       value={{
@@ -58,6 +82,7 @@ function App() {
         updateRefreshToken,
         handleDelete,
         handlePostUpdate,
+        syncImageDelete,
         isLoading,
       }}
     >

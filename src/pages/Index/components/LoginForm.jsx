@@ -7,7 +7,6 @@ export default function LoginForm() {
   const { updateAccessToken, updateRefreshToken } = useContext(appContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [successfulLogin, setSuccessfulLogin] = useState(false);
   function handleUsernameChange(e) {
     setUsername(e.target.value);
   }
@@ -39,7 +38,6 @@ export default function LoginForm() {
       const { accessToken, refreshToken } = data;
       updateAccessToken(accessToken);
       updateRefreshToken(refreshToken);
-      setSuccessfulLogin(true);
       localStorage.setItem("refreshToken", refreshToken);
       nav("/dashboard");
     } catch (error) {

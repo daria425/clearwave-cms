@@ -32,11 +32,10 @@ export default function EditPage() {
     });
   }
   function handleFileUpload(e) {
-    console.log(e.target.files);
-    const uploaded_images = e.target.files.map((file) =>
-      URL.createObjectURL(file)
-    );
-    setSelectedPost({ ...selectedPost, uploaded_images });
+    const fileArray = [...e.target.files];
+    const uploaded_images = fileArray.map((file) => URL.createObjectURL(file));
+    console.log(uploaded_images);
+    // setSelectedPost({ ...selectedPost, uploaded_images });
   }
 
   function handleNestedTextChange(e) {
@@ -65,6 +64,7 @@ export default function EditPage() {
     });
   }
   function handleArrayChange(e) {
+    //happens separate from form submission
     const newTags = selectedPost.tags.map((tag) =>
       tag === e.target.name ? e.target.value : tag
     );

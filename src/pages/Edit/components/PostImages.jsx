@@ -1,8 +1,8 @@
 import { Buffer } from "buffer";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { appContext } from "../../../App";
 export default function PostImages({ selectedPost, handleImageDelete }) {
-  const { accessToken } = useContext(appContext);
+  const { accessToken, syncImageDelete } = useContext(appContext);
   async function handleServerImageDelete(e) {
     e.preventDefault();
     try {
@@ -21,7 +21,8 @@ export default function PostImages({ selectedPost, handleImageDelete }) {
       );
       console.log(response);
       if (response.ok) {
-        handleImageDelete(e); //if image is deleted on server THEN delete it on the client
+        // handleImageDelete(e); //if image is deleted on server THEN delete it on the client
+        syncImageDelete(e);
       }
     } catch (err) {
       console.log(err);
@@ -46,6 +47,7 @@ export default function PostImages({ selectedPost, handleImageDelete }) {
               onClick={(e) => {
                 handleServerImageDelete(e);
               }}
+              data-postid={selectedPost._id}
               id={image._id}
             >
               Remove image
