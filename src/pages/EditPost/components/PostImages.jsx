@@ -21,8 +21,7 @@ export default function PostImages({ selectedPost, handleImageDelete }) {
       );
       console.log(response);
       if (response.ok) {
-        // handleImageDelete(e); //if image is deleted on server THEN delete it on the client
-        syncImageDelete(e);
+        syncImageDelete(e); //deletes image on selected post AND in the allBlogs
       }
     } catch (err) {
       console.log(err);

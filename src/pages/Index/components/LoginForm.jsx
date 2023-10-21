@@ -28,7 +28,7 @@ export default function LoginForm() {
 
       if (!response.ok) {
         console.log(response);
-        throw new Error("Network response was not ok");
+        throw new Error(response.statusText);
       }
 
       const data = await response.json();

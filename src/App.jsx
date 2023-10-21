@@ -4,7 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import EditPage from "./pages/Edit/EditPage";
+import EditPage from "./pages/EditPost/EditPage";
+import NewPostPage from "./pages/NewPost/NewPostPage";
 
 export const appContext = createContext({
   blogPosts: [],
@@ -14,6 +15,7 @@ export const appContext = createContext({
   updateRefreshToken: () => {},
   handleDelete: () => {},
   handlePostUpdate: () => {},
+  handleNewPost: () => {},
   syncImageDelete: () => {},
   isLoading: "",
 });
@@ -50,6 +52,11 @@ function App() {
     setBlogPosts(newPosts);
   }
 
+  function handleNewPost(newPost) {
+    const newPosts = [...blogPosts, newPost];
+    setBlogPosts(newPosts);
+  }
+
   function syncImageDelete(e) {
     // //separate function because for images the post id is a separate data attribute
     // console.log("images syncing");
@@ -82,6 +89,7 @@ function App() {
         updateRefreshToken,
         handleDelete,
         handlePostUpdate,
+        handleNewPost,
         syncImageDelete,
         isLoading,
       }}
@@ -91,6 +99,7 @@ function App() {
           <Route path="/" element={<Index />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/edit/:id" element={<EditPage />} />
+          <Route path="/new" element={<NewPostPage />} />
         </Routes>
       </BrowserRouter>
     </appContext.Provider>
