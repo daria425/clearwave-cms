@@ -4,13 +4,13 @@ import { appContext } from "../../App";
 import BlogCard from "./components/BlogCard";
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { blogPosts, isLoading } = useContext(appContext);
-  if (!isLoading) {
+  const { blogPosts, postsLoading } = useContext(appContext);
+  if (!postsLoading) {
     console.log(blogPosts);
   }
   return (
     <>
-      {isLoading ? (
+      {postsLoading ? (
         <p>Loading...</p> // Display a loading message or spinner while loading
       ) : (
         blogPosts.map((post) => <BlogCard key={post._id} post={post} />)

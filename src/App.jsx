@@ -17,19 +17,31 @@ export const appContext = createContext({
   handlePostUpdate: () => {},
   handleNewPost: () => {},
   syncImageDelete: () => {},
-  isLoading: "",
+  categoryLoading: "",
+  postsLoading: "",
 });
 
 function App() {
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
-  const { data, error, isLoading } = useData("api/posts");
+  const {
+    data: categoryData,
+    error: categoryError,
+    isLoading: categoriesLoading,
+  } = useData("api/category");
+  const {
+    data: postData,
+    error: postError,
+    isLoading: postsLoading,
+  } = useData("api/posts");
   const [blogPosts, setBlogPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
-    if (!isLoading) {
-      setBlogPosts(data);
+    if (!postsLoading && !categoriesLoading) {
+      setBlogPosts(postData);
+      setCategories(categoryData);
     }
-  }, [data, isLoading]);
+  }, [postData, postsLoading, categoriesLoading, categoryData]);
   function updateAccessToken(newToken) {
     setAccessToken(newToken);
   }
@@ -91,7 +103,8 @@ function App() {
         handlePostUpdate,
         handleNewPost,
         syncImageDelete,
-        isLoading,
+        postsLoading,
+        categories,
       }}
     >
       <BrowserRouter>

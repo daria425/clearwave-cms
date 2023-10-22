@@ -8,16 +8,16 @@ import EditForm from "./components/EditPostForm";
 export default function EditPage() {
   const [selectedPost, setSelectedPost] = useState(false);
   const { id } = useParams();
-  const { blogPosts, isLoading } = useContext(appContext);
+  const { blogPosts, postsLoading } = useContext(appContext);
 
   useEffect(() => {
-    if (!isLoading) {
-      console.log("All blog posts:", isLoading, blogPosts);
+    if (!postsLoading) {
+      console.log("All blog posts:", postsLoading, blogPosts);
       const post = blogPosts.find((post) => post._id === id);
       console.log(post);
       setSelectedPost(post); // If post is not found, set an empty object
     }
-  }, [blogPosts, id, isLoading]);
+  }, [blogPosts, id, postsLoading]);
   function handleChange(e) {
     setSelectedPost({ ...selectedPost, [e.target.name]: e.target.value });
   }

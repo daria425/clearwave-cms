@@ -15,13 +15,16 @@ export default function EditForm({
   handleArrayChange,
   handleFileUpload,
 }) {
-  const { data, error, isLoading } = useData("api/category");
   const { id } = useParams();
-  const [categories, setCategories] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [responseError, setResponseError] = useState(false);
-  const { handlePostUpdate, accessToken, updateAccessToken, refreshToken } =
-    useContext(appContext);
+  const {
+    handlePostUpdate,
+    accessToken,
+    updateAccessToken,
+    refreshToken,
+    categories,
+  } = useContext(appContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
 
   function handleModal() {
@@ -88,11 +91,6 @@ export default function EditForm({
       handleModal();
     }
   }
-  useEffect(() => {
-    if (!isLoading) {
-      setCategories(data);
-    }
-  }, [data, isLoading]);
   if (categories.length === 0) {
     return <p>Loading...</p>;
   }
