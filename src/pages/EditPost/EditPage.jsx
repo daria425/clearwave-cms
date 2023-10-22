@@ -5,6 +5,7 @@ import { useState } from "react";
 import "./styles.css";
 import PostDetails from "./components/PostDetails";
 import EditForm from "./components/EditPostForm";
+import Layout from "../PageComponents/Layout";
 export default function EditPage() {
   const [selectedPost, setSelectedPost] = useState(false);
   const { id } = useParams();
@@ -92,7 +93,7 @@ export default function EditPage() {
     setSelectedPost({ ...selectedPost, image_sources: newImages });
   }
   return (
-    <>
+    <Layout>
       {!selectedPost ? (
         <p>Loading...</p> // Display a loading message or spinner while loading
       ) : (
@@ -113,6 +114,6 @@ export default function EditPage() {
           />
         </>
       )}
-    </>
+    </Layout>
   );
 }

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { appContext } from "../../../App";
+import { format, parseISO } from "date-fns";
 import { useTokenRefresh } from "../../../Hooks";
 export default function BlogCard({ post }) {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export default function BlogCard({ post }) {
         <>
           <h2>Title: {post.title}</h2>
           <p>Category: {post.category.name}</p>
-          <p>{post.createdAt}</p>
+          <p>{format(parseISO(post.createdAt), "MM/dd/yyyy")}</p>
           <button onClick={() => navigate(`/edit/${post._id}`)}>Edit</button>
           <button
             type="submit"

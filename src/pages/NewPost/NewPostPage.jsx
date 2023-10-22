@@ -1,6 +1,7 @@
 import { useState } from "react";
 import NewPostForm from "./components/NewPostForm";
 import NewPostDetails from "./components/NewPostDetails";
+import Layout from "../PageComponents/Layout";
 export default function NewPostPage() {
   const [newPost, setNewPost] = useState({
     category: "",
@@ -89,7 +90,7 @@ export default function NewPostPage() {
     setNewPost({ ...newPost, image_sources: newImages });
   }
   return (
-    <>
+    <Layout>
       <NewPostDetails newPost={newPost} />
       <NewPostForm
         newPost={newPost}
@@ -101,6 +102,6 @@ export default function NewPostPage() {
         handleArrayChange={handleArrayChange}
         handleFileUpload={handleFileUpload}
       />
-    </>
+    </Layout>
   );
 }

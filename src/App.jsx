@@ -6,7 +6,6 @@ import { createContext } from "react";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import EditPage from "./pages/EditPost/EditPage";
 import NewPostPage from "./pages/NewPost/NewPostPage";
-
 export const appContext = createContext({
   blogPosts: [],
   accessToken: "",
