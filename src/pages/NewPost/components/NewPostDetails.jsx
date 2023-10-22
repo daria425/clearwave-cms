@@ -1,6 +1,8 @@
+import NewPostImages from "./NewPostImages";
 export default function NewPostDetails({ newPost }) {
   return (
     <section>
+      <NewPostImages newPost={newPost} />
       <h1>{newPost.title}</h1>
       <h3>Subheadings:</h3>
       {newPost.content.subheadings.length > 0 &&

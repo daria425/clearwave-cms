@@ -43,26 +43,14 @@ export default function NewPostForm({
       console.log(JSON.stringify(newPost.tags));
       const formData = new FormData();
       formData.append("title", newPost.title);
-      // formData.append(
-      //   "content.subheadings",
-      //   newPost.content.subheadings[0] ?? ""
-      // );
-      // formData.append(
-      //   "content.snippets",
-      //   newPost.content.snippets[0] ?? ""
-      // );
-      // formData.append("content.main_text", newPost.content.main_text);
       formData.append("content", JSON.stringify(contentObj));
       formData.append("category", newPost.category._id || categories[0]._id); //workaround: first select element before changes will always be categories[0], so we default to submitting the request with that
       formData.append("tags", JSON.stringify(newPost.tags));
       formData.append("is_published", newPost.is_published);
-
-      // Add image files to formData if any
       const imageInput = document.querySelector('input[name="image_sources"]');
       for (const file of imageInput.files) {
         formData.append("image_sources", file);
       }
-      console.log(accessToken);
       const response = await fetch(`http://localhost:3000/api/posts/new`, {
         method: "POST",
         credentials: "include",
@@ -86,6 +74,8 @@ export default function NewPostForm({
     } catch (err) {
       setResponseError(err.message);
       console.log(err);
+    } finally {
+      handleModal();
     }
   }
   return (

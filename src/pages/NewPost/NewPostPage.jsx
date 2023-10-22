@@ -13,7 +13,6 @@ export default function NewPostPage() {
     title: "",
     is_published: false,
   });
-
   function handleChange(e) {
     setNewPost({ ...newPost, [e.target.name]: e.target.value });
   }
@@ -45,6 +44,7 @@ export default function NewPostPage() {
       })
       .concat(newPost.image_sources);
     Promise.all(fileObjects).then((results) => {
+      console.log(results);
       setNewPost({ ...newPost, image_sources: results });
       // Use the results array, which contains objects with data and contentType
     });
