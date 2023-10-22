@@ -33,21 +33,19 @@ export default function EditPage() {
   }
   function handleFileUpload(e) {
     const fileArray = [...e.target.files];
-    const fileObjects = fileArray
-      .map((file) => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            const data = new Uint8Array(event.target.result);
-            resolve({
-              data,
-              contentType: file.type,
-            });
-          };
-          reader.readAsArrayBuffer(file);
-        });
-      })
-      .concat(selectedPost.image_sources);
+    const fileObjects = fileArray.map((file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const data = new Uint8Array(event.target.result);
+          resolve({
+            data,
+            contentType: file.type,
+          });
+        };
+        reader.readAsArrayBuffer(file);
+      });
+    });
     Promise.all(fileObjects).then((results) => {
       setSelectedPost({ ...selectedPost, image_sources: results });
       // Use the results array, which contains objects with data and contentType

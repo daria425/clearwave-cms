@@ -40,7 +40,6 @@ export default function NewPostForm({
         snippets: newPost.content.snippets[0] ?? "",
         main_text: newPost.content.main_text,
       };
-      console.log(JSON.stringify(newPost.tags));
       const formData = new FormData();
       formData.append("title", newPost.title);
       formData.append("content", JSON.stringify(contentObj));
@@ -51,6 +50,11 @@ export default function NewPostForm({
       for (const file of imageInput.files) {
         formData.append("image_sources", file);
       }
+      for (const image of userImages) {
+        formData.append("image_sources", image);
+      }
+      console.log(imageInput.files);
+      console.log(userImages);
       const response = await fetch(`http://localhost:3000/api/posts/new`, {
         method: "POST",
         credentials: "include",

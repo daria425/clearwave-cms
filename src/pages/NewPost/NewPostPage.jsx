@@ -28,21 +28,19 @@ export default function NewPostPage() {
   }
   function handleFileUpload(e) {
     const fileArray = [...e.target.files];
-    const fileObjects = fileArray
-      .map((file) => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = (event) => {
-            const data = new Uint8Array(event.target.result);
-            resolve({
-              data,
-              contentType: file.type,
-            });
-          };
-          reader.readAsArrayBuffer(file);
-        });
-      })
-      .concat(newPost.image_sources);
+    const fileObjects = fileArray.map((file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const data = new Uint8Array(event.target.result);
+          resolve({
+            data,
+            contentType: file.type,
+          });
+        };
+        reader.readAsArrayBuffer(file);
+      });
+    });
     Promise.all(fileObjects).then((results) => {
       console.log(results);
       setNewPost({ ...newPost, image_sources: results });
