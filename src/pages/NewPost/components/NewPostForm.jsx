@@ -13,19 +13,17 @@ export default function NewPostForm({
   handleArrayChange,
   handleFileUpload,
 }) {
-  const { data, error, isLoading } = useData("api/category");
-  const [categories, setCategories] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   //first make the object with just the key value pairs needed for form
   const [responseError, setResponseError] = useState(false);
-  const { handleNewPost, accessToken, updateAccessToken, refreshToken } =
-    useContext(appContext);
+  const {
+    handleNewPost,
+    accessToken,
+    updateAccessToken,
+    refreshToken,
+    categories,
+  } = useContext(appContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
-  useEffect(() => {
-    if (!isLoading) {
-      setCategories(data);
-    }
-  }, [data, isLoading]);
   if (categories.length === 0) {
     return <p>Loading...</p>;
   }
@@ -50,11 +48,7 @@ export default function NewPostForm({
       for (const file of imageInput.files) {
         formData.append("image_sources", file);
       }
-      for (const image of userImages) {
-        formData.append("image_sources", image);
-      }
-      console.log(imageInput.files);
-      console.log(userImages);
+
       const response = await fetch(`http://localhost:3000/api/posts/new`, {
         method: "POST",
         credentials: "include",
