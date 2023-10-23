@@ -1,6 +1,12 @@
 import Index from "./pages/Index/Index";
 import { useData } from "./Hooks";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -18,11 +24,15 @@ export const appContext = createContext({
   syncImageDelete: () => {},
   categoryLoading: "",
   postsLoading: "",
+  handleLogin: () => {},
+  handleLogout: () => {},
+  userLogin: "",
 });
 
 function App() {
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
+  const [userLogin, setUserLogin] = useState(false);
   const {
     data: categoryData,
     error: categoryError,
@@ -53,6 +63,14 @@ function App() {
       const newPosts = blogPosts.filter((post) => post._id !== e.target.id);
       setBlogPosts(newPosts);
     }
+  }
+
+  function handleLogin() {
+    setUserLogin(true);
+  }
+
+  function handleLogout() {
+    setUserLogin(false);
   }
 
   function handlePostUpdate(e, changedPost) {
@@ -89,7 +107,27 @@ function App() {
   }
   //make new array where image id does not equal to btn id
   //change post images to new images, dont re render yet
-
+  const Router = () => {
+    const router = createBrowserRouter([
+      {
+        path: "/",
+        element: <Index />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/edit/:id",
+        element: <EditPage />,
+      },
+      {
+        path: "/new",
+        element: <Index />,
+      },
+    ]);
+    return <RouterProvider router={router} />;
+  };
   return (
     <appContext.Provider
       value={{
@@ -104,16 +142,12 @@ function App() {
         syncImageDelete,
         postsLoading,
         categories,
+        userLogin,
+        handleLogin,
+        handleLogout,
       }}
     >
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/edit/:id" element={<EditPage />} />
-          <Route path="/new" element={<NewPostPage />} />
-        </Routes>
-      </BrowserRouter>
+      <Router />
     </appContext.Provider>
   );
 }

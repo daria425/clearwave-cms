@@ -4,7 +4,8 @@ import { appContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
 export default function LoginForm() {
   const nav = useNavigate();
-  const { updateAccessToken, updateRefreshToken } = useContext(appContext);
+  const { updateAccessToken, updateRefreshToken, handleLogin } =
+    useContext(appContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   function handleUsernameChange(e) {
@@ -38,7 +39,7 @@ export default function LoginForm() {
       const { accessToken, refreshToken } = data;
       updateAccessToken(accessToken);
       updateRefreshToken(refreshToken);
-      localStorage.setItem("refreshToken", refreshToken);
+      handleLogin();
       nav("/dashboard");
     } catch (error) {
       console.error("Error:", error.message);
