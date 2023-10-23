@@ -1,17 +1,12 @@
 import Index from "./pages/Index/Index";
 import { useData } from "./Hooks";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import EditPage from "./pages/EditPost/EditPage";
 import NewPostPage from "./pages/NewPost/NewPostPage";
+import NewCategoryPage from "./pages/NewCategory/NewCategoryPage";
 export const appContext = createContext({
   blogPosts: [],
   accessToken: "",
@@ -24,6 +19,7 @@ export const appContext = createContext({
   syncImageDelete: () => {},
   categoriesLoading: "",
   postsLoading: "",
+  handleNewCategory: () => {},
   handleLogin: () => {},
   handleLogout: () => {},
   userLogin: "",
@@ -86,6 +82,10 @@ function App() {
     setBlogPosts(newPosts);
   }
 
+  function handleNewCategory(newcategory) {
+    const newCategories = [...categories, newcategory];
+    setCategories(newCategories);
+  }
   function syncImageDelete(e) {
     // //separate function because for images the post id is a separate data attribute
     // console.log("images syncing");
@@ -125,6 +125,10 @@ function App() {
         path: "/new",
         element: <NewPostPage />,
       },
+      {
+        path: "/new-category",
+        element: <NewCategoryPage />,
+      },
     ]);
     return <RouterProvider router={router} />;
   };
@@ -139,6 +143,7 @@ function App() {
         handleDelete,
         handlePostUpdate,
         handleNewPost,
+        handleNewCategory,
         syncImageDelete,
         postsLoading,
         categories,

@@ -14,15 +14,24 @@ export default function Dashboard() {
         <p>Loading...</p> // Display a loading message or spinner while loading
       ) : (
         <>
-          {blogPosts.map((post) => (
-            <BlogCard key={post._id} post={post} />
-          ))}
-          {categories.map((category) => (
-            <Category key={category._id} category={category} />
-          ))}
+          <section>
+            {blogPosts.map((post) => (
+              <BlogCard key={post._id} post={post} />
+            ))}
+            <button onClick={() => navigate(`/new`)}>new post</button>
+          </section>
+          <section>
+            <ul>
+              {categories.map((category) => (
+                <Category key={category._id} category={category} />
+              ))}
+            </ul>
+            <button onClick={() => navigate(`/new-category`)}>
+              new category
+            </button>
+          </section>
         </>
       )}
-      <button onClick={() => navigate(`/new`)}>+</button>
     </Layout>
   );
 }
