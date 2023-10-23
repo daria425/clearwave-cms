@@ -22,7 +22,7 @@ export const appContext = createContext({
   handlePostUpdate: () => {},
   handleNewPost: () => {},
   syncImageDelete: () => {},
-  categoryLoading: "",
+  categoriesLoading: "",
   postsLoading: "",
   handleLogin: () => {},
   handleLogout: () => {},
@@ -123,7 +123,7 @@ function App() {
       },
       {
         path: "/new",
-        element: <Index />,
+        element: <NewPostPage />,
       },
     ]);
     return <RouterProvider router={router} />;
@@ -142,6 +142,7 @@ function App() {
         syncImageDelete,
         postsLoading,
         categories,
+        categoriesLoading,
         userLogin,
         handleLogin,
         handleLogout,
