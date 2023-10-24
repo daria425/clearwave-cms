@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useContext } from "react";
 import { appContext, contentContext } from "../../../App";
-import { useTokenRefresh } from "../../../Hooks";
+import { useTokenRefresh } from "../../../helpers/Hooks";
 import Modal from "./Modal";
 export default function EditForm({
   selectedPost,

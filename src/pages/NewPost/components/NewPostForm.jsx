@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { appContext, contentContext } from "../../../App";
-import { useTokenRefresh } from "../../../Hooks";
+import { useTokenRefresh } from "../../../helpers/Hooks";
 import Modal from "../../EditPost/components/Modal";
 export default function NewPostForm({
   newPost,

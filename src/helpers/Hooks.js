@@ -83,4 +83,15 @@ function useData(query) {
   return { data, error, isLoading };
 }
 
-export { useData, useTokenRefresh };
+function useAuth() {
+  const [userLogin, setUserLogin] = useState(false);
+  useEffect(() => {
+    const loggedInUser = document.cookie;
+    if (loggedInUser) {
+      setUserLogin(true);
+    }
+  }, []);
+  return userLogin;
+}
+
+export { useData, useTokenRefresh, useAuth };

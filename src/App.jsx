@@ -1,5 +1,5 @@
 import Index from "./pages/Index/Index";
-import { useData } from "./helpers/Hooks";
+import { useData, useAuth } from "./helpers/Hooks";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -57,6 +57,12 @@ function App() {
       setCategories(categoryData);
     }
   }, [postData, postsLoading, categoriesLoading, categoryData]);
+  useEffect(() => {
+    const loggedInUser = document.cookie;
+    if (loggedInUser) {
+      setUserLogin(true);
+    }
+  }, []);
   function updateAccessToken(newToken) {
     setAccessToken(newToken);
   }
@@ -158,7 +164,7 @@ function App() {
         updateRefreshToken,
       }}
     >
-      <loginContext.Provider value={{ userLogin, handleLogin, handleLogout }}>
+      <loginContext.Provider value={{ handleLogin, handleLogout }}>
         <contentContext.Provider
           value={{
             blogPosts,

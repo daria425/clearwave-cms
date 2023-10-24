@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { appContext, contentContext } from "../../../App";
-import { useTokenRefresh } from "../../../Hooks";
+import { useTokenRefresh } from "../../../helpers/Hooks";
 export default function NewCategoryForm({ handleNameChange, category }) {
   const { accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
