@@ -36,10 +36,10 @@ export default function LoginForm() {
       console.log("Server response:", data);
       // Handle the response data as needed
       //get token
-      const { accessToken, refreshToken } = data;
+      const { accessToken, refreshToken, user } = data;
       updateAccessToken(accessToken);
       updateRefreshToken(refreshToken);
-      handleLogin();
+      handleLogin(user);
       nav("/dashboard");
     } catch (error) {
       console.error("Error:", error.message);

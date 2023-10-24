@@ -67,8 +67,8 @@ function App() {
     }
   }
 
-  function handleLogin() {
-    setUserLogin(true);
+  function handleLogin(user) {
+    setUserLogin(user);
   }
 
   function handleLogout() {

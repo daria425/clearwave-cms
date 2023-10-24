@@ -5,7 +5,9 @@ export default function Header() {
   const nav = useNavigate();
   const { handleLogout } = useContext(loginContext);
   async function logout() {
-    await fetch("http://localhost:3000/api/logout");
+    await fetch("http://localhost:3000/api/logout", {
+      credentials: "include",
+    });
     handleLogout();
     nav("/");
   }
