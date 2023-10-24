@@ -51,7 +51,9 @@ export default function LoginForm() {
         handleSubmit(e);
       }}
     >
-      <label htmlFor="username">Username:</label>
+      <label className="login-label" htmlFor="username">
+        Username:
+      </label>
       <input
         className="login-input"
         type="text"
@@ -63,7 +65,9 @@ export default function LoginForm() {
         }}
         required
       />
-      <label htmlFor="password">Password:</label>
+      <label className="login-label" htmlFor="password">
+        Password:
+      </label>
       <input
         className="login-input"
         type="password"
