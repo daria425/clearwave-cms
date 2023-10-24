@@ -54,10 +54,8 @@ export default function NewPostForm({
         },
         body: formData,
       });
-      console.log(response);
       if (response.ok) {
         const savedPost = await response.json();
-        console.log(savedPost);
         handleNewPost(savedPost);
       } else {
         throw new Error(

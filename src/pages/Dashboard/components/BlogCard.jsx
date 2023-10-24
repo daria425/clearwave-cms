@@ -11,7 +11,6 @@ export default function BlogCard({ post }) {
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
   const [error, setError] = useState(null);
   async function handleSubmit(e) {
-    console.log(e.target.id);
     e.preventDefault();
 
     try {

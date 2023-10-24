@@ -60,7 +60,6 @@ function useData(query) {
         const json = await fetch(`http://localhost:3000/${query}`);
         const data = await json.json();
         if (!ignore) {
-          console.log(data);
           setData(data);
           setError(false);
         }

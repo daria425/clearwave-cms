@@ -20,7 +20,6 @@ export default function PostImages({ selectedPost }) {
           body: JSON.stringify({ "image_to_delete": e.target.id }),
         }
       );
-      console.log(response);
       if (response.ok) {
         syncImageDelete(e); //deletes image on selected post AND in the allBlogs
       }

@@ -13,9 +13,7 @@ export default function EditPage() {
 
   useEffect(() => {
     if (!postsLoading) {
-      console.log("All blog posts:", postsLoading, blogPosts);
       const post = blogPosts.find((post) => post._id === id);
-      console.log(post);
       setSelectedPost(post); // If post is not found, set an empty object
     }
   }, [blogPosts, id, postsLoading]);

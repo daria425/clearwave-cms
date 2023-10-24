@@ -28,7 +28,6 @@ export default function LoginForm() {
       });
 
       if (!response.ok) {
-        console.log(response);
         throw new Error(response.statusText);
       }
 

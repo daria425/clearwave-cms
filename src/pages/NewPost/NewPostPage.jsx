@@ -43,7 +43,6 @@ export default function NewPostPage() {
       });
     });
     Promise.all(fileObjects).then((results) => {
-      console.log(results);
       setNewPost({ ...newPost, image_sources: results });
       // Use the results array, which contains objects with data and contentType
     });

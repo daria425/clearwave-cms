@@ -54,10 +54,8 @@ export default function EditForm({
       // Add image files to formData if any
       const imageInput = document.querySelector('input[name="image_sources"]');
       for (const file of imageInput.files) {
-        console.log(file);
         formData.append("image_sources", file);
       }
-      console.log(accessToken);
       const response = await fetch(
         `http://localhost:3000/api/posts/${selectedPost._id}/update`,
         {
