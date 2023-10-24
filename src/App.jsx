@@ -1,10 +1,6 @@
 import Index from "./pages/Index/Index";
-import { useData, useAuth } from "./helpers/Hooks";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate,
-} from "react-router-dom";
+import { useData } from "./helpers/Hooks";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import ProtectedRoute from "./pages/PageComponents/ProtectedRoutes";
@@ -103,12 +99,6 @@ function App() {
     setCategories(newCategories);
   }
   function syncImageDelete(e) {
-    // //separate function because for images the post id is a separate data attribute
-    // console.log("images syncing");
-    // const newPosts = blogPosts.map((post) =>
-    //   post._id === e.target.dataset.postid ? changedPost : post
-    // );
-    // setBlogPosts(newPosts);
     const selectedPost = blogPosts.find(
       (post) => post._id === e.target.dataset.postid
     );

@@ -1,13 +1,15 @@
-import LoginForm from "./components/LoginForm";
+import LoginComponent from "./components/LoginComponent";
+import FancyScreen from "./components/FancyScreen";
 import { Navigate } from "react-router-dom";
+import "./index-styles.css";
 export default function Index({ userLogin }) {
   if (userLogin) {
     return <Navigate to="/dashboard" />;
   }
   return (
-    <>
-      <h1>hi</h1>
-      <LoginForm />
-    </>
+    <section className="login">
+      <FancyScreen />
+      <LoginComponent />
+    </section>
   );
 }

@@ -46,12 +46,14 @@ export default function LoginForm() {
   }
   return (
     <form
+      className="login-form"
       onSubmit={(e) => {
         handleSubmit(e);
       }}
     >
       <label htmlFor="username">Username:</label>
       <input
+        className="login-input"
         type="text"
         id="username"
         name="username"
@@ -63,6 +65,7 @@ export default function LoginForm() {
       />
       <label htmlFor="password">Password:</label>
       <input
+        className="login-input"
         type="password"
         id="password"
         name="password"

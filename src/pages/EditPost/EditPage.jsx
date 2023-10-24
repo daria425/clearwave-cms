@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { contentContext } from "../../App";
 import { useState } from "react";
-import "./styles.css";
+import "./edit-page-styles.css";
 import PostDetails from "./components/PostDetails";
 import EditForm from "./components/EditPostForm";
 import Layout from "../PageComponents/Layout";
