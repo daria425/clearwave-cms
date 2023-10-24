@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
+import ProtectedRoute from "./pages/PageComponents/ProtectedRoutes";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import EditPage from "./pages/EditPost/EditPage";
 import NewPostPage from "./pages/NewPost/NewPostPage";
@@ -142,6 +143,38 @@ function App() {
     ]);
     return <RouterProvider router={router} />;
   };
+
+  const ProtectedRouter = () => {
+    const router = createBrowserRouter([
+      {
+        path: "/login",
+        element: <Index userLogin={userLogin} />,
+      },
+      {
+        path: "/",
+        element: <ProtectedRoute userLogin={userLogin} />,
+        children: [
+          {
+            path: "dashboard",
+            element: <Dashboard />,
+          },
+          {
+            path: "edit/:id",
+            element: <EditPage />,
+          },
+          {
+            path: "new",
+            element: <NewPostPage />,
+          },
+          {
+            path: "new-category",
+            element: <NewCategoryPage />,
+          },
+        ],
+      },
+    ]);
+    return <RouterProvider router={router} />;
+  };
   return (
     <appContext.Provider
       value={{
@@ -166,7 +199,7 @@ function App() {
             categoriesLoading,
           }}
         >
-          <Router />
+          <ProtectedRouter />
         </contentContext.Provider>
       </loginContext.Provider>
     </appContext.Provider>
