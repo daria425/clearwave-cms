@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { appContext } from "../../App";
+import { contentContext } from "../../App";
 import { useState } from "react";
 import "./styles.css";
 import PostDetails from "./components/PostDetails";
@@ -9,7 +9,7 @@ import Layout from "../PageComponents/Layout";
 export default function EditPage() {
   const [selectedPost, setSelectedPost] = useState(false);
   const { id } = useParams();
-  const { blogPosts, postsLoading } = useContext(appContext);
+  const { blogPosts, postsLoading } = useContext(contentContext);
 
   useEffect(() => {
     if (!postsLoading) {
@@ -86,22 +86,14 @@ export default function EditPage() {
     );
     setSelectedPost({ ...selectedPost, tags: newTags });
   }
-  function handleImageDelete(e) {
-    const newImages = selectedPost.image_sources.filter(
-      (image) => image._id !== e.target.id
-    ); //make new array where image id does not equal to btn id
-    setSelectedPost({ ...selectedPost, image_sources: newImages });
-  }
+
   return (
     <Layout>
       {!selectedPost ? (
         <p>Loading...</p> // Display a loading message or spinner while loading
       ) : (
         <>
-          <PostDetails
-            selectedPost={selectedPost}
-            handleImageDelete={handleImageDelete}
-          />
+          <PostDetails selectedPost={selectedPost} />
           <EditForm
             selectedPost={selectedPost}
             handleChange={handleChange}

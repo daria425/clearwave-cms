@@ -1,11 +1,8 @@
 import PostImages from "./PostImages";
-export default function PostDetails({ selectedPost, handleImageDelete }) {
+export default function PostDetails({ selectedPost }) {
   return (
     <section>
-      <PostImages
-        selectedPost={selectedPost}
-        handleImageDelete={handleImageDelete}
-      />
+      <PostImages selectedPost={selectedPost} />
       <h1>{selectedPost.title}</h1>
       <h3>Subheadings:</h3>
       {selectedPost.content.subheadings.length > 0 &&

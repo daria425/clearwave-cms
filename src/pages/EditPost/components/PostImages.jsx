@@ -1,8 +1,9 @@
 import { Buffer } from "buffer";
-import { useContext, useEffect } from "react";
-import { appContext } from "../../../App";
-export default function PostImages({ selectedPost, handleImageDelete }) {
-  const { accessToken, syncImageDelete } = useContext(appContext);
+import { useContext } from "react";
+import { appContext, contentContext } from "../../../App";
+export default function PostImages({ selectedPost }) {
+  const { accessToken } = useContext(appContext);
+  const { syncImageDelete } = useContext(contentContext);
   async function handleServerImageDelete(e) {
     e.preventDefault();
     try {

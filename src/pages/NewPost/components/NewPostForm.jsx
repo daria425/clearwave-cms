@@ -1,6 +1,5 @@
-import { useData } from "../../../Hooks";
-import { useContext, useState, useEffect } from "react";
-import { appContext } from "../../../App";
+import { useContext, useState } from "react";
+import { appContext, contentContext } from "../../../App";
 import { useTokenRefresh } from "../../../Hooks";
 import Modal from "../../EditPost/components/Modal";
 export default function NewPostForm({
@@ -16,13 +15,9 @@ export default function NewPostForm({
   const [modalOpen, setModalOpen] = useState(false);
   //first make the object with just the key value pairs needed for form
   const [responseError, setResponseError] = useState(false);
-  const {
-    handleNewPost,
-    accessToken,
-    updateAccessToken,
-    refreshToken,
-    categories,
-  } = useContext(appContext);
+  const { accessToken, updateAccessToken, refreshToken } =
+    useContext(appContext);
+  const { handleNewPost, categories } = useContext(contentContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
   if (categories.length === 0) {
     return <p>Loading...</p>;

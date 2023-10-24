@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom";
-import { useData } from "../../../Hooks";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useContext } from "react";
-import { appContext } from "../../../App";
+import { appContext, contentContext } from "../../../App";
 import { useTokenRefresh } from "../../../Hooks";
 import Modal from "./Modal";
 export default function EditForm({
@@ -18,13 +17,9 @@ export default function EditForm({
   const { id } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
   const [responseError, setResponseError] = useState(false);
-  const {
-    handlePostUpdate,
-    accessToken,
-    updateAccessToken,
-    refreshToken,
-    categories,
-  } = useContext(appContext);
+  const { accessToken, updateAccessToken, refreshToken } =
+    useContext(appContext);
+  const { handlePostUpdate, categories } = useContext(contentContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
 
   function handleModal() {

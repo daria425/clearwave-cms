@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { appContext } from "../../App";
+import { contentContext } from "../../App";
 import BlogCard from "./components/BlogCard";
 import Layout from "../PageComponents/Layout";
 import Category from "./components/Category";
 export default function Dashboard() {
   const navigate = useNavigate();
   const { blogPosts, postsLoading, categoriesLoading, categories } =
-    useContext(appContext);
+    useContext(contentContext);
   return (
     <Layout>
       {postsLoading || categoriesLoading ? (

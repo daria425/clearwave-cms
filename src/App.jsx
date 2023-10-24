@@ -13,6 +13,10 @@ export const appContext = createContext({
   refreshToken: "",
   updateAccessToken: () => {},
   updateRefreshToken: () => {},
+});
+
+export const contentContext = createContext({
+  blogPosts: [],
   handleDelete: () => {},
   handlePostUpdate: () => {},
   handleNewPost: () => {},
@@ -20,9 +24,11 @@ export const appContext = createContext({
   categoriesLoading: "",
   postsLoading: "",
   handleNewCategory: () => {},
+});
+export const loginContext = createContext({
   handleLogin: () => {},
   handleLogout: () => {},
-  userLogin: "",
+  userLogin: false,
 });
 
 function App() {
@@ -140,20 +146,25 @@ function App() {
         refreshToken,
         updateAccessToken,
         updateRefreshToken,
-        handleDelete,
-        handlePostUpdate,
-        handleNewPost,
-        handleNewCategory,
-        syncImageDelete,
-        postsLoading,
-        categories,
-        categoriesLoading,
-        userLogin,
-        handleLogin,
-        handleLogout,
       }}
     >
-      <Router />
+      <loginContext.Provider value={{ userLogin, handleLogin, handleLogout }}>
+        <contentContext.Provider
+          value={{
+            blogPosts,
+            postsLoading,
+            handleDelete,
+            handlePostUpdate,
+            handleNewPost,
+            syncImageDelete,
+            handleNewCategory,
+            categories,
+            categoriesLoading,
+          }}
+        >
+          <Router />
+        </contentContext.Provider>
+      </loginContext.Provider>
     </appContext.Provider>
   );
 }

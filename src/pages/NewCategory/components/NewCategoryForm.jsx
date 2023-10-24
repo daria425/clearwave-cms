@@ -1,9 +1,10 @@
 import { useContext } from "react";
-import { appContext } from "../../../App";
+import { appContext, contentContext } from "../../../App";
 import { useTokenRefresh } from "../../../Hooks";
 export default function NewCategoryForm({ handleNameChange, category }) {
-  const { accessToken, updateAccessToken, refreshToken, handleNewCategory } =
+  const { accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
+  const { handleNewCategory } = useContext(contentContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
   async function handleSubmit(e) {
     e.preventDefault();

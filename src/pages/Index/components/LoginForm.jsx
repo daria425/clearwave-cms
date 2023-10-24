@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useContext } from "react";
-import { appContext } from "../../../App";
+import { appContext, loginContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
 export default function LoginForm() {
   const nav = useNavigate();
-  const { updateAccessToken, updateRefreshToken, handleLogin } =
-    useContext(appContext);
+  const { updateAccessToken, updateRefreshToken } = useContext(appContext);
+  const { handleLogin } = useContext(loginContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   function handleUsernameChange(e) {

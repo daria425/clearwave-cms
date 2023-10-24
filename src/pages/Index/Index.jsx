@@ -1,10 +1,10 @@
 import LoginForm from "./components/LoginForm";
 import { useContext, useEffect } from "react";
-import { appContext } from "../../App";
+import { loginContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 export default function Index() {
   const nav = useNavigate();
-  const { userLogin } = useContext(appContext);
+  const { userLogin } = useContext(loginContext);
   useEffect(() => {
     if (userLogin) {
       nav("/dashboard");
