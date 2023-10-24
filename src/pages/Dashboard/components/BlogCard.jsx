@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { appContext } from "../../../App";
+import { appContext, contentContext } from "../../../App";
 import { format, parseISO } from "date-fns";
 import { useTokenRefresh } from "../../../Hooks";
 export default function BlogCard({ post }) {
   const navigate = useNavigate();
-  const { handleDelete, accessToken, updateAccessToken, refreshToken } =
+  const { accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
+  const { handleDelete } = useContext(contentContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
   const [error, setError] = useState(null);
   async function handleSubmit(e) {
