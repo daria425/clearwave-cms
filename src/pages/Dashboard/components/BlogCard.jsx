@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { appContext, contentContext } from "../../../App";
 import { format, parseISO } from "date-fns";
-import { useTokenRefresh } from "../../../Hooks";
+import { useTokenRefresh } from "../../../helpers/Hooks";
 export default function BlogCard({ post }) {
   const navigate = useNavigate();
   const { accessToken, updateAccessToken, refreshToken } =

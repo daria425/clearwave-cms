@@ -1,5 +1,5 @@
 import Index from "./pages/Index/Index";
-import { useData } from "./Hooks";
+import { useData } from "./helpers/Hooks";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -33,7 +33,6 @@ export const contentContext = createContext({
 export const loginContext = createContext({
   handleLogin: () => {},
   handleLogout: () => {},
-  userLogin: false,
 });
 
 function App() {
@@ -117,32 +116,6 @@ function App() {
     setBlogPosts(newPosts);
   }
   //make new array where image id does not equal to btn id
-  //change post images to new images, dont re render yet
-  const Router = () => {
-    const router = createBrowserRouter([
-      {
-        path: "/",
-        element: userLogin ? <Navigate to="/dashboard" /> : <Index />,
-      },
-      {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
-        path: "/edit/:id",
-        element: <EditPage />,
-      },
-      {
-        path: "/new",
-        element: <NewPostPage />,
-      },
-      {
-        path: "/new-category",
-        element: <NewCategoryPage />,
-      },
-    ]);
-    return <RouterProvider router={router} />;
-  };
 
   const ProtectedRouter = () => {
     const router = createBrowserRouter([
