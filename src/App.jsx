@@ -1,6 +1,10 @@
 import Index from "./pages/Index/Index";
 import { useData } from "./Hooks";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -67,8 +71,8 @@ function App() {
     }
   }
 
-  function handleLogin(user) {
-    setUserLogin(user);
+  function handleLogin() {
+    setUserLogin(true);
   }
 
   function handleLogout() {
@@ -117,7 +121,7 @@ function App() {
     const router = createBrowserRouter([
       {
         path: "/",
-        element: <Index />,
+        element: userLogin ? <Navigate to="/dashboard" /> : <Index />,
       },
       {
         path: "/dashboard",

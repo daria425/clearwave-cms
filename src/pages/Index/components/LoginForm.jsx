@@ -33,13 +33,12 @@ export default function LoginForm() {
       }
 
       const data = await response.json();
-      console.log("Server response:", data);
       // Handle the response data as needed
       //get token
-      const { accessToken, refreshToken, user } = data;
+      const { accessToken, refreshToken } = data;
       updateAccessToken(accessToken);
       updateRefreshToken(refreshToken);
-      handleLogin(user);
+      handleLogin();
       nav("/dashboard");
     } catch (error) {
       console.error("Error:", error.message);
