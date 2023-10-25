@@ -1,0 +1,35 @@
+@use "./functions";
+
+//------COLORS-------//
+$charcoal: #414141;
+$fuchsia: #c137a2;
+$violet: #694ed6;
+$white: #fff;
+
+$colors: (
+  "charcoal": $charcoal,
+  "fuchsia": $fuchsia,
+  "violet": $violet,
+  "white": $white,
+);
+
+//charcoal
+$charcoal-025: functions.tint($charcoal, 75%);
+$charcoal-050: functions.tint($charcoal, 50%);
+$charcoal-075: functions.tint($charcoal, 25%);
+$charcoal-dark: functions.shade($charcoal, 25%);
+
+//violet
+$violet-025: functions.tint($violet, 75%);
+$violet-050: functions.tint($violet, 50%);
+$violet-075: functions.tint($violet, 25%);
+$violet-dark: functions.shade($violet, 25%);
+
+//fuchsia
+
+$fuchsia-025: functions.tint($fuchsia, 75%);
+$fuchsia-050: functions.tint($fuchsia, 50%);
+$fuchsia-075: functions.tint($fuchsia, 25%);
+$fuchsia-dark: functions.shade($fuchsia, 25%);
+
+//------FONTS-------//
