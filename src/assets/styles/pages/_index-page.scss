@@ -1,0 +1,24 @@
+.login {
+  display: flex;
+}
+
+.login-fancy-screen {
+  width: 50%;
+}
+.login-wrapper {
+  flex-grow: 1;
+}
+
+.login-form {
+}
+
+.login-label {
+  display: block;
+  text-align: center;
+}
+.login-input {
+  display: block;
+  margin: 0 auto;
+  border: none;
+  border-bottom: 3px solid black;
+}

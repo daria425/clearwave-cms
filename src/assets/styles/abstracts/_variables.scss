@@ -14,22 +14,28 @@ $colors: (
 );
 
 //charcoal
+$charcoal-010: functions.tint($charcoal, 90%);
 $charcoal-025: functions.tint($charcoal, 75%);
 $charcoal-050: functions.tint($charcoal, 50%);
 $charcoal-075: functions.tint($charcoal, 25%);
-$charcoal-dark: functions.shade($charcoal, 25%);
+$charcoal-090: functions.tint($charcoal, 10%);
+$charcoal-dark: functions.shade($charcoal, 35%);
 
 //violet
+$violet-010: functions.tint($violet, 90%);
 $violet-025: functions.tint($violet, 75%);
 $violet-050: functions.tint($violet, 50%);
 $violet-075: functions.tint($violet, 25%);
-$violet-dark: functions.shade($violet, 25%);
-
+$violet-dark: functions.shade($violet, 35%);
+$violet-090: functions.tint($violet, 10%);
 //fuchsia
 
+$fuchsia-010: functions.tint($fuchsia, 90%);
 $fuchsia-025: functions.tint($fuchsia, 75%);
 $fuchsia-050: functions.tint($fuchsia, 50%);
 $fuchsia-075: functions.tint($fuchsia, 25%);
-$fuchsia-dark: functions.shade($fuchsia, 25%);
+$fuchsia-dark: functions.shade($fuchsia, 35%);
+$fuchsia-090: functions.tint($fuchsia, 10%);
 
 //------FONTS-------//
+$font-light: $charcoal-010;

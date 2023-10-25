@@ -1,3 +1,4 @@
+@use "./variables";
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&display=swap");
 
 $inter: "Inter", sans-serif;
@@ -11,7 +12,7 @@ $font-size-small: clamp(1rem, 0.7727rem + 0.9697vw, 1.5rem);
   font-weight: 700;
 }
 
-@mixin subheading {
+@mixin form {
   font-size: $font-size-medium;
   font-weight: 400;
 }
