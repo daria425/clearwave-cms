@@ -1,0 +1,14 @@
+@use "../abstracts/" as *;
+.btn-primary {
+  font-size: $font-m;
+  font-weight: 700;
+  color: white;
+  background-color: $primary-variant;
+  padding: 10px 0px;
+  cursor: pointer;
+  &--login {
+    @extend .btn-primary;
+    margin-top: 30px;
+    width: 100%;
+  }
+}

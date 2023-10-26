@@ -1,5 +1,4 @@
 import LoginComponent from "./components/LoginComponent";
-import FancyScreen from "./components/FancyScreen";
 import { Navigate } from "react-router-dom";
 export default function Index({ userLogin }) {
   if (userLogin) {
@@ -7,7 +6,6 @@ export default function Index({ userLogin }) {
   }
   return (
     <section className="login">
-      <FancyScreen />
       <LoginComponent />
     </section>
   );

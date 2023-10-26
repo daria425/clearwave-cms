@@ -1,8 +1,24 @@
 @use "../abstracts/" as *;
 
-body {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
   font-family: $Inter;
+  color: white;
 }
 h1 {
   font-size: $font-l;
+  font-weight: 700;
+}
+
+h2,
+h3,
+input,
+label {
+  font-size: $font-m;
 }

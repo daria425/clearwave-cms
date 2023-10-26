@@ -80,7 +80,9 @@ export default function LoginForm() {
         required
       />
 
-      <button type="submit">Submit</button>
+      <button className="btn-primary--login" type="submit">
+        LOGIN
+      </button>
     </form>
   );
 }
