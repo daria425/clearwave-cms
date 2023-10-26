@@ -1,15 +1,18 @@
+@use "../abstracts/" as *;
 .login {
   display: flex;
 }
 
 .login-fancy-screen {
   width: 50%;
+  background-color: $primary;
 }
 .login-wrapper {
   flex-grow: 1;
 }
 
 .login-form {
+  background-color: $primary-600;
 }
 
 .login-label {

@@ -3,5 +3,5 @@
 }
 
 @function shade($color, $percentage) {
-  @return mix(#000, $color, $percentage);
+  @return mix(black, saturate($color, 50%), $percentage);
 }
