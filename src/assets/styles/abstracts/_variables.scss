@@ -4,7 +4,7 @@
 $Inter: "Inter", sans-serif;
 
 $font-l: clamp(2rem, 1.0909rem + 3.8788vw, 4rem);
-$font-m: clamp(1rem, 0.6591rem + 1.4545vw, 1.75rem);
+$font-m: clamp(1rem, 0.8864rem + 0.4848vw, 1.25rem);
 $font-s: clamp(1rem, 0.7727rem + 0.9697vw, 1.5rem);
 
 //------COLORS-------//
@@ -37,12 +37,12 @@ $secondary-700: shade($secondary, 50%);
 $secondary-800: shade($secondary, 60%);
 $secondary-900: shade($secondary, 70%);
 
-$gray-050: tint($gray, 90%);
-$gray-100: tint($gray, 80%);
-$gray-200: tint($gray, 70%);
-$gray-300: tint($gray, 60%);
-$gray-400: tint($gray, 50%);
-$gray-500: tint($gray, 40%);
+$gray-050: tint(#000, 90%);
+$gray-100: tint(#000, 80%);
+$gray-200: tint(#000, 70%);
+$gray-300: tint(#000, 60%);
+$gray-400: tint(#000, 50%);
+$gray-500: tint(#000, 40%);
 $gray-600: darken($gray, 40%);
 $gray-700: darken($gray, 50%);
 $gray-800: darken($gray, 60%);

@@ -59,6 +59,7 @@ export default function LoginForm() {
         type="text"
         id="username"
         name="username"
+        placeholder="Enter username"
         value={username}
         onChange={(e) => {
           handleUsernameChange(e);
@@ -74,6 +75,7 @@ export default function LoginForm() {
         id="password"
         name="password"
         value={password}
+        placeholder="Enter password"
         onChange={(e) => {
           handlePasswordChange(e);
         }}

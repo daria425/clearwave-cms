@@ -1,5 +1,19 @@
-.login-grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.dashboard {
+  padding: 0px 20px;
+}
+
+.posts {
+  position: relative;
+}
+
+.posts-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.categories-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
 }

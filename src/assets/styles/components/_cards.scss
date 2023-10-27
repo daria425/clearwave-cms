@@ -1,0 +1,23 @@
+@use "../abstracts/" as *;
+
+.post-card {
+  background-color: $surface;
+  padding: 30px 30px;
+  line-height: 1.5;
+}
+
+.post-card-title {
+  font-weight: 700;
+}
+
+.post-card-category,
+.post-card-date {
+  color: $gray-100;
+}
+
+.category--card {
+  background-color: $surface;
+  text-align: center;
+  padding: 10px 0px;
+  font-weight: 700;
+}

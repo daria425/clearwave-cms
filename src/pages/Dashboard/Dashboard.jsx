@@ -13,15 +13,22 @@ export default function Dashboard() {
       {postsLoading || categoriesLoading ? (
         <p>Loading...</p> // Display a loading message or spinner while loading
       ) : (
-        <>
-          <section>
-            {blogPosts.map((post) => (
-              <BlogCard key={post._id} post={post} />
-            ))}
-            <button onClick={() => navigate(`/new`)}>new post</button>
+        <main className="dashboard">
+          <section className="posts">
+            <div className="posts-wrapper">
+              {blogPosts.map((post) => (
+                <BlogCard key={post._id} post={post} />
+              ))}
+            </div>
+            <button
+              className="btn-floating-action--new-post"
+              onClick={() => navigate(`/new`)}
+            >
+              +
+            </button>
           </section>
-          <section>
-            <ul>
+          <section className="categories">
+            <ul className="categories-wrapper">
               {categories.map((category) => (
                 <Category key={category._id} category={category} />
               ))}
@@ -30,7 +37,7 @@ export default function Dashboard() {
               new category
             </button>
           </section>
-        </>
+        </main>
       )}
     </Layout>
   );

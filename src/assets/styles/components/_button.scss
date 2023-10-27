@@ -1,14 +1,35 @@
 @use "../abstracts/" as *;
 .btn-primary {
-  font-size: $font-m;
-  font-weight: 700;
+  @include rounded;
+  @include btn-sizing;
   color: white;
-  background-color: $primary-variant;
-  padding: 10px 0px;
+  background-color: $primary;
+
+  transition: background-color 0.5s;
   cursor: pointer;
   &--login {
     @extend .btn-primary;
     margin-top: 30px;
     width: 100%;
+  }
+}
+
+.btn-primary:hover {
+  background-color: $primary-500;
+}
+
+.btn-floating-action {
+  @include btn-sizing;
+  color: white;
+  background-color: $primary;
+  &--new-post {
+    @extend .btn-floating-action;
+    border-radius: 50%;
+    position: absolute;
+    bottom: calc(-75px / 2);
+    left: 50%;
+    transform: translate(-50%, 0);
+    min-height: 75px;
+    min-width: 75px;
   }
 }

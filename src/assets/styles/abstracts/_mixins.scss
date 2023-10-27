@@ -14,3 +14,18 @@
           + "Available breakpoints are: #{map-keys(variables.$breakpoints)}.";
   }
 }
+
+@mixin rounded {
+  border-radius: 3px;
+}
+
+@mixin btn-sizing {
+  font-size: variables.$font-m;
+  font-weight: 700;
+  padding: 10px 0px;
+}
+
+@mixin btn-circle {
+  padding: 10px;
+  border-radius: 50%;
+}

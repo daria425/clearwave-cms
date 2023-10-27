@@ -1,6 +1,7 @@
 @use "../abstracts/" as *;
 
 .login-wrapper {
+  @include rounded;
   background-color: $surface;
   padding: 30px 30px;
   max-width: 80%;
@@ -20,11 +21,15 @@
   margin: 10px 0px;
 }
 .login-input {
+  @include rounded;
   display: block;
   border: none;
-  border-bottom: 2px solid white;
   width: 100%;
+  color: $gray-100;
+  background-color: $gray-600;
+  padding: 10px 5px;
+  box-sizing: border-box;
 }
-
 .login-input:focus {
+  border: 2px solid $primary;
 }

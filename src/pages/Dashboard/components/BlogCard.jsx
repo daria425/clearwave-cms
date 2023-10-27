@@ -38,23 +38,28 @@ export default function BlogCard({ post }) {
     }
   }
   return (
-    <div role="article" key={post._id} id={post._id}>
+    <div role="article" className="post-card" key={post._id} id={post._id}>
       {error ? (
         <p style={{ color: "red" }}>{error}</p>
       ) : (
         <>
-          <h2>Title: {post.title}</h2>
-          <p>Category: {post.category.name}</p>
-          <p>{format(parseISO(post.createdAt), "MM/dd/yyyy")}</p>
-          <button onClick={() => navigate(`/edit/${post._id}`)}>Edit</button>
+          <h2 className="post-card-title">Title: {post.title}</h2>
+          <p className="post-card-category">Category: {post.category.name}</p>
+          <p className="post-card-date">
+            Date posted:{format(parseISO(post.createdAt), "MM/dd/yyyy")}
+          </p>
+          <button className="" onClick={() => navigate(`/edit/${post._id}`)}>
+            Edit &rarr;
+          </button>
           <button
+            className="btn"
             type="submit"
             id={post._id}
             onClick={(e) => {
               handleSubmit(e);
             }}
           >
-            Delete
+            X
           </button>
         </>
       )}
