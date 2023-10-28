@@ -1,6 +1,6 @@
-export default function MenuButton() {
+export default function MenuButton({ handleSidebarOpen }) {
   return (
-    <button className="btn-icon">
+    <button className="btn-icon" onClick={handleSidebarOpen}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 -960 960 960"

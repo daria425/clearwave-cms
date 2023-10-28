@@ -34,10 +34,10 @@ export default function LoginForm() {
       const data = await response.json();
       // Handle the response data as needed
       //get token
-      const { accessToken, refreshToken } = data;
+      const { accessToken, refreshToken, user } = data;
       updateAccessToken(accessToken);
       updateRefreshToken(refreshToken);
-      handleLogin();
+      handleLogin(user);
       nav("/dashboard");
     } catch (error) {
       console.error("Error:", error.message);

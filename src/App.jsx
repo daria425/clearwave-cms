@@ -30,12 +30,14 @@ export const contentContext = createContext({
 export const loginContext = createContext({
   handleLogin: () => {},
   handleLogout: () => {},
+  user: {},
 });
 
 function App() {
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
   const [userLogin, setUserLogin] = useState(false);
+  const [user, setUser] = useState({});
   const {
     data: categoryData,
     error: categoryError,
@@ -74,12 +76,14 @@ function App() {
     }
   }
 
-  function handleLogin() {
+  function handleLogin(user) {
     setUserLogin(true);
+    setUser(user);
   }
 
   function handleLogout() {
     setUserLogin(false);
+    setUser({});
   }
 
   function handlePostUpdate(e, changedPost) {
@@ -159,7 +163,7 @@ function App() {
         updateRefreshToken,
       }}
     >
-      <loginContext.Provider value={{ handleLogin, handleLogout }}>
+      <loginContext.Provider value={{ handleLogin, handleLogout, user }}>
         <contentContext.Provider
           value={{
             blogPosts,

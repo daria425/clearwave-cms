@@ -1,0 +1,45 @@
+@use "../abstracts/" as *;
+.sidebar {
+  height: 100%;
+  background-color: white;
+  position: fixed;
+  overflow-x: hidden;
+  z-index: 1;
+  font-size: $font-m;
+}
+.sidebar--link {
+  @include rounded;
+  color: $gray-700;
+  display: block;
+  font-size: $font-s;
+  padding: 5px;
+  font-weight: 700;
+  transition: background-color 0.5s;
+  line-height: 1.5;
+  margin-top: 5px;
+  &:hover {
+    color: $primary;
+    background-color: $primary-100;
+  }
+}
+
+.sidebar--profile {
+  color: $gray-700;
+  border-bottom: 2px solid $gray-300;
+  padding: 10px 10px;
+}
+
+.sidebar--profile--fullname {
+  color: $gray-700;
+  font-weight: 700;
+  margin: 10px 0px;
+}
+.sidebar--profile--username,
+.sidebar--profile--email {
+  color: $gray-500;
+  font-size: $font-s;
+}
+
+.sidebar--navigation {
+  padding: 5px 5px;
+}
