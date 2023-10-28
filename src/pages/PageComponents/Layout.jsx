@@ -13,8 +13,8 @@ export default function Layout({ children }) {
     <>
       {pathname !== "/" ? (
         <>
-          <SideBarNav sidebarOpen={sidebarOpen} />
           <Header handleSidebarOpen={handleSidebarOpen} />
+          <SideBarNav sidebarOpen={sidebarOpen} />
         </>
       ) : null}
       {children}

@@ -57,8 +57,14 @@ function App() {
     }
   }, [postData, postsLoading, categoriesLoading, categoryData]);
   useEffect(() => {
-    const loggedInUser = document.cookie;
-    if (loggedInUser) {
+    const cookies = document.cookie;
+    if (cookies) {
+      const indexToSlice = cookies.indexOf("=") + 1;
+      const userData = decodeURIComponent(cookies.slice(indexToSlice));
+      const userString = userData.replaceAll("j:", "");
+      const userJson = `${userString}`;
+      const user = JSON.parse(userJson);
+      setUser(user);
       setUserLogin(true);
     }
   }, []);
