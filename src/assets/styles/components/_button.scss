@@ -1,29 +1,29 @@
 @use "../abstracts/" as *;
+// .btn-primary {
+//   @include btn-default;
+//   color: white;
+//   background-color: $primary;
+//   &--login {
+//     @extend .btn-primary;
+//     margin-top: 30px;
+//     width: 100%;
+//   }
+// }
+
+// .btn-primary:hover {
+//   background-color: $primary-500;
+// }
+
 .btn-primary {
-  @include rounded;
-  @include btn-default;
-  color: white;
-  background-color: $primary;
-  &--login {
-    @extend .btn-primary;
-    margin-top: 30px;
-    width: 100%;
-  }
-}
-
-.btn-primary:hover {
-  background-color: $primary-500;
-}
-
-.btn-floating-action {
-  @include btn-default;
+  @include btn-default(10px);
   color: white;
   background-color: $primary;
   &:hover {
     background-color: $primary-500;
   }
   &--new-post {
-    @extend .btn-floating-action;
+    @extend .btn-primary;
+    padding: 0px;
     border-radius: 50%;
     position: absolute;
     bottom: calc(-#{$btn-radius} / 2);
@@ -32,22 +32,30 @@
     min-height: $btn-radius;
     min-width: $btn-radius;
   }
-}
-
-.btn-primary-colorswap {
-  @include rounded;
-  @include btn-default(10px);
-  color: $primary;
-  background-color: white;
-  &--nav {
-    @extend .btn-primary-colorswap;
-    box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
-    &:hover {
-      box-shadow: 0px 6px 15px 2px rgba(0, 0, 0, 0.2);
-      background-color: $primary-100;
-    }
+  &--login {
+    @extend .btn-primary;
+    margin-top: 30px;
+    width: 100%;
+  }
+  &--logout {
+    @extend .btn-primary;
+    margin-top: 10px;
   }
 }
+
+// .btn-primary-colorswap {
+//   @include rounded;
+//   @include btn-default(10px);
+//   color: $primary;
+//   background-color: white;
+//   &--nav {
+//     @extend .btn-primary-colorswap;
+//     &:hover {
+//       box-shadow: 0px 6px 15px 2px rgba(0, 0, 0, 0.2);
+//       background-color: $primary-100;
+//     }
+//   }
+// }
 
 .btn-icon {
   color: white;

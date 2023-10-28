@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { loginContext } from "../../../App";
 import ProfileIcon from "../Icons/ProfileIcon";
+import LogoutBtn from "./LogoutBtn";
 export default function Profile() {
   const { user } = useContext(loginContext);
   return (
@@ -11,6 +12,7 @@ export default function Profile() {
       </p>
       <p className="sidebar--profile--username">@{user.username}</p>
       <p className="sidebar--profile--email">{user.email}</p>
+      <LogoutBtn />
     </section>
   );
 }
