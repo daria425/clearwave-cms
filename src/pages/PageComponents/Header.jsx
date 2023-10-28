@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { loginContext } from "../../App";
+import MenuButton from "./Icons/MenuButton";
 export default function Header() {
   const nav = useNavigate();
   const { handleLogout } = useContext(loginContext);
@@ -14,8 +15,12 @@ export default function Header() {
     }
   }
   return (
-    <header>
-      <button onClick={logout}>Logout</button>
+    <header className="header">
+      <MenuButton />
+      <h1>ClearWave</h1>
+      <button className="btn-primary-colorswap--nav" onClick={logout}>
+        LOGOUT
+      </button>
     </header>
   );
 }

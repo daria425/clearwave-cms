@@ -3,8 +3,9 @@ import { useData } from "./helpers/Hooks";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
+import Dashboard from "./pages/DashboardPage/Dashboard";
 import ProtectedRoute from "./pages/PageComponents/ProtectedRoutes";
-import Dashboard from "./pages/Dashboard/Dashboard";
+import ContentPage from "./pages/ContentPage/ContentPage";
 import EditPage from "./pages/EditPost/EditPage";
 import NewPostPage from "./pages/NewPost/NewPostPage";
 import NewCategoryPage from "./pages/NewCategory/NewCategoryPage";
@@ -126,6 +127,10 @@ function App() {
           {
             path: "dashboard",
             element: <Dashboard />,
+          },
+          {
+            path: "content",
+            element: <ContentPage />,
           },
           {
             path: "edit/:id",

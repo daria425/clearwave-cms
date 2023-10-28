@@ -1,5 +1,5 @@
 @use "../abstracts/" as *;
-
+a,
 p,
 h1,
 h2,
@@ -21,4 +21,8 @@ h3,
 input,
 label {
   font-size: $font-m;
+}
+
+a {
+  text-decoration: none;
 }

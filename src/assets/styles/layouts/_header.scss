@@ -1,0 +1,15 @@
+@use "../abstracts/" as *;
+.header {
+  background-color: $primary;
+  display: flex;
+  padding: 10px 0px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.header--link {
+  color: $primary-100;
+  &:hover {
+    color: white;
+  }
+}
