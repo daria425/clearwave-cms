@@ -1,9 +1,9 @@
 import MenuButton from "./Icons/MenuButton";
-export default function Header({ handleSidebarOpen }) {
+export default function Header({ isDesktop, handleSidebarOpen }) {
   return (
     <header className="header">
-      <MenuButton handleSidebarOpen={handleSidebarOpen} />
-      <h1>ClearWave</h1>
+      {isDesktop ? <MenuButton handleSidebarOpen={handleSidebarOpen} /> : null}
+      <h1 className="header--title">ClearWave</h1>
     </header>
   );
 }

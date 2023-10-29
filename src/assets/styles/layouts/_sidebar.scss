@@ -6,7 +6,11 @@
   overflow-x: hidden;
   z-index: 2;
   font-size: $font-m;
-  box-shadow: 6px 0px 17px 0px rgba(0, 0, 0, 0.3);
+  @include respond-to("s") {
+    position: static;
+    grid-row: 1 / span 2;
+    box-shadow: 6px 0px 17px 0px rgba(0, 0, 0, 0.3);
+  }
 }
 .sidebar--link {
   @include rounded;

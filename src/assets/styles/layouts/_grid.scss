@@ -1,4 +1,13 @@
 @use "../abstracts/" as *;
+
+.wrapper {
+  @include respond-to("s") {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+  }
+}
+
 .dashboard {
   padding: 0px 20px;
 }
