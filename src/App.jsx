@@ -9,6 +9,7 @@ import ContentPage from "./pages/ContentPage/ContentPage";
 import EditPage from "./pages/EditPost/EditPage";
 import NewPostPage from "./pages/NewPost/NewPostPage";
 import NewCategoryPage from "./pages/NewCategory/NewCategoryPage";
+import CategoryPage from "./pages/CategoriesPage/CategoryPage";
 export const appContext = createContext({
   blogPosts: [],
   accessToken: "",
@@ -149,6 +150,10 @@ function App() {
           {
             path: "new",
             element: <NewPostPage />,
+          },
+          {
+            path: "categories",
+            element: <CategoryPage />,
           },
           {
             path: "new-category",

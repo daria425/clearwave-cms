@@ -6,7 +6,8 @@
   overflow-x: hidden;
   z-index: 2;
   font-size: $font-m;
-  @include respond-to("s") {
+  transition: width 0.5s ease-in-out;
+  @include respond-to("m") {
     position: static;
     grid-row: 1 / span 2;
     box-shadow: 6px 0px 17px 0px rgba(0, 0, 0, 0.3);
@@ -33,16 +34,22 @@
   border-bottom: 2px solid $gray-300;
   padding: 10px 10px;
 }
+.sidebar--icons {
+  display: flex;
+  justify-content: space-between;
+}
 
 .sidebar--profile--fullname {
   color: $gray-700;
   font-weight: 700;
   margin: 10px 0px;
+  white-space: nowrap;
 }
 .sidebar--profile--username,
 .sidebar--profile--email {
   color: $gray-500;
   font-size: $font-s;
+  white-space: nowrap;
 }
 
 .sidebar--navigation {

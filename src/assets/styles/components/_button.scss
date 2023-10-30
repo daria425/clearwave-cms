@@ -64,3 +64,11 @@
     color: $primary-100;
   }
 }
+
+.btn-icon-dark {
+  color: $gray-700;
+  cursor: pointer;
+  &:hover {
+    color: $primary;
+  }
+}

@@ -4,21 +4,37 @@ import SideBarNav from "./Sidebar/SideBarNav";
 import { useState, useEffect } from "react";
 export default function Layout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const breakpoint = 768;
-  useEffect(() => {
-    if (window.innerWidth > breakpoint) {
-      setIsDesktop(true);
-    } else {
-      setIsDesktop(false);
-    }
+  const [dimensions, setDimensions] = useState({
+    width: window.innerWidth,
+    breakpoint: 768,
+  });
+  // useEffect(() => {
+  //   if (window.innerWidth > breakpoint) {
+  //     setIsDesktop(true);
+  //     console.log("desktop set to true");
+  //   } else {
+  //     setIsDesktop(false);
+  //     console.log("desktop set to false");
+  //   }
 
+  //   function handleResize() {
+  //     if (window.innerWidth > breakpoint) {
+  //       setIsDesktop(true);
+  //       console.log("desktop set to true");
+  //     } else {
+  //       setIsDesktop(false);
+  //       console.log("desktop set to false");
+  //     }
+  //   }
+  //   window.addEventListener("resize", handleResize);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
+
+  useEffect(() => {
     function handleResize() {
-      if (window.innerWidth > breakpoint) {
-        setIsDesktop(true);
-      } else {
-        setIsDesktop(false);
-      }
+      setDimensions({ ...dimensions, width: window.innerWidth });
     }
     window.addEventListener("resize", handleResize);
     return () => {
@@ -26,8 +42,10 @@ export default function Layout({ children }) {
     };
   }, []);
   function handleSidebarOpen() {
-    console.log("function passed");
     setSidebarOpen(true);
+  }
+  function handleSidebarClose() {
+    setSidebarOpen(false);
   }
   const { pathname } = useLocation();
 
@@ -35,8 +53,15 @@ export default function Layout({ children }) {
     <section className="wrapper">
       {pathname !== "/" ? (
         <>
-          <SideBarNav isDesktop={isDesktop} sidebarOpen={sidebarOpen} />
-          <Header isDesktop={isDesktop} handleSidebarOpen={handleSidebarOpen} />
+          <SideBarNav
+            dimensions={dimensions}
+            sidebarOpen={sidebarOpen}
+            handleSidebarClose={handleSidebarClose}
+          />
+          <Header
+            dimensions={dimensions}
+            handleSidebarOpen={handleSidebarOpen}
+          />
         </>
       ) : null}
       {children}

@@ -1,8 +1,10 @@
 import MenuButton from "./Icons/MenuButton";
-export default function Header({ isDesktop, handleSidebarOpen }) {
+export default function Header({ dimensions, handleSidebarOpen }) {
   return (
     <header className="header">
-      {isDesktop ? <MenuButton handleSidebarOpen={handleSidebarOpen} /> : null}
+      {dimensions.width < dimensions.breakpoint ? (
+        <MenuButton handleSidebarOpen={handleSidebarOpen} />
+      ) : null}
       <h1 className="header--title">ClearWave</h1>
     </header>
   );

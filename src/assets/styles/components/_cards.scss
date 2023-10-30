@@ -1,6 +1,7 @@
 @use "../abstracts/" as *;
 
 .post-card {
+  @include rounded;
   background-color: $surface;
   padding: 30px 30px;
   line-height: 1.5;
@@ -16,6 +17,7 @@
 }
 
 .category--card {
+  @include rounded;
   background-color: $surface;
   text-align: center;
   padding: 10px 0px;
