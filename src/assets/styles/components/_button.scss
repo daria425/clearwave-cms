@@ -43,6 +43,26 @@
   }
 }
 
+.btn-outline {
+  @include btn-default(5px);
+  color: white;
+  box-shadow: none;
+  border: 2px solid $gray-300;
+  &:hover {
+    background-color: $primary-500;
+  }
+}
+
+.btn-danger {
+  @include btn-default(10px);
+  color: white;
+  background-color: $danger;
+  box-shadow: none;
+  border: 2px solid $danger-700;
+  &:hover {
+    background-color: $danger-300;
+  }
+}
 // .btn-primary-colorswap {
 //   @include rounded;
 //   @include btn-default(10px);
@@ -62,6 +82,12 @@
   cursor: pointer;
   &:hover {
     color: $primary-100;
+  }
+  &--close-post {
+    @extend .btn-icon;
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 }
 

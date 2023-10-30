@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { appContext, contentContext } from "../../../App";
 import { format, parseISO } from "date-fns";
 import { useTokenRefresh } from "../../../helpers/Hooks";
+import CloseSelectedButton from "../../PageComponents/Icons/CloseSelectedButton";
 export default function BlogCard({ post }) {
   const navigate = useNavigate();
   const { accessToken, updateAccessToken, refreshToken } =
@@ -10,6 +11,16 @@ export default function BlogCard({ post }) {
   const { handleDelete } = useContext(contentContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
   const [error, setError] = useState(null);
+  const [translation, setTranslation] = useState("0px");
+  const [shadow, setShadow] = useState("none");
+  const initialStyle = {
+    left: "0px",
+    boxShadow: "none",
+    border: "none",
+    top: "0px",
+    zIndex: "0",
+  };
+  const [style, setStyle] = useState(initialStyle);
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -37,32 +48,56 @@ export default function BlogCard({ post }) {
       setError(err.message);
     }
   }
+  function selectCard() {
+    const newStyle = {
+      left: "50px",
+      boxShadow: "rgba(0, 0, 0, 0.3) 0px 0px 9px 5px",
+      border: "2px solid #999999",
+      top: "20px",
+      zIndex: "5",
+    };
+    setStyle(newStyle);
+  }
+
+  function handleUndoSelection(e) {
+    e.stopPropagation();
+    const newStyle = { ...initialStyle };
+    setStyle(newStyle);
+    console.log(style);
+  }
   return (
-    <div role="article" className="post-card" key={post._id} id={post._id}>
-      {error ? (
-        <p style={{ color: "red" }}>{error}</p>
-      ) : (
-        <>
-          <h2 className="post-card-title">Title: {post.title}</h2>
-          <p className="post-card-category">Category: {post.category.name}</p>
-          <p className="post-card-date">
-            Date posted:{format(parseISO(post.createdAt), "MM/dd/yyyy")}
-          </p>
-          <button className="" onClick={() => navigate(`/edit/${post._id}`)}>
-            Edit &rarr;
-          </button>
-          <button
-            className="btn"
-            type="submit"
-            id={post._id}
-            onClick={(e) => {
-              handleSubmit(e);
-            }}
-          >
-            X
-          </button>
-        </>
-      )}
+    <div
+      role="article"
+      className="post-card"
+      key={post._id}
+      id={post._id}
+      style={style}
+      onClick={selectCard}
+    >
+      <CloseSelectedButton handleUndoSelection={handleUndoSelection} />
+      <h2 className="post-card-title">Title: {post.title}</h2>
+      <p className="post-card-category">Category: {post.category.name}</p>
+      <p className="post-card-date">
+        Date posted:{format(parseISO(post.createdAt), "MM/dd/yyyy")}
+      </p>
+      <div className="post-control-buttons">
+        <button
+          className="btn-outline"
+          onClick={() => navigate(`/edit/${post._id}`)}
+        >
+          EDIT
+        </button>
+        <button
+          className="btn-danger"
+          type="submit"
+          id={post._id}
+          onClick={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          X
+        </button>
+      </div>
     </div>
   );
 }

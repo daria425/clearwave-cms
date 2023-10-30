@@ -15,6 +15,7 @@ $primary-variant: #5a00ee;
 $secondary: #60d4e2;
 $secondary-variant: #36b1c3;
 $gray: #bdbdbd;
+$danger: #a32a48;
 
 $primary-050: tint($primary, 90%);
 $primary-100: tint($primary, 80%);
@@ -48,6 +49,9 @@ $gray-600: darken($gray, 40%);
 $gray-700: darken($gray, 50%);
 $gray-800: darken($gray, 60%);
 $gray-900: darken($gray, 70%);
+
+$danger-300: tint($danger, 30%);
+$danger-700: darken($danger, 50%);
 
 $background: $gray-900;
 $surface: $gray-700;

@@ -3,8 +3,9 @@
 .post-card {
   @include rounded;
   background-color: $surface;
-  padding: 30px 30px;
   line-height: 1.5;
+  padding: 30px 30px;
+  position: relative;
 }
 
 .post-card-title {
@@ -14,6 +15,12 @@
 .post-card-category,
 .post-card-date {
   color: $gray-100;
+}
+
+.post-control-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .category--card {
