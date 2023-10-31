@@ -1,0 +1,20 @@
+@use "./login-form";
+@use "../abstracts/" as *;
+
+.edit-form label {
+  @extend .login-label;
+  &.edit-form-main-label {
+    font-weight: 700;
+  }
+}
+
+.edit-form input {
+  @extend .login-input;
+}
+
+.edit-form-fieldset {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  margin-top: 20px;
+  padding: 0px 30px;
+}

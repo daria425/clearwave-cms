@@ -4,7 +4,11 @@ import { appContext, contentContext } from "../../../App";
 import { format, parseISO } from "date-fns";
 import { useTokenRefresh } from "../../../helpers/Hooks";
 import CloseSelectedButton from "../../PageComponents/Icons/CloseSelectedButton";
-export default function BlogCard({ post }) {
+export default function BlogCard({
+  post,
+  handleSelection,
+  handleUndoSelection,
+}) {
   const navigate = useNavigate();
   const { accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
@@ -14,10 +18,7 @@ export default function BlogCard({ post }) {
   const [translation, setTranslation] = useState("0px");
   const [shadow, setShadow] = useState("none");
   const initialStyle = {
-    left: "0px",
-    boxShadow: "none",
     border: "none",
-    top: "0px",
     zIndex: "0",
   };
   const [style, setStyle] = useState(initialStyle);
@@ -50,20 +51,18 @@ export default function BlogCard({ post }) {
   }
   function selectCard() {
     const newStyle = {
-      left: "50px",
-      boxShadow: "rgba(0, 0, 0, 0.3) 0px 0px 9px 5px",
       border: "2px solid #999999",
-      top: "20px",
       zIndex: "5",
     };
     setStyle(newStyle);
+    handleSelection();
   }
 
-  function handleUndoSelection(e) {
+  function undoSelectCard(e) {
     e.stopPropagation();
     const newStyle = { ...initialStyle };
     setStyle(newStyle);
-    console.log(style);
+    handleUndoSelection();
   }
   return (
     <div
@@ -74,7 +73,7 @@ export default function BlogCard({ post }) {
       style={style}
       onClick={selectCard}
     >
-      <CloseSelectedButton handleUndoSelection={handleUndoSelection} />
+      <CloseSelectedButton undoSelectCard={undoSelectCard} />
       <h2 className="post-card-title">Title: {post.title}</h2>
       <p className="post-card-category">Category: {post.category.name}</p>
       <p className="post-card-date">

@@ -89,7 +89,7 @@ export default function EditPage() {
       {!selectedPost ? (
         <p>Loading...</p> // Display a loading message or spinner while loading
       ) : (
-        <>
+        <section className="content">
           <PostDetails selectedPost={selectedPost} />
           <EditForm
             selectedPost={selectedPost}
@@ -101,7 +101,7 @@ export default function EditPage() {
             handleArrayChange={handleArrayChange}
             handleFileUpload={handleFileUpload}
           />
-        </>
+        </section>
       )}
     </Layout>
   );

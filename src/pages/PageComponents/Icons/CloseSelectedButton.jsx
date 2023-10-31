@@ -1,9 +1,9 @@
-export default function CloseSelectedButton({ handleUndoSelection }) {
+export default function CloseSelectedButton({ undoSelectCard }) {
   return (
     <button
       className="btn-icon--close-post"
       onClick={(e) => {
-        handleUndoSelection(e);
+        undoSelectCard(e);
       }}
     >
       <svg

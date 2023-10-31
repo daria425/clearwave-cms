@@ -3,8 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { contentContext } from "../../App";
 import BlogCard from "./components/BlogCard";
 import Layout from "../PageComponents/Layout";
+import Overlay from "../PageComponents/Overlay";
+import { useState } from "react";
 export default function Dashboard() {
+  const [postSelected, setPostSelected] = useState(false);
   const navigate = useNavigate();
+  function handleSelection() {
+    setPostSelected(true);
+  }
+  function handleUndoSelection() {
+    setPostSelected(false);
+  }
   const { blogPosts, postsLoading } = useContext(contentContext);
   return (
     <Layout>
@@ -15,7 +24,12 @@ export default function Dashboard() {
           <section className="posts">
             <div className="posts-wrapper">
               {blogPosts.map((post) => (
-                <BlogCard key={post._id} post={post} />
+                <BlogCard
+                  key={post._id}
+                  post={post}
+                  handleSelection={handleSelection}
+                  handleUndoSelection={handleUndoSelection}
+                />
               ))}
             </div>
             <button
@@ -24,6 +38,7 @@ export default function Dashboard() {
             >
               +
             </button>
+            {postSelected ? <Overlay /> : null}
           </section>
         </main>
       )}
