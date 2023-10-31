@@ -19,7 +19,7 @@ export default function TextEditor({
         </textarea>
       </label>
       <button className="btn-primary" onClick={handleCloseTextEditor}>
-        SAVE
+        SAVE AND CLOSE
       </button>
     </div>
   );
