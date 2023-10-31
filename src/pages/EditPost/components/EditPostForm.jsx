@@ -13,6 +13,7 @@ export default function EditForm({
   handleCheckbox,
   handleArrayChange,
   handleFileUpload,
+  handleShowTextEditor,
 }) {
   const { id } = useParams();
   const [modalOpen, setModalOpen] = useState(false);
@@ -87,6 +88,25 @@ export default function EditForm({
   if (categories.length === 0) {
     return <p>Loading...</p>;
   }
+  // if (showTextEditor) {
+  //   return (
+  //     <div className="edit-form-texteditor">
+  //       <label htmlFor="main_text">
+  //         Body text:
+  //         <textarea
+  //           className="edit-form-textarea"
+  //           name="content.main_text"
+  //           onChange={(e) => {
+  //             handleNestedTextChange(e);
+  //           }}
+  //           required
+  //         >
+  //           {selectedPost.content.main_text}
+  //         </textarea>
+  //       </label>
+  //     </div>
+  //   );
+  // } else
   return (
     <>
       {modalOpen && (
@@ -139,19 +159,24 @@ export default function EditForm({
               required
             />
           </label>
-          <label htmlFor="main_text">
-            Body text:
-            <textarea
-              name="content.main_text"
-              rows={5}
-              cols={10}
+          <button
+            className="btn-outline"
+            onClick={(e) => {
+              handleShowTextEditor(e);
+            }}
+          >
+            EDIT CONTENT
+          </button>
+          <label htmlFor="image_sources">
+            Images:
+            <input
+              type="file"
+              name="image_sources"
               onChange={(e) => {
-                handleNestedTextChange(e);
+                handleFileUpload(e);
               }}
-              required
-            >
-              {selectedPost.content.main_text}
-            </textarea>
+              multiple
+            ></input>
           </label>
         </fieldset>
         <fieldset className="edit-form-fieldset">
@@ -173,16 +198,7 @@ export default function EditForm({
               ))}
             </select>
           </label>
-          <label htmlFor="image_sources">
-            <input
-              type="file"
-              name="image_sources"
-              onChange={(e) => {
-                handleFileUpload(e);
-              }}
-              multiple
-            ></input>
-          </label>
+
           <label htmlFor="tags-group">
             {selectedPost.tags.map((tag, index) => {
               return (

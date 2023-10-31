@@ -4,11 +4,13 @@ import { contentContext } from "../../App";
 import { useState } from "react";
 import PostDetails from "./components/PostDetails";
 import EditForm from "./components/EditPostForm";
+import TextEditor from "./components/TextEditor";
 import Layout from "../PageComponents/Layout";
 export default function EditPage() {
   const [selectedPost, setSelectedPost] = useState(false);
   const { id } = useParams();
   const { blogPosts, postsLoading } = useContext(contentContext);
+  const [showTextEditor, setShowTextEditor] = useState(false);
 
   useEffect(() => {
     if (!postsLoading) {
@@ -28,6 +30,13 @@ export default function EditPage() {
         [nestedProp]: [e.target.value],
       },
     });
+  }
+  function handleShowTextEditor(e) {
+    e.preventDefault();
+    setShowTextEditor(true);
+  }
+  function handleCloseTextEditor() {
+    setShowTextEditor(false);
   }
   function handleFileUpload(e) {
     const fileArray = [...e.target.files];
@@ -90,17 +99,28 @@ export default function EditPage() {
         <p>Loading...</p> // Display a loading message or spinner while loading
       ) : (
         <section className="content">
-          <PostDetails selectedPost={selectedPost} />
-          <EditForm
-            selectedPost={selectedPost}
-            handleChange={handleChange}
-            handleNestedArrayChange={handleNestedArrayChange}
-            handleSelectChange={handleSelectChange}
-            handleNestedTextChange={handleNestedTextChange}
-            handleCheckbox={handleCheckbox}
-            handleArrayChange={handleArrayChange}
-            handleFileUpload={handleFileUpload}
-          />
+          {!showTextEditor ? (
+            <>
+              <PostDetails selectedPost={selectedPost} />
+              <EditForm
+                selectedPost={selectedPost}
+                handleChange={handleChange}
+                handleNestedArrayChange={handleNestedArrayChange}
+                handleSelectChange={handleSelectChange}
+                handleNestedTextChange={handleNestedTextChange}
+                handleCheckbox={handleCheckbox}
+                handleArrayChange={handleArrayChange}
+                handleFileUpload={handleFileUpload}
+                handleShowTextEditor={handleShowTextEditor}
+              />
+            </>
+          ) : (
+            <TextEditor
+              selectedPost={selectedPost}
+              handleNestedTextChange={handleNestedTextChange}
+              handleCloseTextEditor={handleCloseTextEditor}
+            />
+          )}
         </section>
       )}
     </Layout>
