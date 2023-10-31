@@ -1,0 +1,27 @@
+@use "./login-form";
+@use "../abstracts/" as *;
+
+.texteditor {
+  padding: 10px 10px;
+}
+
+.texteditor-textarea {
+  @include rounded;
+  width: 100%;
+  height: 500px;
+  color: $gray-100;
+  background-color: $gray-600;
+  height: 50vh;
+  border: none;
+  font-size: $font-m;
+  &:focus {
+    @extend .login-input, :focus;
+  }
+  margin-bottom: 10px;
+}
+
+.texteditor-title {
+  font-size: $font-ml;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
