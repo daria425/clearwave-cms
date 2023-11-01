@@ -31,8 +31,8 @@ export default function EditForm({
 
     try {
       const contentObj = {
-        subheadings: selectedPost.content.subheadings[0] ?? "",
-        snippets: selectedPost.content.snippets[0] ?? "",
+        subheading: selectedPost.content.subheading,
+        snippets: selectedPost.content.snippets,
         main_text: selectedPost.content.main_text,
       };
       console.log(JSON.stringify(selectedPost.tags));
@@ -135,13 +135,13 @@ export default function EditForm({
             />
           </label>
 
-          <label htmlFor="subheadings">
+          <label htmlFor="subheading">
             Subheadings:
             <input
-              name="content.subheadings"
-              value={selectedPost.content.subheadings[0] ?? ""}
+              name="content.subheading"
+              value={selectedPost.content.subheading}
               onChange={(e) => {
-                handleNestedArrayChange(e);
+                handleNestedTextChange(e);
               }}
               type="text"
               required
