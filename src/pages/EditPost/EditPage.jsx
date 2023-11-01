@@ -5,13 +5,14 @@ import { useState } from "react";
 import PostDetails from "./components/PostDetails";
 import EditForm from "./components/EditPostForm";
 import TextEditor from "./components/TextEditor";
+import PostDetailsCard from "./components/PostDetailsCard";
 import Layout from "../PageComponents/Layout";
 export default function EditPage() {
   const [selectedPost, setSelectedPost] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const { id } = useParams();
   const { blogPosts, postsLoading } = useContext(contentContext);
   const [showTextEditor, setShowTextEditor] = useState(false);
-
   useEffect(() => {
     if (!postsLoading) {
       const post = blogPosts.find((post) => post._id === id);
@@ -92,29 +93,47 @@ export default function EditPage() {
     );
     setSelectedPost({ ...selectedPost, tags: newTags });
   }
-
+  function handleShowDetails() {
+    setShowDetails(true);
+  }
   return (
     <Layout>
       {!selectedPost ? (
-        <p>Loading...</p> // Display a loading message or spinner while loading
+        <p>Loading...</p>
       ) : (
-        <section className="content">
+        <section
+          className="content--edit-page"
+          style={{ flexGrow: showDetails ? "1" : "0" }} //make div stretch to fill page when the details card is on display to center it
+        >
           {!showTextEditor ? (
+            // Content when !showTextEditor
             <>
-              <PostDetails selectedPost={selectedPost} />
-              <EditForm
-                selectedPost={selectedPost}
-                handleChange={handleChange}
-                handleNestedArrayChange={handleNestedArrayChange}
-                handleSelectChange={handleSelectChange}
-                handleNestedTextChange={handleNestedTextChange}
-                handleCheckbox={handleCheckbox}
-                handleArrayChange={handleArrayChange}
-                handleFileUpload={handleFileUpload}
-                handleShowTextEditor={handleShowTextEditor}
-              />
+              {showDetails ? (
+                // Content when showDetails is true
+                <PostDetailsCard selectedPost={selectedPost} />
+              ) : (
+                // Content when showDetails is false
+                <>
+                  <PostDetails
+                    selectedPost={selectedPost}
+                    handleShowDetails={handleShowDetails}
+                  />
+                  <EditForm
+                    selectedPost={selectedPost}
+                    handleChange={handleChange}
+                    handleNestedArrayChange={handleNestedArrayChange}
+                    handleSelectChange={handleSelectChange}
+                    handleNestedTextChange={handleNestedTextChange}
+                    handleCheckbox={handleCheckbox}
+                    handleArrayChange={handleArrayChange}
+                    handleFileUpload={handleFileUpload}
+                    handleShowTextEditor={handleShowTextEditor}
+                  />
+                </>
+              )}
             </>
           ) : (
+            // Content when showTextEditor
             <TextEditor
               selectedPost={selectedPost}
               handleNestedTextChange={handleNestedTextChange}

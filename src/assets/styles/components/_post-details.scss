@@ -1,0 +1,17 @@
+@use "../abstracts/" as *;
+@use "./button";
+
+.post-details-card-label {
+  font-weight: 700;
+}
+.post-details-card-content {
+  color: $gray-100;
+}
+.post-details-listitem {
+  @extend .post-details-card-content;
+  font-style: italic;
+}
+.post-details-content--main-text-panel {
+  padding: 0px 10px;
+  transition: height 0.5s;
+}

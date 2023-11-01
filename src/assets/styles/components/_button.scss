@@ -41,15 +41,27 @@
     @extend .btn-primary;
     margin-top: 10px;
   }
+  &--back {
+    @extend .btn-primary;
+    width: 75px;
+    margin-top: 10px;
+  }
 }
 
 .btn-outline {
-  @include btn-default(5px);
+  @include btn-default(10px);
   color: $primary-400;
   box-shadow: none;
   border: 2px solid $gray-300;
   &:hover {
     background-color: $primary-050;
+  }
+  &--accordion {
+    @extend .btn-outline;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 

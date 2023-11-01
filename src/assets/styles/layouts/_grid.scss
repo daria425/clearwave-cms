@@ -1,6 +1,7 @@
 @use "../abstracts/" as *;
 
 .wrapper {
+  position: relative;
   @include respond-to("m") {
     display: grid;
     grid-template-columns: auto 1fr;
