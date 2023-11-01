@@ -1,8 +1,12 @@
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import SideBarNav from "./Sidebar/SideBarNav";
+import LoadingPage from "../LoadingPage/LoadingPage";
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { contentContext } from "../../App";
 export default function Layout({ children }) {
+  const { postsLoading, categoriesLoading } = useContext(contentContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dimensions, setDimensions] = useState({
     width: window.innerWidth,
@@ -64,7 +68,7 @@ export default function Layout({ children }) {
           />
         </>
       ) : null}
-      {children}
+      {postsLoading || categoriesLoading ? <LoadingPage /> : children}
     </section>
   );
 }

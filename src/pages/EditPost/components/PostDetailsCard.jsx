@@ -1,9 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import PostImages from "./PostImages";
 import BackButton from "../../PageComponents/Icons/BackButton";
 import AccordionIcon from "../../PageComponents/Icons/AccordionIcon";
 import { useState } from "react";
-export default function PostDetailsCard({ selectedPost }) {
+export default function PostDetailsCard({ selectedPost, handleShowDetails }) {
   const [showMainText, setShowMainText] = useState(false);
   const initialStyle = {
     height: "0px",
@@ -13,7 +12,7 @@ export default function PostDetailsCard({ selectedPost }) {
     height: "25vh",
     overflow: "auto",
   };
-  const nav = useNavigate();
+
   function handleShowMainText() {
     setShowMainText(!showMainText);
   }
@@ -58,7 +57,7 @@ export default function PostDetailsCard({ selectedPost }) {
           ))}
         </ul>
       </section>
-      <BackButton />
+      <BackButton navigationFunction={handleShowDetails} />
     </>
   );
 }

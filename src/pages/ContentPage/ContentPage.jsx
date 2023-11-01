@@ -4,6 +4,7 @@ import { contentContext } from "../../App";
 import BlogCard from "./components/BlogCard";
 import Layout from "../PageComponents/Layout";
 import Overlay from "../PageComponents/Overlay";
+import LoadingPage from "../LoadingPage/LoadingPage";
 import { useState } from "react";
 export default function Dashboard() {
   const [postSelected, setPostSelected] = useState(false);
@@ -18,7 +19,7 @@ export default function Dashboard() {
   return (
     <Layout>
       {postsLoading ? (
-        <p>Loading...</p> // Display a loading message or spinner while loading
+        <LoadingPage /> // Display a loading message or spinner while loading
       ) : (
         <main className="content">
           <section className="posts">

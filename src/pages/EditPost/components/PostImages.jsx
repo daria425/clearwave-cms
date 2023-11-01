@@ -1,6 +1,7 @@
 import { Buffer } from "buffer";
 import { useContext } from "react";
 import { appContext, contentContext } from "../../../App";
+import DeleteButton from "../../PageComponents/Icons/DeleteButton";
 export default function PostImages({ selectedPost }) {
   const { accessToken } = useContext(appContext);
   const { syncImageDelete } = useContext(contentContext);
@@ -32,27 +33,22 @@ export default function PostImages({ selectedPost }) {
       {selectedPost.image_sources.length <= 0 ? (
         <p>No images</p>
       ) : (
-        selectedPost.image_sources.map((image, index) => (
-          <div key={index} className="imageContainer">
-            <img
-              className="imageContainer-img"
-              key={index}
-              src={`data:image/${image.contentType};base64, ${Buffer.from(
-                image.data
-              ).toString("base64")}`}
-              alt={`Image ${index + 1}`}
-            />
-            <button
-              onClick={(e) => {
-                handleServerImageDelete(e);
-              }}
-              data-postid={selectedPost._id}
-              id={image._id}
-            >
-              Remove image
-            </button>
-          </div>
-        ))
+        <div className="post-details-gallery">
+          {selectedPost.image_sources.map((image, index) => (
+            <div key={index} className="post-details-galleryitem">
+              <div className="post-details-imagecontainer">
+                <img
+                  className="post-details-imagecontainer-img"
+                  src={`data:image/${image.contentType};base64, ${Buffer.from(
+                    image.data
+                  ).toString("base64")}`}
+                  alt={`Image ${index + 1}`}
+                />
+              </div>
+              <DeleteButton deletionFunction={handleServerImageDelete} />
+            </div>
+          ))}
+        </div>
       )}
     </>
   );

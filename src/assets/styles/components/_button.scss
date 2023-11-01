@@ -66,13 +66,12 @@
 }
 
 .btn-danger {
-  @include btn-default(10px);
-  color: white;
-  background-color: $danger;
+  @include btn-default(0px, 0px);
+  color: $danger-300;
   box-shadow: none;
-  border: 2px solid $danger-700;
+  width: 100%;
   &:hover {
-    background-color: $danger-300;
+    color: $danger;
   }
 }
 // .btn-primary-colorswap {

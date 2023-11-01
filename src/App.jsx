@@ -129,7 +129,13 @@ function App() {
     const router = createBrowserRouter([
       {
         path: "/login",
-        element: <Index userLogin={userLogin} />,
+        element: (
+          <Index
+            userLogin={userLogin}
+            postsLoading={postsLoading}
+            categoriesLoading={categoriesLoading}
+          />
+        ),
       },
       {
         path: "/",

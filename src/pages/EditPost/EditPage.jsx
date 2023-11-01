@@ -6,6 +6,7 @@ import PostDetails from "./components/PostDetails";
 import EditForm from "./components/EditPostForm";
 import TextEditor from "./components/TextEditor";
 import PostDetailsCard from "./components/PostDetailsCard";
+import LoadingPage from "../LoadingPage/LoadingPage";
 import Layout from "../PageComponents/Layout";
 export default function EditPage() {
   const [selectedPost, setSelectedPost] = useState(false);
@@ -94,12 +95,13 @@ export default function EditPage() {
     setSelectedPost({ ...selectedPost, tags: newTags });
   }
   function handleShowDetails() {
-    setShowDetails(true);
+    setShowDetails(!showDetails);
   }
+
   return (
     <Layout>
       {!selectedPost ? (
-        <p>Loading...</p>
+        <LoadingPage />
       ) : (
         <section
           className="content--edit-page"
@@ -110,7 +112,10 @@ export default function EditPage() {
             <>
               {showDetails ? (
                 // Content when showDetails is true
-                <PostDetailsCard selectedPost={selectedPost} />
+                <PostDetailsCard
+                  selectedPost={selectedPost}
+                  handleShowDetails={handleShowDetails}
+                />
               ) : (
                 // Content when showDetails is false
                 <>
