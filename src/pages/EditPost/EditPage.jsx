@@ -118,7 +118,7 @@ export default function EditPage() {
                 />
               ) : (
                 // Content when showDetails is false
-                <>
+                <div className="edit-page-wrapper">
                   <PostDetails
                     selectedPost={selectedPost}
                     handleShowDetails={handleShowDetails}
@@ -134,7 +134,7 @@ export default function EditPage() {
                     handleFileUpload={handleFileUpload}
                     handleShowTextEditor={handleShowTextEditor}
                   />
-                </>
+                </div>
               )}
             </>
           ) : (
