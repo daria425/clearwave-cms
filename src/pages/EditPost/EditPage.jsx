@@ -8,11 +8,14 @@ import TextEditor from "./components/TextEditor";
 import PostDetailsCard from "./components/PostDetailsCard";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import Layout from "../PageComponents/Layout";
+import Modal from "./components/Modal";
 export default function EditPage() {
   const [selectedPost, setSelectedPost] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [responseLoading, setResponseLoading] = useState(false);
   const { id } = useParams();
   const { blogPosts, postsLoading } = useContext(contentContext);
+
   const [showTextEditor, setShowTextEditor] = useState(false);
   useEffect(() => {
     if (!postsLoading) {
@@ -40,27 +43,30 @@ export default function EditPage() {
   function handleCloseTextEditor() {
     setShowTextEditor(false);
   }
-  function handleFileUpload(e) {
-    const fileArray = [...e.target.files];
-    const fileObjects = fileArray.map((file) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const data = new Uint8Array(event.target.result);
-          resolve({
-            data,
-            contentType: file.type,
-          });
-        };
-        reader.readAsArrayBuffer(file);
-      });
-    });
-    Promise.all(fileObjects).then((results) => {
-      setSelectedPost({ ...selectedPost, image_sources: results });
-      // Use the results array, which contains objects with data and contentType
-    });
-    // setSelectedPost({ ...selectedPost, uploaded_images });
+  function handleResponse() {
+    setResponseLoading(!responseLoading);
   }
+  // function handleFileUpload(e) {
+  //   const fileArray = [...e.target.files];
+  //   const fileObjects = fileArray.map((file) => {
+  //     return new Promise((resolve, reject) => {
+  //       const reader = new FileReader();
+  //       reader.onload = (event) => {
+  //         const data = new Uint8Array(event.target.result);
+  //         resolve({
+  //           data,
+  //           contentType: file.type,
+  //         });
+  //       };
+  //       reader.readAsArrayBuffer(file);
+  //     });
+  //   });
+  //   Promise.all(fileObjects).then((results) => {
+  //     setSelectedPost({ ...selectedPost, image_sources: results });
+  //     // Use the results array, which contains objects with data and contentType
+  //   });
+  //   // setSelectedPost({ ...selectedPost, uploaded_images });
+  // }
 
   function handleNestedTextChange(e) {
     const [firstProp, nestedProp] = e.target.name.split(".");
@@ -98,6 +104,10 @@ export default function EditPage() {
     setShowDetails(!showDetails);
   }
 
+  function handleDataUpdate(newPost) {
+    setSelectedPost(newPost);
+  }
+
   return (
     <Layout>
       {!selectedPost ? (
@@ -119,11 +129,14 @@ export default function EditPage() {
               ) : (
                 // Content when showDetails is false
                 <div className="edit-page-wrapper">
+                  {responseLoading && <Modal modalMessage="Loading" />}
                   <PostDetails
                     selectedPost={selectedPost}
                     handleShowDetails={handleShowDetails}
                   />
                   <EditForm
+                    handleDataUpdate={handleDataUpdate}
+                    handleResponse={handleResponse}
                     selectedPost={selectedPost}
                     handleChange={handleChange}
                     handleNestedArrayChange={handleNestedArrayChange}
@@ -131,7 +144,6 @@ export default function EditPage() {
                     handleNestedTextChange={handleNestedTextChange}
                     handleCheckbox={handleCheckbox}
                     handleArrayChange={handleArrayChange}
-                    handleFileUpload={handleFileUpload}
                     handleShowTextEditor={handleShowTextEditor}
                   />
                 </div>

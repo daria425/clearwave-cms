@@ -1,4 +1,4 @@
-export default function DeleteButton({ deletionFunction }) {
+export default function DeleteButton({ deletionFunction, imageid, postid }) {
   return (
     <button
       className="btn-danger"
@@ -10,6 +10,8 @@ export default function DeleteButton({ deletionFunction }) {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         className="close-icon"
+        id={imageid}
+        data-postid={postid}
       >
         <path d="M0 0h24v24H0z" fill="none" />
         <path

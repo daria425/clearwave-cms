@@ -1,4 +1,3 @@
-import { Buffer } from "buffer";
 import { useContext } from "react";
 import { appContext, contentContext } from "../../../App";
 import DeleteButton from "../../PageComponents/Icons/DeleteButton";
@@ -7,6 +6,7 @@ export default function PostImages({ selectedPost }) {
   const { syncImageDelete } = useContext(contentContext);
   async function handleServerImageDelete(e) {
     e.preventDefault();
+    console.log(e.target);
     try {
       const response = await fetch(
         `http://localhost:3000/api/posts/${selectedPost._id}/imagedelete`,
@@ -39,13 +39,15 @@ export default function PostImages({ selectedPost }) {
               <div className="post-details-imagecontainer">
                 <img
                   className="post-details-imagecontainer-img"
-                  src={`data:image/${image.contentType};base64, ${Buffer.from(
-                    image.data
-                  ).toString("base64")}`}
+                  src={image.url}
                   alt={`Image ${index + 1}`}
                 />
               </div>
-              <DeleteButton deletionFunction={handleServerImageDelete} />
+              <DeleteButton
+                postid={selectedPost._id}
+                imageid={image._id}
+                deletionFunction={handleServerImageDelete}
+              />
             </div>
           ))}
         </div>

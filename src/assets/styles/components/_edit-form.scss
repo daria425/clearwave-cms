@@ -1,20 +1,22 @@
 @use "./login-form";
 @use "../abstracts/" as *;
 
+.edit-form {
+  @include respond-to("l") {
+    max-height: calc(100vh - 90px);
+    overflow: auto;
+  }
+}
 .edit-form label {
   @extend .login-label;
   &.edit-form-main-label {
     font-weight: 700;
+    font-size: $font-ml;
   }
 }
 
 .edit-form input {
   @extend .login-input;
-}
-
-.edit-form-fieldset {
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
 }
 
 .edit-form-texteditor {

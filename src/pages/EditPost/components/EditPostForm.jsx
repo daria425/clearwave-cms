@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useContext } from "react";
 import { appContext, contentContext } from "../../../App";
 import { useTokenRefresh } from "../../../helpers/Hooks";
-import Modal from "./Modal";
 export default function EditForm({
+  handleDataUpdate,
+  handleResponse,
   selectedPost,
   handleChange,
   handleNestedArrayChange,
@@ -12,23 +13,18 @@ export default function EditForm({
   handleNestedTextChange,
   handleCheckbox,
   handleArrayChange,
-  handleFileUpload,
   handleShowTextEditor,
 }) {
   const { id } = useParams();
-  const [modalOpen, setModalOpen] = useState(false);
   const [responseError, setResponseError] = useState(false);
   const { accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
   const { handlePostUpdate, categories } = useContext(contentContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
 
-  function handleModal() {
-    setModalOpen(!modalOpen);
-  }
   async function handleSubmit(e) {
     e.preventDefault();
-
+    handleResponse();
     try {
       const contentObj = {
         subheading: selectedPost.content.subheading,
@@ -72,7 +68,10 @@ export default function EditForm({
       );
       console.log(response);
       if (response.ok) {
-        handlePostUpdate(e, selectedPost);
+        const updatedPost = await response.json();
+        console.log(updatedPost);
+        handleDataUpdate(updatedPost);
+        handlePostUpdate(e, updatedPost);
       } else {
         throw new Error(
           `Server response failed with status code: ${response.statusText}`
@@ -82,7 +81,7 @@ export default function EditForm({
       setResponseError(err.message);
       console.log(err);
     } finally {
-      handleModal();
+      handleResponse();
     }
   }
   if (categories.length === 0) {
@@ -109,9 +108,6 @@ export default function EditForm({
   // } else
   return (
     <>
-      {modalOpen && (
-        <Modal responseError={responseError} handleModal={handleModal} />
-      )}
       <form
         action={`http://localhost:3000/api/posts/${id}/update`}
         encType="multipart/form-data"
@@ -169,14 +165,7 @@ export default function EditForm({
           </button>
           <label htmlFor="image_sources">
             Images:
-            <input
-              type="file"
-              name="image_sources"
-              onChange={(e) => {
-                handleFileUpload(e);
-              }}
-              multiple
-            ></input>
+            <input type="file" name="image_sources" multiple></input>
           </label>
         </fieldset>
         <fieldset className="edit-form-fieldset">
@@ -236,7 +225,7 @@ export default function EditForm({
             handleSubmit(e);
           }}
         >
-          Save Changes
+          SAVE CHANGES
         </button>
       </form>
     </>

@@ -63,6 +63,10 @@
     justify-content: space-between;
     align-items: center;
   }
+  &--details-summary {
+    @extend .btn-outline;
+    margin-top: 10px;
+  }
 }
 
 .btn-danger {
