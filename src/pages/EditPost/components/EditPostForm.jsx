@@ -1,6 +1,5 @@
-import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
 import { appContext, contentContext } from "../../../App";
 import { useTokenRefresh } from "../../../helpers/Hooks";
 export default function EditForm({
@@ -20,7 +19,7 @@ export default function EditForm({
     useContext(appContext);
   const { handlePostUpdate, categories } = useContext(contentContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
-
+  const nav = useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
     handleResponse();
@@ -154,7 +153,15 @@ export default function EditForm({
               required
             />
           </label>
-
+          <button
+            className="btn-outline"
+            onClick={(e) => {
+              e.preventDefault();
+              nav(`../../${selectedPost._id}/texteditor`);
+            }}
+          >
+            EDIT TEXT
+          </button>
           <label htmlFor="image_sources">
             Images:
             <input type="file" name="image_sources" multiple></input>

@@ -1,8 +1,31 @@
-export default function TextEditor({
-  selectedPost,
-  handleNestedTextChange,
-  handleCloseTextEditor,
-}) {
+import { useState, useEffect, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { contentContext } from "../../../App";
+export default function TextEditor() {
+  const { id } = useParams();
+  const [selectedPost, setSelectedPost] = useState(false);
+  const { blogPosts, postsLoading } = useContext(contentContext);
+
+  useEffect(() => {
+    if (!postsLoading) {
+      const post = blogPosts.find((post) => post._id === id);
+      setSelectedPost(post); // If post is not found, set an empty object
+    }
+  }, [blogPosts, id, postsLoading]);
+  function handleNestedTextChange(e) {
+    const [firstProp, nestedProp] = e.target.name.split(".");
+    setSelectedPost({
+      ...selectedPost,
+      [firstProp]: {
+        ...selectedPost[firstProp],
+        [nestedProp]: e.target.value,
+      },
+    });
+  }
+
+  if (!selectedPost) {
+    return <p>Loading...</p>;
+  }
   return (
     <div className="texteditor">
       <h2 className="texteditor-title">{selectedPost.title}</h2>
@@ -14,14 +37,11 @@ export default function TextEditor({
           onChange={(e) => {
             handleNestedTextChange(e);
           }}
+          value={selectedPost.content.main_text}
           required
-        >
-          {selectedPost.content.main_text}
-        </textarea>
+        ></textarea>
       </label>
-      <button className="btn-primary" onClick={handleCloseTextEditor}>
-        SAVE AND CLOSE
-      </button>
+      <button className="btn-primary">SAVE AND CLOSE</button>
     </div>
   );
 }

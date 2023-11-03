@@ -12,6 +12,7 @@ import NewCategoryPage from "./pages/NewCategory/NewCategoryPage";
 import CategoryPage from "./pages/CategoriesPage/CategoryPage";
 import SummaryView from "./pages/EditPost/components/SummaryView";
 import PostDetailsCard from "./pages/EditPost/components/PostDetailsCard";
+import TextEditor from "./pages/EditPost/components/TextEditor";
 export const appContext = createContext({
   blogPosts: [],
   accessToken: "",
@@ -157,6 +158,7 @@ function App() {
             children: [
               { path: "edit", element: <SummaryView /> },
               { path: "details", element: <PostDetailsCard /> },
+              { path: "texteditor", element: <TextEditor /> },
             ],
           },
           {
