@@ -1,28 +1,9 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 import { contentContext } from "../../../App";
 export default function TextEditor() {
-  const { id } = useParams();
-  const [selectedPost, setSelectedPost] = useState(false);
-  const { blogPosts, postsLoading } = useContext(contentContext);
-
-  useEffect(() => {
-    if (!postsLoading) {
-      const post = blogPosts.find((post) => post._id === id);
-      setSelectedPost(post); // If post is not found, set an empty object
-    }
-  }, [blogPosts, id, postsLoading]);
-  function handleNestedTextChange(e) {
-    const [firstProp, nestedProp] = e.target.name.split(".");
-    setSelectedPost({
-      ...selectedPost,
-      [firstProp]: {
-        ...selectedPost[firstProp],
-        [nestedProp]: e.target.value,
-      },
-    });
-  }
-
+  const { selectedPost, handleNestedTextChange } = useOutletContext();
+  const nav = useNavigate();
   if (!selectedPost) {
     return <p>Loading...</p>;
   }
@@ -41,7 +22,14 @@ export default function TextEditor() {
           required
         ></textarea>
       </label>
-      <button className="btn-primary">SAVE AND CLOSE</button>
+      <button
+        className="btn-primary"
+        onClick={() => {
+          nav(-1);
+        }}
+      >
+        SAVE AND CLOSE
+      </button>
     </div>
   );
 }
