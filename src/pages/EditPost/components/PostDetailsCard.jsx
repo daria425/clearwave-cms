@@ -1,9 +1,21 @@
 import PostImages from "./PostImages";
 import BackButton from "../../PageComponents/Icons/BackButton";
 import AccordionIcon from "../../PageComponents/Icons/AccordionIcon";
-import { useState } from "react";
-export default function PostDetailsCard({ selectedPost, handleShowDetails }) {
+import { useState, useEffect, useContext } from "react";
+import { contentContext } from "../../../App";
+import { useParams, useNavigate } from "react-router-dom";
+export default function PostDetailsCard() {
+  const { id } = useParams();
   const [showMainText, setShowMainText] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+  const { blogPosts, postsLoading } = useContext(contentContext);
+  const nav = useNavigate();
+  useEffect(() => {
+    if (!postsLoading) {
+      const post = blogPosts.find((post) => post._id === id);
+      setSelectedPost(post); // If post is not found, set an empty object
+    }
+  }, [blogPosts, id, postsLoading]);
   const initialStyle = {
     height: "0px",
     overflow: "hidden",
@@ -15,6 +27,12 @@ export default function PostDetailsCard({ selectedPost, handleShowDetails }) {
 
   function handleShowMainText() {
     setShowMainText(!showMainText);
+  }
+  function handleBackNavigation() {
+    nav(`../../${selectedPost._id}/edit`, { relative: "path" });
+  }
+  if (!selectedPost) {
+    return <p>Loading...</p>;
   }
   return (
     <>
@@ -57,7 +75,7 @@ export default function PostDetailsCard({ selectedPost, handleShowDetails }) {
           ))}
         </ul>
       </section>
-      <BackButton navigationFunction={handleShowDetails} />
+      <BackButton navigationFunction={handleBackNavigation} />
     </>
   );
 }

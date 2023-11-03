@@ -11,6 +11,7 @@ import NewPostPage from "./pages/NewPost/NewPostPage";
 import NewCategoryPage from "./pages/NewCategory/NewCategoryPage";
 import CategoryPage from "./pages/CategoriesPage/CategoryPage";
 import SummaryView from "./pages/EditPost/components/SummaryView";
+import PostDetailsCard from "./pages/EditPost/components/PostDetailsCard";
 export const appContext = createContext({
   blogPosts: [],
   accessToken: "",
@@ -151,9 +152,12 @@ function App() {
             element: <ContentPage />,
           },
           {
-            path: "edit/:id",
+            path: ":id",
             element: <EditPage />,
-            children: [{ path: "summary", element: <SummaryView /> }],
+            children: [
+              { path: "edit", element: <SummaryView /> },
+              { path: "details", element: <PostDetailsCard /> },
+            ],
           },
           {
             path: "new",
