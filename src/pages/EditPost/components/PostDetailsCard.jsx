@@ -1,21 +1,14 @@
 import PostImages from "./PostImages";
 import BackButton from "../../PageComponents/Icons/BackButton";
 import AccordionIcon from "../../PageComponents/Icons/AccordionIcon";
-import { useState, useEffect, useContext } from "react";
-import { contentContext } from "../../../App";
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+import { useNavigate, useOutletContext } from "react-router-dom";
 export default function PostDetailsCard() {
-  const { id } = useParams();
+  const { selectedPost } = useOutletContext();
   const [showMainText, setShowMainText] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
-  const { blogPosts, postsLoading } = useContext(contentContext);
+
   const nav = useNavigate();
-  useEffect(() => {
-    if (!postsLoading) {
-      const post = blogPosts.find((post) => post._id === id);
-      setSelectedPost(post); // If post is not found, set an empty object
-    }
-  }, [blogPosts, id, postsLoading]);
   const initialStyle = {
     height: "0px",
     overflow: "hidden",
