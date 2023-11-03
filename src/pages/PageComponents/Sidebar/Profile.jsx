@@ -10,7 +10,7 @@ export default function Profile({ handleSidebarClose, dimensions }) {
       <div className="sidebar--icons">
         <ProfileIcon />
         {dimensions.width < dimensions.breakpoint ? (
-          <CloseButton handleSidebarClose={handleSidebarClose} />
+          <CloseButton closingFunction={handleSidebarClose} color={"dark"} />
         ) : null}
       </div>
       <p className="sidebar--profile--fullname">

@@ -73,7 +73,10 @@ export default function BlogCard({
       style={style}
       onClick={selectCard}
     >
-      <CloseSelectedButton undoSelectCard={undoSelectCard} />
+      <CloseSelectedButton
+        closingFunction={undoSelectCard}
+        additionalClass="close-post"
+      />
       <h2 className="post-card-title">Title: {post.title}</h2>
       <p className="post-card-category">Category: {post.category.name}</p>
       <p className="post-card-date">

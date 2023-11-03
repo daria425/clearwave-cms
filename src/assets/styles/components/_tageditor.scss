@@ -1,0 +1,22 @@
+@use "../abstracts/" as *;
+@use "./cards" as *;
+
+.edit-form-tageditor {
+  @include rounded;
+  display: block;
+  background-color: $surface;
+  z-index: 5;
+}
+
+.tag-card {
+  @extend .category--card;
+  flex: 1 1 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &--tageditor {
+    @extend .tag-card;
+    background-color: $gray-600;
+  }
+}

@@ -1,6 +1,6 @@
-export default function CloseButton({ handleSidebarClose }) {
+export default function CloseButton({ closingFunction, color }) {
   return (
-    <button className="btn-icon-dark" onClick={handleSidebarClose}>
+    <button className={`btn-icon-${color}`} onClick={closingFunction}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

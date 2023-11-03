@@ -12,6 +12,7 @@ export default function EditForm({
   handleNestedTextChange,
   handleCheckbox,
   handleArrayChange,
+  handleTagEditor,
 }) {
   const { id } = useParams();
   const [responseError, setResponseError] = useState(false);
@@ -188,24 +189,26 @@ export default function EditForm({
             </select>
           </label>
 
-          <label htmlFor="tags-group">
-            {selectedPost.tags.map((tag, index) => {
-              return (
-                <label htmlFor="tag" key={index}>
-                  Tag {index + 1}
-                  <input
-                    type="text"
-                    name={tag}
-                    id={index}
-                    value={tag}
-                    onChange={(e) => {
-                      handleArrayChange(e);
-                    }}
-                  ></input>
-                </label>
-              );
-            })}
+          <label htmlFor="tags">
+            Tags:
+            <div className="tags-group">
+              {selectedPost.tags.map((tag, index) => {
+                return (
+                  <div key={index} className="tag-card">
+                    {tag}
+                  </div>
+                );
+              })}
+            </div>
           </label>
+          <button
+            className="btn-outline"
+            onClick={(e) => {
+              handleTagEditor(e);
+            }}
+          >
+            EDIT TAGS
+          </button>
         </fieldset>
         <label htmlFor="is_published">
           Publish?
