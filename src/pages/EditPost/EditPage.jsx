@@ -15,14 +15,13 @@ export default function EditPage() {
   const [responseLoading, setResponseLoading] = useState(false);
   const { id } = useParams();
   const { blogPosts, postsLoading } = useContext(contentContext);
-
-  const [showTextEditor, setShowTextEditor] = useState(false);
   useEffect(() => {
     if (!postsLoading) {
       const post = blogPosts.find((post) => post._id === id);
       setSelectedPost(post); // If post is not found, set an empty object
     }
   }, [blogPosts, id, postsLoading]);
+
   function handleChange(e) {
     setSelectedPost({ ...selectedPost, [e.target.name]: e.target.value });
   }
@@ -108,10 +107,22 @@ export default function EditPage() {
     setSelectedPost(newPost);
   }
 
+  const outletContext = {
+    selectedPost,
+    responseLoading,
+    handleArrayChange,
+    handleChange,
+    handleCheckbox,
+    handleDataUpdate,
+    handleNestedArrayChange,
+    handleNestedTextChange,
+    handleSelectChange,
+    handleResponse,
+  };
   return (
     <Layout>
       <section className="content--edit-page">
-        <Outlet />
+        <Outlet context={outletContext} />
       </section>
     </Layout>
   );

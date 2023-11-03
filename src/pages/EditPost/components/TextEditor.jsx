@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { contentContext } from "../../../App";
 export default function TextEditor() {
   const { id } = useParams();
