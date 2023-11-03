@@ -1,4 +1,4 @@
-export default function PostDetails({ selectedPost, handleShowDetails }) {
+export default function PostDetails({ selectedPost }) {
   return (
     <section className="post-details-summary">
       <h1 className="post-details-title-summary">
@@ -6,12 +6,7 @@ export default function PostDetails({ selectedPost, handleShowDetails }) {
       </h1>
       <h3 className="post-details-label">Subheading:</h3>
       <p className="post-details-content">{selectedPost.content.subheading}</p>
-      <button
-        className="btn-outline--details-summary"
-        onClick={handleShowDetails}
-      >
-        VIEW DETAILS
-      </button>
+
       {/* area for comments */}
     </section>
   );

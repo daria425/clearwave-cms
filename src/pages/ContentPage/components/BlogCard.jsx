@@ -82,7 +82,7 @@ export default function BlogCard({
       <div className="post-control-buttons">
         <button
           className="btn-outline"
-          onClick={() => navigate(`/edit/${post._id}`)}
+          onClick={() => navigate(`/edit/${post._id}/summary`)}
         >
           EDIT
         </button>

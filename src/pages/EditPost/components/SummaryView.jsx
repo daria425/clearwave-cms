@@ -1,22 +1,17 @@
-import { useParams, Outlet } from "react-router-dom";
+import EditForm from "./EditPostForm";
+import PostDetails from "./PostDetails";
+import Modal from "./Modal";
+import { useParams } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { contentContext } from "../../App";
+import { contentContext } from "../../../App";
 import { useState } from "react";
-import PostDetails from "./components/PostDetails";
-import EditForm from "./components/EditPostForm";
-import TextEditor from "./components/TextEditor";
-import PostDetailsCard from "./components/PostDetailsCard";
-import LoadingPage from "../LoadingPage/LoadingPage";
-import Layout from "../PageComponents/Layout";
-import Modal from "./components/Modal";
-export default function EditPage() {
+export default function SummaryView() {
   const [selectedPost, setSelectedPost] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
   const [responseLoading, setResponseLoading] = useState(false);
   const { id } = useParams();
+  console.log(id);
   const { blogPosts, postsLoading } = useContext(contentContext);
 
-  const [showTextEditor, setShowTextEditor] = useState(false);
   useEffect(() => {
     if (!postsLoading) {
       const post = blogPosts.find((post) => post._id === id);
@@ -36,38 +31,10 @@ export default function EditPage() {
       },
     });
   }
-  function handleShowTextEditor(e) {
-    e.preventDefault();
-    setShowTextEditor(true);
-  }
-  function handleCloseTextEditor() {
-    setShowTextEditor(false);
-  }
+
   function handleResponse() {
     setResponseLoading(!responseLoading);
   }
-  // function handleFileUpload(e) {
-  //   const fileArray = [...e.target.files];
-  //   const fileObjects = fileArray.map((file) => {
-  //     return new Promise((resolve, reject) => {
-  //       const reader = new FileReader();
-  //       reader.onload = (event) => {
-  //         const data = new Uint8Array(event.target.result);
-  //         resolve({
-  //           data,
-  //           contentType: file.type,
-  //         });
-  //       };
-  //       reader.readAsArrayBuffer(file);
-  //     });
-  //   });
-  //   Promise.all(fileObjects).then((results) => {
-  //     setSelectedPost({ ...selectedPost, image_sources: results });
-  //     // Use the results array, which contains objects with data and contentType
-  //   });
-  //   // setSelectedPost({ ...selectedPost, uploaded_images });
-  // }
-
   function handleNestedTextChange(e) {
     const [firstProp, nestedProp] = e.target.name.split(".");
     setSelectedPost({
@@ -100,19 +67,28 @@ export default function EditPage() {
     );
     setSelectedPost({ ...selectedPost, tags: newTags });
   }
-  function handleShowDetails() {
-    setShowDetails(!showDetails);
-  }
 
   function handleDataUpdate(newPost) {
     setSelectedPost(newPost);
   }
-
+  if (!selectedPost) {
+    return <p>Loading...</p>;
+  }
   return (
-    <Layout>
-      <section className="content--edit-page">
-        <Outlet />
-      </section>
-    </Layout>
+    <div className="summary-view-wrapper">
+      {responseLoading && <Modal modalMessage="Loading" />}
+      <PostDetails selectedPost={selectedPost} />
+      <EditForm
+        handleDataUpdate={handleDataUpdate}
+        handleResponse={handleResponse}
+        selectedPost={selectedPost}
+        handleChange={handleChange}
+        handleNestedArrayChange={handleNestedArrayChange}
+        handleSelectChange={handleSelectChange}
+        handleNestedTextChange={handleNestedTextChange}
+        handleCheckbox={handleCheckbox}
+        handleArrayChange={handleArrayChange}
+      />
+    </div>
   );
 }

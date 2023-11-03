@@ -13,7 +13,6 @@ export default function EditForm({
   handleNestedTextChange,
   handleCheckbox,
   handleArrayChange,
-  handleShowTextEditor,
 }) {
   const { id } = useParams();
   const [responseError, setResponseError] = useState(false);
@@ -155,14 +154,7 @@ export default function EditForm({
               required
             />
           </label>
-          <button
-            className="btn-outline"
-            onClick={(e) => {
-              handleShowTextEditor(e);
-            }}
-          >
-            EDIT CONTENT
-          </button>
+
           <label htmlFor="image_sources">
             Images:
             <input type="file" name="image_sources" multiple></input>

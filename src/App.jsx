@@ -10,6 +10,7 @@ import EditPage from "./pages/EditPost/EditPage";
 import NewPostPage from "./pages/NewPost/NewPostPage";
 import NewCategoryPage from "./pages/NewCategory/NewCategoryPage";
 import CategoryPage from "./pages/CategoriesPage/CategoryPage";
+import SummaryView from "./pages/EditPost/components/SummaryView";
 export const appContext = createContext({
   blogPosts: [],
   accessToken: "",
@@ -152,6 +153,7 @@ function App() {
           {
             path: "edit/:id",
             element: <EditPage />,
+            children: [{ path: "summary", element: <SummaryView /> }],
           },
           {
             path: "new",
