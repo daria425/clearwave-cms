@@ -1,6 +1,13 @@
-export default function CloseButton({ closingFunction, color }) {
+export default function CloseButton({
+  closingFunction,
+  color = "light",
+  additionalClass = "",
+}) {
   return (
-    <button className={`btn-icon-${color}`} onClick={closingFunction}>
+    <button
+      className={`btn-icon-${color}${additionalClass}`}
+      onClick={closingFunction}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

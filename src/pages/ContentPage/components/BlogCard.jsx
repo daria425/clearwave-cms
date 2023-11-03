@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { appContext, contentContext } from "../../../App";
 import { format, parseISO } from "date-fns";
 import { useTokenRefresh } from "../../../helpers/Hooks";
-import CloseSelectedButton from "../../PageComponents/Icons/CloseSelectedButton";
+import CloseButton from "../../PageComponents/Icons/CloseButton";
 export default function BlogCard({
   post,
   handleSelection,
@@ -73,9 +73,9 @@ export default function BlogCard({
       style={style}
       onClick={selectCard}
     >
-      <CloseSelectedButton
+      <CloseButton
         closingFunction={undoSelectCard}
-        additionalClass="close-post"
+        additionalClass="--corner-post-card"
       />
       <h2 className="post-card-title">Title: {post.title}</h2>
       <p className="post-card-category">Category: {post.category.name}</p>

@@ -28,7 +28,12 @@ export default function SummaryView() {
   }
   return (
     <div className="summary-view-wrapper">
-      {openTagEditor && <TagEditor selectedPost={selectedPost} />}
+      {openTagEditor && (
+        <TagEditor
+          selectedPost={selectedPost}
+          handleTagEditor={handleTagEditor}
+        />
+      )}
       {responseLoading && <Modal modalMessage="Loading" />}
       <PostDetails selectedPost={selectedPost} />
       <EditForm
