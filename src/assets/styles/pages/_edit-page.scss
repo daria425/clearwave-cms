@@ -7,6 +7,7 @@
   position: relative;
   @include respond-to("l") {
     display: grid;
-    grid-template-columns: auto minmax(400px, 60%);
+    grid-template-columns: auto minmax(300px, 60%);
+    gap: 10px;
   }
 }

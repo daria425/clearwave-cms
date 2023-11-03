@@ -174,6 +174,7 @@ export default function EditForm({
           <label htmlFor="category">
             Category:
             <select
+              defaultValue={selectedPost.category._id}
               name="category"
               onChange={(e) => {
                 handleSelectChange(categories, e);

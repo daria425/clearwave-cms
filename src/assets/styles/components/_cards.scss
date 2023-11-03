@@ -39,3 +39,7 @@
   padding: 30px 30px;
   line-height: 1.5;
 }
+
+.tag-card {
+  @extend .category--card;
+}

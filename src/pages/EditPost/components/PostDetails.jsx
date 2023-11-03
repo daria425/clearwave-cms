@@ -9,7 +9,7 @@ export default function PostDetails({ selectedPost }) {
       <h3 className="post-details-label">Subheading:</h3>
       <p className="post-details-content">{selectedPost.content.subheading}</p>
       <button
-        className="btn-outline"
+        className="btn-outline--details-summary"
         onClick={() => {
           nav(`/${selectedPost._id}/details`);
         }}

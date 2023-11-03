@@ -38,13 +38,15 @@ export default function PostDetailsCard() {
         </p>
         <h3 className="post-details-card-label"> Snippets:</h3>
         {selectedPost.content.snippets.length > 0 &&
-        selectedPost.content.snippets[0] !== ""
-          ? selectedPost.content.snippets.map((snippet, index) => (
-              <p className="post-details-card-content" key={index}>
-                {snippet}
-              </p>
-            ))
-          : "No snippets"}
+        selectedPost.content.snippets[0] !== "" ? (
+          selectedPost.content.snippets.map((snippet, index) => (
+            <p className="post-details-card-content" key={index}>
+              {snippet}
+            </p>
+          ))
+        ) : (
+          <p className="post-details-card-content">No snippets</p>
+        )}
         <button className="btn-outline--accordion" onClick={handleShowMainText}>
           VIEW CONTENT
           <AccordionIcon showMainText={showMainText} />

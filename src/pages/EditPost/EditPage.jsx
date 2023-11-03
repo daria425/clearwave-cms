@@ -2,16 +2,11 @@ import { useParams, Outlet } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { contentContext } from "../../App";
 import { useState } from "react";
-import PostDetails from "./components/PostDetails";
-import EditForm from "./components/EditPostForm";
-import TextEditor from "./components/TextEditor";
-import PostDetailsCard from "./components/PostDetailsCard";
-import LoadingPage from "../LoadingPage/LoadingPage";
 import Layout from "../PageComponents/Layout";
-import Modal from "./components/Modal";
+
 export default function EditPage() {
   const [selectedPost, setSelectedPost] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
+
   const [responseLoading, setResponseLoading] = useState(false);
   const { id } = useParams();
   const { blogPosts, postsLoading } = useContext(contentContext);
@@ -35,13 +30,7 @@ export default function EditPage() {
       },
     });
   }
-  function handleShowTextEditor(e) {
-    e.preventDefault();
-    setShowTextEditor(true);
-  }
-  function handleCloseTextEditor() {
-    setShowTextEditor(false);
-  }
+
   function handleResponse() {
     setResponseLoading(!responseLoading);
   }
@@ -98,9 +87,6 @@ export default function EditPage() {
       tag === e.target.name ? e.target.value : tag
     );
     setSelectedPost({ ...selectedPost, tags: newTags });
-  }
-  function handleShowDetails() {
-    setShowDetails(!showDetails);
   }
 
   function handleDataUpdate(newPost) {
