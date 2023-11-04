@@ -9,6 +9,7 @@
 }
 .edit-form label {
   @extend .login-label;
+
   &.edit-form-main-label {
     font-weight: 700;
     font-size: $font-ml;
@@ -17,6 +18,7 @@
 
 .edit-form input {
   @extend .login-input;
+  margin-top: 10px;
 }
 
 .edit-form-texteditor {
@@ -39,4 +41,6 @@
 .tags-group {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
 }

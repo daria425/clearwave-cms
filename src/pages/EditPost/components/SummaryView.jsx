@@ -2,7 +2,7 @@ import EditForm from "./EditPostForm";
 import PostDetails from "./PostDetails";
 import Modal from "./Modal";
 import { useOutletContext } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import TagEditor from "./TagEditor";
 import Overlay from "../../PageComponents/Overlay";
 export default function SummaryView() {
@@ -20,7 +20,6 @@ export default function SummaryView() {
     handleTagUpdate,
   } = useOutletContext();
   const [openTagEditor, setOpenTagEditor] = useState(false);
-
   function handleTagEditor(e) {
     e.preventDefault();
     setOpenTagEditor(!openTagEditor);

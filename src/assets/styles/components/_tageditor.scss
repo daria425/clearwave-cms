@@ -4,27 +4,38 @@
 
 .edit-form-tageditor {
   @include rounded;
-  display: block;
   background-color: $surface;
   z-index: 5;
-  padding-top: 30px;
   border: none;
   box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.6);
+  position: absolute;
+  max-width: 25rem;
+  padding: 30px 20px 20px 20px;
+  margin: auto;
+  left: 0;
+  right: 0;
 }
 
 .tag-card {
   @extend .category--card;
   flex: 1 1 0px;
+  padding: 5px 5px;
+  font-size: $font-xs;
   display: flex;
   align-items: center;
   justify-content: center;
-  &--tageditor {
-    @extend .tag-card;
-    background-color: $gray-600;
-    margin-top: 20px;
-  }
 }
 
 .tag-input-tageditor {
   @extend .login-input;
+}
+
+.tag-card--tageditor {
+  @extend .category--card;
+  background-color: $gray-600;
+  margin-top: 10px;
+  font-size: $font-m;
+  &:hover {
+    background-color: $danger;
+  }
 }

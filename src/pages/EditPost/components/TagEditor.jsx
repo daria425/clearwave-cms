@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import CloseButton from "../../PageComponents/Icons/CloseButton";
+import {
+  danger,
+  gray600,
+} from "../../../assets/styles/modules/_variables.module.scss";
 export default function TagEditor({
   selectedPost,
   handleTagEditor,
@@ -7,14 +11,18 @@ export default function TagEditor({
 }) {
   const [newTag, setNewTag] = useState("");
   const [tagsToDelete, setTagsToDelete] = useState([]);
-
+  const ref = useRef(null);
   function stageForDeletion(e) {
     if (!tagsToDelete.includes(e.target.dataset.tagname)) {
       setTagsToDelete([...tagsToDelete, e.target.dataset.tagname]);
+    } else {
+      setTagsToDelete(
+        tagsToDelete.filter((tag) => tag !== e.target.dataset.tagname)
+      ); //removes tag from deleted array on repeat click
     }
   }
   return (
-    <dialog className="edit-form-tageditor">
+    <aside className="edit-form-tageditor" ref={ref}>
       <CloseButton
         closingFunction={handleTagEditor}
         additionalClass="--corner-tageditor"
@@ -25,9 +33,15 @@ export default function TagEditor({
         <div className="tags-group-tageditor">
           {selectedPost.tags.map((tag, index) => {
             const isTagToDelete = tagsToDelete.includes(tag);
-            const tagStyle = {
-              textDecoration: isTagToDelete ? "line-through" : "none",
-            };
+            const tagStyle = isTagToDelete
+              ? {
+                  textDecoration: "line-through",
+                  backgroundColor: danger,
+                }
+              : {
+                  textDecoration: "none",
+                  backgroundColor: gray600,
+                };
             return (
               <div
                 data-tagname={tag}
@@ -60,12 +74,13 @@ export default function TagEditor({
         className="btn-primary"
         onClick={(e) => {
           e.preventDefault();
+          ref.current?.scrollIntoView();
           handleTagUpdate(newTag, tagsToDelete);
           handleTagEditor(e);
         }}
       >
         SAVE
       </button>
-    </dialog>
+    </aside>
   );
 }
