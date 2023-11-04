@@ -1,5 +1,13 @@
+import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import CloseButton from "../../PageComponents/Icons/CloseButton";
-export default function TagEditor({ selectedPost, handleTagEditor }) {
+export default function TagEditor({
+  selectedPost,
+  handleTagEditor,
+  handleNewTag,
+}) {
+  const [newTag, setNewTag] = useState("");
+
   return (
     <dialog className="edit-form-tageditor">
       <CloseButton
@@ -19,6 +27,27 @@ export default function TagEditor({ selectedPost, handleTagEditor }) {
           })}
         </div>
       </label>
+
+      <label htmlFor="new-tag">New Tag:</label>
+      <input
+        type="text"
+        name="new-tag"
+        id="new-tag"
+        className="tag-input-tageditor"
+        value={newTag}
+        onChange={(e) => {
+          setNewTag(e.target.value);
+        }}
+      ></input>
+      <button
+        className="btn-primary"
+        onClick={(e) => {
+          e.preventDefault();
+          handleNewTag(newTag);
+        }}
+      >
+        SAVE
+      </button>
     </dialog>
   );
 }

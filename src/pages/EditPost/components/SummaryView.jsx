@@ -2,7 +2,7 @@ import EditForm from "./EditPostForm";
 import PostDetails from "./PostDetails";
 import Modal from "./Modal";
 import { useOutletContext } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TagEditor from "./TagEditor";
 import Overlay from "../../PageComponents/Overlay";
 export default function SummaryView() {
@@ -17,14 +17,17 @@ export default function SummaryView() {
     handleResponse,
     handleSelectChange,
     handleNestedArrayChange,
+    handleNewTag,
   } = useOutletContext();
   const [openTagEditor, setOpenTagEditor] = useState(false);
-  if (!selectedPost) {
-    return <p>Loading...</p>;
-  }
+
   function handleTagEditor(e) {
     e.preventDefault();
     setOpenTagEditor(!openTagEditor);
+  }
+
+  if (!selectedPost) {
+    return <p>Loading...</p>;
   }
   return (
     <div className="summary-view-wrapper">
@@ -32,6 +35,7 @@ export default function SummaryView() {
         <TagEditor
           selectedPost={selectedPost}
           handleTagEditor={handleTagEditor}
+          handleNewTag={handleNewTag}
         />
       )}
       {responseLoading && <Modal modalMessage="Loading" />}

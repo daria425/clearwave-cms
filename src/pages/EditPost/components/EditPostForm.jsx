@@ -11,7 +11,6 @@ export default function EditForm({
   handleSelectChange,
   handleNestedTextChange,
   handleCheckbox,
-  handleArrayChange,
   handleTagEditor,
 }) {
   const { id } = useParams();

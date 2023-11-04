@@ -31,6 +31,11 @@ export default function EditPage() {
     });
   }
 
+  function handleNewTag(newtag) {
+    const newTags = selectedPost.tags.concat(newtag);
+    setSelectedPost({ ...selectedPost, tags: newTags });
+  }
+
   function handleResponse() {
     setResponseLoading(!responseLoading);
   }
@@ -104,6 +109,7 @@ export default function EditPage() {
     handleNestedTextChange,
     handleSelectChange,
     handleResponse,
+    handleNewTag,
   };
   return (
     <Layout>

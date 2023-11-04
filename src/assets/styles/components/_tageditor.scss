@@ -1,13 +1,15 @@
 @use "../abstracts/" as *;
-@use "./cards" as *;
+@use "./cards";
+@use "./login-form";
 
 .edit-form-tageditor {
   @include rounded;
-  position: relative;
   display: block;
   background-color: $surface;
   z-index: 5;
   padding-top: 30px;
+  border: none;
+  box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.6);
 }
 
 .tag-card {
@@ -16,9 +18,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   &--tageditor {
     @extend .tag-card;
     background-color: $gray-600;
+    margin-top: 20px;
   }
+}
+
+.tag-input-tageditor {
+  @extend .login-input;
 }

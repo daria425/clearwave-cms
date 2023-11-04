@@ -29,8 +29,9 @@
   @include rounded;
   background-color: $surface;
   text-align: center;
-  padding: 10px 0px;
+  padding: 10px 10px;
   font-weight: 700;
+  list-style: none;
 }
 
 .post-details-card {
