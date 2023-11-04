@@ -61,6 +61,7 @@ export default function TagEditor({
         onClick={(e) => {
           e.preventDefault();
           handleTagUpdate(newTag, tagsToDelete);
+          handleTagEditor(e);
         }}
       >
         SAVE
