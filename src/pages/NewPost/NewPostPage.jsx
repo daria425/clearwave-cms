@@ -1,6 +1,5 @@
 import { useState } from "react";
 import NewPostForm from "./components/NewPostForm";
-import NewPostDetails from "./components/NewPostDetails";
 import Layout from "../PageComponents/Layout";
 export default function NewPostPage() {
   const [newPost, setNewPost] = useState({
@@ -26,27 +25,6 @@ export default function NewPostPage() {
         [nestedProp]: [e.target.value],
       },
     });
-  }
-  function handleFileUpload(e) {
-    const fileArray = [...e.target.files];
-    const fileObjects = fileArray.map((file) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const data = new Uint8Array(event.target.result);
-          resolve({
-            data,
-            contentType: file.type,
-          });
-        };
-        reader.readAsArrayBuffer(file);
-      });
-    });
-    Promise.all(fileObjects).then((results) => {
-      setNewPost({ ...newPost, image_sources: results });
-      // Use the results array, which contains objects with data and contentType
-    });
-    // setNewPost({ ...NewPost, uploaded_images });
   }
 
   function handleNestedTextChange(e) {
@@ -90,7 +68,6 @@ export default function NewPostPage() {
   }
   return (
     <Layout>
-      <NewPostDetails newPost={newPost} />
       <NewPostForm
         newPost={newPost}
         handleChange={handleChange}
@@ -99,7 +76,6 @@ export default function NewPostPage() {
         handleNestedTextChange={handleNestedTextChange}
         handleCheckbox={handleCheckbox}
         handleArrayChange={handleArrayChange}
-        handleFileUpload={handleFileUpload}
       />
     </Layout>
   );

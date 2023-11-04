@@ -34,7 +34,7 @@ export default function Dashboard() {
               ))}
             </div>
             <button
-              className="btn-floating-action--new-post"
+              className="btn-primary--new-post"
               onClick={() => navigate(`/new`)}
             >
               +

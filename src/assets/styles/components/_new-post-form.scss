@@ -1,0 +1,52 @@
+@use "./texteditor";
+@use "../abstracts/" as *;
+.new-post-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.texteditor--new-post {
+  flex-grow: 1;
+}
+.textarea--new-post {
+  @extend .texteditor-textarea;
+  height: auto;
+}
+
+// for autogrowing the text area
+.grow-wrap {
+  /* easy way to plop the elements on top of each other and have them both sized based on the tallest one's height */
+  display: grid;
+  padding: 5px 5px;
+  &:focus {
+    border: 2px solid;
+  }
+}
+
+.grow-wrap::after {
+  /* Note the weird space! Needed to preventy jumpy behavior */
+  content: attr(data-replicated-value) " ";
+
+  /* This is how textarea text behaves */
+  white-space: pre-wrap;
+
+  /* Hidden from view, clicks, and screen readers */
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.grow-wrap > textarea {
+  /* You could leave this, but after a user resizes, then it ruins the auto sizing */
+  resize: none;
+
+  /* Firefox shows scrollbar on growth, you can hide like this. */
+}
+.grow-wrap > textarea,
+.grow-wrap::after {
+  /* Identical styling required!! */
+
+  font: inherit;
+
+  /* Place on top of each other */
+  grid-area: 1 / 1 / 2 / 2;
+}

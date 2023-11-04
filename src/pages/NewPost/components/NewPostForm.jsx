@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { appContext, contentContext } from "../../../App";
 import { useTokenRefresh } from "../../../helpers/Hooks";
-import Modal from "../../EditPost/components/Modal";
+import NewPostTextEditor from "./NewPostTextEditor";
+import NewPostData from "./NewPostData";
 export default function NewPostForm({
   newPost,
   handleChange,
@@ -10,7 +11,6 @@ export default function NewPostForm({
   handleNestedTextChange,
   handleCheckbox,
   handleArrayChange,
-  handleFileUpload,
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   //first make the object with just the key value pairs needed for form
@@ -70,116 +70,27 @@ export default function NewPostForm({
     }
   }
   return (
-    <>
-      {modalOpen && (
-        <Modal responseError={responseError} handleModal={handleModal} />
-      )}
+    <section className="content--new-post">
       <form
         action={`http://localhost:3000/api/posts/new`}
         encType="multipart/form-data"
+        className="new-post-form"
       >
-        <label htmlFor="title">
-          Post Title:
-          <input
-            name="title"
-            type="text"
-            required
-            value={newPost.title}
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          />
-        </label>
-        <label htmlFor="content">
-          <fieldset>
-            <label htmlFor="subheadings">
-              Subheadings:
-              <input
-                name="content.subheadings"
-                value={newPost.content.subheadings[0] ?? ""}
-                onChange={(e) => {
-                  handleNestedArrayChange(e);
-                }}
-                type="text"
-                required
-              />
-            </label>
-            <label htmlFor="snippets">
-              Snippets:
-              <input
-                name="content.snippets"
-                value={newPost.content.snippets[0] ?? ""}
-                onChange={(e) => {
-                  handleNestedArrayChange(e);
-                }}
-                type="text"
-                required
-              />
-            </label>
-            <label htmlFor="main_text">
-              Body text:
-              <textarea
-                name="content.main_text"
-                rows={5}
-                cols={10}
-                onChange={(e) => {
-                  handleNestedTextChange(e);
-                }}
-                required
-              >
-                {newPost.content.main_text}
-              </textarea>
-            </label>
-          </fieldset>
-        </label>
-        <select
-          name="category"
-          onChange={(e) => {
-            handleSelectChange(categories, e);
-          }}
-        >
-          {categories.map((category) => (
-            <option key={category._id} value={category._id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-        <label htmlFor="image_sources">
-          <input
-            type="file"
-            name="image_sources"
-            onChange={(e) => {
-              handleFileUpload(e);
-            }}
-            multiple
-          ></input>
-        </label>
-        <label htmlFor="tags">
-          Tags:
-          <input type="text" onChange={(e) => handleArrayChange(e)}></input>
-        </label>
-        <label htmlFor="is_published">
-          Publish?
-          <input
-            type="checkbox"
-            name="is_published"
-            checked={newPost.is_published}
-            onChange={(e) => {
-              handleCheckbox(e);
-            }}
-          ></input>
-        </label>
-        <button
-          onClick={(e) => {
-            handleSubmit(e);
-          }}
-          // onClick={(e) => {
-          //   handleSubmit(e);
-          // }}
-        >
-          Save Post
-        </button>
+        <NewPostData
+          newPost={newPost}
+          categories={categories}
+          handleChange={handleChange}
+          handleNestedArrayChange={handleNestedArrayChange}
+          handleSelectChange={handleSelectChange}
+          handleArrayChange={handleArrayChange}
+          handleCheckbox={handleCheckbox}
+          handleSubmit={handleSubmit}
+        />
+        <NewPostTextEditor
+          newPost={newPost}
+          handleNestedTextChange={handleNestedTextChange}
+        />
       </form>
-    </>
+    </section>
   );
 }

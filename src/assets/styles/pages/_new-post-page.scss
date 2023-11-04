@@ -1,0 +1,5 @@
+@use "./edit-page";
+
+.content--new-post {
+  @extend .content--edit-page;
+}
