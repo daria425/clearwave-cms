@@ -1,13 +1,19 @@
 import { useState } from "react";
-import { useOutletContext } from "react-router-dom";
 import CloseButton from "../../PageComponents/Icons/CloseButton";
 export default function TagEditor({
   selectedPost,
   handleTagEditor,
   handleNewTag,
+  handleDeleteTags,
 }) {
   const [newTag, setNewTag] = useState("");
+  const [tagsToDelete, setTagsToDelete] = useState([]);
 
+  function stageForDeletion(e) {
+    if (!tagsToDelete.includes(e.target.dataset.tagname)) {
+      setTagsToDelete([...tagsToDelete, e.target.dataset.tagname]);
+    }
+  }
   return (
     <dialog className="edit-form-tageditor">
       <CloseButton
@@ -20,14 +26,21 @@ export default function TagEditor({
         <div className="tags-group-tageditor">
           {selectedPost.tags.map((tag, index) => {
             return (
-              <div key={index} className="tag-card--tageditor">
+              <div
+                data-tagname={tag}
+                onClick={(e) => {
+                  stageForDeletion(e);
+                }}
+                key={index}
+                className="tag-card--tageditor"
+              >
                 {tag}
               </div>
             );
           })}
         </div>
       </label>
-
+      {/* to do: prevent duplicate tag submission */}
       <label htmlFor="new-tag">New Tag:</label>
       <input
         type="text"
@@ -44,6 +57,7 @@ export default function TagEditor({
         onClick={(e) => {
           e.preventDefault();
           handleNewTag(newTag);
+          handleDeleteTags(tagsToDelete);
         }}
       >
         SAVE

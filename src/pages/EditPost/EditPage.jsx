@@ -36,6 +36,10 @@ export default function EditPage() {
     setSelectedPost({ ...selectedPost, tags: newTags });
   }
 
+  function handleDeleteTags(tagsArr) {
+    const newTags = selectedPost.tags.filter((tag) => !tagsArr.includes(tag));
+    setSelectedPost({ ...selectedPost, tags: newTags });
+  }
   function handleResponse() {
     setResponseLoading(!responseLoading);
   }
@@ -110,6 +114,7 @@ export default function EditPage() {
     handleSelectChange,
     handleResponse,
     handleNewTag,
+    handleDeleteTags,
   };
   return (
     <Layout>
