@@ -17,8 +17,7 @@ export default function SummaryView() {
     handleResponse,
     handleSelectChange,
     handleNestedArrayChange,
-    handleNewTag,
-    handleDeleteTags,
+    handleTagUpdate,
   } = useOutletContext();
   const [openTagEditor, setOpenTagEditor] = useState(false);
 
@@ -36,8 +35,7 @@ export default function SummaryView() {
         <TagEditor
           selectedPost={selectedPost}
           handleTagEditor={handleTagEditor}
-          handleNewTag={handleNewTag}
-          handleDeleteTags={handleDeleteTags}
+          handleTagUpdate={handleTagUpdate}
         />
       )}
       {responseLoading && <Modal modalMessage="Loading" />}

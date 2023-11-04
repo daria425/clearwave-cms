@@ -31,39 +31,18 @@ export default function EditPage() {
     });
   }
 
-  function handleNewTag(newtag) {
-    const newTags = selectedPost.tags.concat(newtag);
-    setSelectedPost({ ...selectedPost, tags: newTags });
-  }
-
-  function handleDeleteTags(tagsArr) {
-    const newTags = selectedPost.tags.filter((tag) => !tagsArr.includes(tag));
+  function handleTagUpdate(newTag, tagsToDelete) {
+    const newTags = selectedPost.tags.filter(
+      (tag) => !tagsToDelete.includes(tag)
+    );
+    if (newTag !== "") {
+      newTags.push(newTag);
+    }
     setSelectedPost({ ...selectedPost, tags: newTags });
   }
   function handleResponse() {
     setResponseLoading(!responseLoading);
   }
-  // function handleFileUpload(e) {
-  //   const fileArray = [...e.target.files];
-  //   const fileObjects = fileArray.map((file) => {
-  //     return new Promise((resolve, reject) => {
-  //       const reader = new FileReader();
-  //       reader.onload = (event) => {
-  //         const data = new Uint8Array(event.target.result);
-  //         resolve({
-  //           data,
-  //           contentType: file.type,
-  //         });
-  //       };
-  //       reader.readAsArrayBuffer(file);
-  //     });
-  //   });
-  //   Promise.all(fileObjects).then((results) => {
-  //     setSelectedPost({ ...selectedPost, image_sources: results });
-  //     // Use the results array, which contains objects with data and contentType
-  //   });
-  //   // setSelectedPost({ ...selectedPost, uploaded_images });
-  // }
 
   function handleNestedTextChange(e) {
     const [firstProp, nestedProp] = e.target.name.split(".");
@@ -113,8 +92,7 @@ export default function EditPage() {
     handleNestedTextChange,
     handleSelectChange,
     handleResponse,
-    handleNewTag,
-    handleDeleteTags,
+    handleTagUpdate,
   };
   return (
     <Layout>

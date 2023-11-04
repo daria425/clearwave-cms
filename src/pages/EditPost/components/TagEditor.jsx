@@ -3,8 +3,7 @@ import CloseButton from "../../PageComponents/Icons/CloseButton";
 export default function TagEditor({
   selectedPost,
   handleTagEditor,
-  handleNewTag,
-  handleDeleteTags,
+  handleTagUpdate,
 }) {
   const [newTag, setNewTag] = useState("");
   const [tagsToDelete, setTagsToDelete] = useState([]);
@@ -25,6 +24,10 @@ export default function TagEditor({
         Tags:
         <div className="tags-group-tageditor">
           {selectedPost.tags.map((tag, index) => {
+            const isTagToDelete = tagsToDelete.includes(tag);
+            const tagStyle = {
+              textDecoration: isTagToDelete ? "line-through" : "none",
+            };
             return (
               <div
                 data-tagname={tag}
@@ -33,6 +36,7 @@ export default function TagEditor({
                 }}
                 key={index}
                 className="tag-card--tageditor"
+                style={tagStyle}
               >
                 {tag}
               </div>
@@ -56,8 +60,7 @@ export default function TagEditor({
         className="btn-primary"
         onClick={(e) => {
           e.preventDefault();
-          handleNewTag(newTag);
-          handleDeleteTags(tagsToDelete);
+          handleTagUpdate(newTag, tagsToDelete);
         }}
       >
         SAVE
