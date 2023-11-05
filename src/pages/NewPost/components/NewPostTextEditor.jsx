@@ -10,13 +10,12 @@ export default function NewPostTextEditor({ newPost, handleNestedTextChange }) {
           <textarea
             className="textarea--new-post"
             name="content.main_text"
+            value={newPost.content.main_text}
             onChange={(e) => {
               handleNestedTextChange(e);
             }}
             required
-          >
-            {newPost.content.main_text}
-          </textarea>
+          ></textarea>
         </div>
       </label>
     </section>

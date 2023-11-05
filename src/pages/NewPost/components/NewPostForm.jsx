@@ -33,11 +33,13 @@ export default function NewPostForm({
         snippets: newPost.content.snippets[0] ?? "",
         main_text: newPost.content.main_text,
       };
+      const postTags = newPost.tags.replaceAll(" ", "").split(",");
+      const uniqueTags = [...new Set(postTags)];
       const formData = new FormData();
       formData.append("title", newPost.title);
       formData.append("content", JSON.stringify(contentObj));
       formData.append("category", newPost.category._id || categories[0]._id); //workaround: first select element before changes will always be categories[0], so we default to submitting the request with that
-      formData.append("tags", JSON.stringify(newPost.tags));
+      formData.append("tags", JSON.stringify(uniqueTags));
       formData.append("is_published", newPost.is_published);
       const imageInput = document.querySelector('input[name="image_sources"]');
       for (const file of imageInput.files) {
@@ -81,6 +83,7 @@ export default function NewPostForm({
           categories={categories}
           handleChange={handleChange}
           handleNestedArrayChange={handleNestedArrayChange}
+          handleNestedTextChange={handleNestedTextChange}
           handleSelectChange={handleSelectChange}
           handleArrayChange={handleArrayChange}
           handleCheckbox={handleCheckbox}

@@ -7,16 +7,17 @@
     overflow: auto;
   }
 }
-.edit-form label {
+.edit-form-label {
   @extend .login-label;
-
-  &.edit-form-main-label {
-    font-weight: 700;
-    font-size: $font-ml;
-  }
 }
 
-.edit-form input {
+.edit-form-main-label {
+  @extend .login-label;
+  font-size: $font-ml;
+  font-weight: 700;
+}
+
+.edit-form-input {
   @extend .login-input;
   margin-top: 10px;
 }

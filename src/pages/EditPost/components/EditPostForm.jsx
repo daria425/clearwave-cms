@@ -119,6 +119,7 @@ export default function EditForm({
           <label htmlFor="title">
             Post Title:
             <input
+              className="edit-form-input"
               name="title"
               type="text"
               required
@@ -129,9 +130,10 @@ export default function EditForm({
             />
           </label>
 
-          <label htmlFor="subheading">
-            Subheadings:
+          <label className="edit-form-label" htmlFor="subheading">
+            Subheading:
             <input
+              className="edit-form-input"
               name="content.subheading"
               value={selectedPost.content.subheading}
               onChange={(e) => {
@@ -141,9 +143,10 @@ export default function EditForm({
               required
             />
           </label>
-          <label htmlFor="snippets">
+          <label htmlFor="snippets" className="edit-form-label">
             Snippets:
             <input
+              className="edit-form-input"
               name="content.snippets"
               value={selectedPost.content.snippets[0] ?? ""}
               onChange={(e) => {
@@ -162,16 +165,21 @@ export default function EditForm({
           >
             EDIT TEXT
           </button>
-          <label htmlFor="image_sources">
+          <label className="edit-form-label" htmlFor="image_sources">
             Images:
-            <input type="file" name="image_sources" multiple></input>
+            <input
+              className="edit-form-input"
+              type="file"
+              name="image_sources"
+              multiple
+            ></input>
           </label>
         </fieldset>
         <fieldset className="edit-form-fieldset">
           <label htmlFor="categorization" className="edit-form-main-label">
             Categorization
           </label>
-          <label htmlFor="category">
+          <label htmlFor="category" className="edit-form-label">
             Category:
             <select
               defaultValue={selectedPost.category._id}
@@ -188,7 +196,7 @@ export default function EditForm({
             </select>
           </label>
 
-          <label htmlFor="tags">
+          <label htmlFor="tags" className="edit-form-label">
             Tags:
             <div className="tags-group">
               {selectedPost.tags.map((tag, index) => {
@@ -209,9 +217,10 @@ export default function EditForm({
             EDIT TAGS
           </button>
         </fieldset>
-        <label htmlFor="is_published">
+        <label htmlFor="is_published" className="edit-form-label">
           Publish?
           <input
+            className="edit-form-input--checkbox"
             type="checkbox"
             name="is_published"
             checked={selectedPost.is_published}

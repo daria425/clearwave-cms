@@ -9,7 +9,7 @@ export default function NewPostPage() {
       subheadings: [],
     },
     image_sources: [],
-    tags: [],
+    tags: "",
     title: "",
     is_published: false,
   });
@@ -54,18 +54,13 @@ export default function NewPostPage() {
   }
   function handleArrayChange(e) {
     //happens separate from form submission
-    const newTags = [e.target.value];
+    const newTags = e.target.value;
     setNewPost({
       ...newPost,
-      tags: newTags, //adds a tag as the first element, if there are already tags then concats into the array (will be used on multiple intput fields)
+      tags: newTags,
     });
   }
-  function handleImageDelete(e) {
-    const newImages = newPost.image_sources.filter(
-      (image) => image._id !== e.target.id
-    ); //make new array where image id does not equal to btn id
-    setNewPost({ ...newPost, image_sources: newImages });
-  }
+
   return (
     <Layout>
       <NewPostForm

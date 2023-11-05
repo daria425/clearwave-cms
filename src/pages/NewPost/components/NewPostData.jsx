@@ -3,6 +3,7 @@ export default function NewPostData({
   categories,
   handleChange,
   handleNestedArrayChange,
+  handleNestedTextChange,
   handleSelectChange,
   handleArrayChange,
   handleCheckbox,
@@ -10,9 +11,10 @@ export default function NewPostData({
 }) {
   return (
     <div className="new-post-form-data">
-      <label htmlFor="title">
+      <label htmlFor="title" className="new-post-form-label--main">
         Post Title:
         <input
+          className="new-post-form-input"
           name="title"
           type="text"
           required
@@ -22,23 +24,25 @@ export default function NewPostData({
           }}
         />
       </label>
-      <label htmlFor="content">
+      <label htmlFor="content" className="new-post-form-label">
         <fieldset>
           <label htmlFor="subheadings">
-            Subheadings:
+            Subheading:
             <input
+              className="new-post-form-input"
               name="content.subheadings"
-              value={newPost.content.subheadings[0] ?? ""}
+              value={newPost.content.subheadings}
               onChange={(e) => {
-                handleNestedArrayChange(e);
+                handleNestedTextChange(e);
               }}
               type="text"
               required
             />
           </label>
-          <label htmlFor="snippets">
+          <label htmlFor="snippets" className="new-post-form-label">
             Snippets:
             <input
+              className="new-post-form-input"
               name="content.snippets"
               value={newPost.content.snippets[0] ?? ""}
               onChange={(e) => {
@@ -48,30 +52,45 @@ export default function NewPostData({
               required
             />
           </label>
+          <label htmlFor="image_sources">
+            Upload Images:
+            <input
+              className="new-post-form-input"
+              type="file"
+              name="image_sources"
+              multiple
+            ></input>
+          </label>
         </fieldset>
       </label>
-      <select
-        name="category"
-        onChange={(e) => {
-          handleSelectChange(categories, e);
-        }}
-      >
-        {categories.map((category) => (
-          <option key={category._id} value={category._id}>
-            {category.name}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="image_sources">
-        <input type="file" name="image_sources" multiple></input>
+      <label htmlFor="category" className="new-post-form-label">
+        Category:
+        <select
+          name="category"
+          onChange={(e) => {
+            handleSelectChange(categories, e);
+          }}
+        >
+          {categories.map((category) => (
+            <option key={category._id} value={category._id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
       </label>
-      <label htmlFor="tags">
-        Tags:
-        <input type="text" onChange={(e) => handleArrayChange(e)}></input>
+      <label htmlFor="tags" className="new-post-form-label">
+        Tags (comma-separated):
+        <input
+          type="text"
+          className="new-post-form-input"
+          onChange={(e) => handleArrayChange(e)}
+          required
+        ></input>
       </label>
-      <label htmlFor="is_published">
+      <label htmlFor="is_published" className="new-post-form-label">
         Publish?
         <input
+          className="new-post-form-input--checkbox"
           type="checkbox"
           name="is_published"
           checked={newPost.is_published}
