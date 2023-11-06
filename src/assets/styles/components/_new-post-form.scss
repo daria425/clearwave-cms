@@ -2,18 +2,9 @@
 @use "./login-form";
 @use "../abstracts/" as *;
 .new-post-form {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.texteditor--new-post {
-  flex-grow: 1;
-}
-.textarea--new-post {
-  @extend .texteditor-textarea;
-  height: auto;
   @include respond-to("l") {
-    min-height: 50vh;
+    display: grid;
+    grid-template-columns: 35% 1fr;
   }
 }
 
@@ -24,6 +15,31 @@
     font-size: $font-ml;
     font-weight: 700;
   }
+  &--texteditor {
+    @extend .new-post-form-label;
+    font-size: $font-ml;
+    font-weight: 700;
+    margin-bottom: 0;
+  }
+}
+
+.texteditor--new-post {
+  flex-grow: 1;
+}
+.textarea--new-post {
+  @extend .texteditor-textarea;
+  height: auto;
+  font-weight: 400;
+  @include respond-to("l") {
+    min-height: 50vh;
+  }
+}
+
+.new-post-form-data {
+  flex-grow: 1;
+  @include respond-to("l") {
+    flex-grow: 0;
+  }
 }
 
 .new-post-form-input {
@@ -33,7 +49,6 @@
 .grow-wrap {
   /* easy way to plop the elements on top of each other and have them both sized based on the tallest one's height */
   display: grid;
-  padding: 5px 5px;
   &:focus {
     border: 2px solid;
   }

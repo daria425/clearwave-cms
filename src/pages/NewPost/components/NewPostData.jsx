@@ -100,7 +100,7 @@ export default function NewPostData({
         ></input>
       </label>
       <button
-        className="btn-primary"
+        className="btn-primary--new-post-form"
         onClick={(e) => {
           handleSubmit(e);
         }}
