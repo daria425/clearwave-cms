@@ -1,4 +1,4 @@
-export default function NewPostTextEditor({ newPost, handleNestedTextChange }) {
+export default function NewPostTextEditor({ newPost, handleMainTextChange }) {
   return (
     <section className="texteditor--new-post">
       <label htmlFor="main_text" className="new-post-form-label--texteditor">
@@ -13,7 +13,7 @@ export default function NewPostTextEditor({ newPost, handleNestedTextChange }) {
           name="content.main_text"
           value={newPost.content.main_text}
           onChange={(e) => {
-            handleNestedTextChange(e);
+            handleMainTextChange(e);
           }}
           required
         ></textarea>

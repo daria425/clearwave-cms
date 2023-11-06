@@ -6,9 +6,10 @@ import NewPostData from "./NewPostData";
 export default function NewPostForm({
   newPost,
   handleChange,
-  handleNestedArrayChange,
+  handleSnippetChange,
   handleSelectChange,
-  handleNestedTextChange,
+  handleSubheadingChange,
+  handleMainTextChange,
   handleCheckbox,
   handleArrayChange,
 }) {
@@ -29,7 +30,7 @@ export default function NewPostForm({
     e.preventDefault();
     try {
       const contentObj = {
-        subheadings: newPost.content.subheadings[0] ?? "",
+        subheading: newPost.content.subheading,
         snippets: newPost.content.snippets[0] ?? "",
         main_text: newPost.content.main_text,
       };
@@ -82,8 +83,8 @@ export default function NewPostForm({
           newPost={newPost}
           categories={categories}
           handleChange={handleChange}
-          handleNestedArrayChange={handleNestedArrayChange}
-          handleNestedTextChange={handleNestedTextChange}
+          handleSnippetChange={handleSnippetChange}
+          handleSubheadingChange={handleSubheadingChange}
           handleSelectChange={handleSelectChange}
           handleArrayChange={handleArrayChange}
           handleCheckbox={handleCheckbox}
@@ -91,7 +92,7 @@ export default function NewPostForm({
         />
         <NewPostTextEditor
           newPost={newPost}
-          handleNestedTextChange={handleNestedTextChange}
+          handleMainTextChange={handleMainTextChange}
         />
       </form>
     </section>

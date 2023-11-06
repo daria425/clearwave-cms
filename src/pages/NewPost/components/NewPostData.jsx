@@ -2,8 +2,8 @@ export default function NewPostData({
   newPost,
   categories,
   handleChange,
-  handleNestedArrayChange,
-  handleNestedTextChange,
+  handleSnippetChange,
+  handleSubheadingChange,
   handleSelectChange,
   handleArrayChange,
   handleCheckbox,
@@ -30,28 +30,37 @@ export default function NewPostData({
             Subheading:
             <input
               className="new-post-form-input"
-              name="content.subheadings"
-              value={newPost.content.subheadings}
+              name="content.subheading"
+              value={newPost.content.subheading}
               onChange={(e) => {
-                handleNestedTextChange(e);
+                handleSubheadingChange(e);
               }}
               type="text"
               required
             />
           </label>
-          <label htmlFor="snippets" className="new-post-form-label">
-            Snippets:
-            <input
-              className="new-post-form-input"
-              name="content.snippets"
-              value={newPost.content.snippets[0] ?? ""}
-              onChange={(e) => {
-                handleNestedArrayChange(e);
-              }}
-              type="text"
-              required
-            />
-          </label>
+          {newPost.content.snippets.map((snippet, index) => {
+            return (
+              <label
+                key={index}
+                htmlFor="snippets"
+                className="new-post-form-label"
+              >
+                Snippets:
+                <input
+                  className="new-post-form-input"
+                  name="content.snippets"
+                  id={index}
+                  value={newPost.content.snippets[index]}
+                  onChange={(e) => {
+                    handleSnippetChange(e);
+                  }}
+                  type="text"
+                  required
+                />
+              </label>
+            );
+          })}
           <label htmlFor="image_sources">
             Upload Images:
             <input

@@ -5,8 +5,9 @@ export default function NewPostPage() {
   const [newPost, setNewPost] = useState({
     category: "",
     content: {
-      snippets: [],
-      subheadings: [],
+      main_text: "",
+      snippets: [""],
+      subheading: "",
     },
     image_sources: [],
     tags: "",
@@ -16,24 +17,40 @@ export default function NewPostPage() {
   function handleChange(e) {
     setNewPost({ ...newPost, [e.target.name]: e.target.value });
   }
-  function handleNestedArrayChange(e) {
-    const [firstProp, nestedProp] = e.target.name.split(".");
+
+  function handleSubheadingChange(e) {
     setNewPost({
       ...newPost,
-      [firstProp]: {
-        ...newPost[firstProp],
-        [nestedProp]: [e.target.value],
+      content: {
+        ...newPost.content,
+        subheading: e.target.value,
       },
     });
   }
-
-  function handleNestedTextChange(e) {
-    const [firstProp, nestedProp] = e.target.name.split(".");
+  function handleMainTextChange(e) {
     setNewPost({
       ...newPost,
-      [firstProp]: {
-        ...newPost[firstProp],
-        [nestedProp]: e.target.value,
+      content: {
+        ...newPost.content,
+        main_text: e.target.value,
+      },
+    });
+  }
+  function handleSnippetChange(e) {
+    const updatedSnippets = [...newPost.content.snippets]; // Create a copy of the snippets array
+    updatedSnippets[e.target.id] = e.target.value;
+    // setNewPost({
+    //   ...newPost,
+    //   [firstProp]: {
+    //     ...newPost[firstProp],
+    //     [nestedProp]: e.target.value,
+    //   },
+    // });
+    setNewPost({
+      ...newPost,
+      content: {
+        ...newPost.content,
+        snippets: updatedSnippets,
       },
     });
   }
@@ -66,9 +83,10 @@ export default function NewPostPage() {
       <NewPostForm
         newPost={newPost}
         handleChange={handleChange}
-        handleNestedArrayChange={handleNestedArrayChange}
         handleSelectChange={handleSelectChange}
-        handleNestedTextChange={handleNestedTextChange}
+        handleSnippetChange={handleSnippetChange}
+        handleSubheadingChange={handleSubheadingChange}
+        handleMainTextChange={handleMainTextChange}
         handleCheckbox={handleCheckbox}
         handleArrayChange={handleArrayChange}
       />
