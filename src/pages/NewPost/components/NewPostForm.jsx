@@ -3,6 +3,7 @@ import { appContext, contentContext } from "../../../App";
 import { useTokenRefresh } from "../../../helpers/Hooks";
 import NewPostTextEditor from "./NewPostTextEditor";
 import NewPostData from "./NewPostData";
+import PageHeading from "../../PageComponents/PageHeading";
 export default function NewPostForm({
   newPost,
   handleChange,
@@ -74,6 +75,7 @@ export default function NewPostForm({
   }
   return (
     <section className="content--new-post">
+      <PageHeading heading={"New Post"} />
       <form
         action={`http://localhost:3000/api/posts/new`}
         encType="multipart/form-data"

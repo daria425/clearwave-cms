@@ -4,6 +4,7 @@ import { appContext, contentContext } from "../../../App";
 import { format, parseISO } from "date-fns";
 import { useTokenRefresh } from "../../../helpers/Hooks";
 import CloseButton from "../../PageComponents/Icons/CloseButton";
+import DeletePostButton from "../../PageComponents/Icons/DeletePostButton";
 export default function BlogCard({
   post,
   handleSelection,
@@ -15,13 +16,15 @@ export default function BlogCard({
   const { handleDelete } = useContext(contentContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
   const [error, setError] = useState(null);
-  const [translation, setTranslation] = useState("0px");
-  const [shadow, setShadow] = useState("none");
   const initialStyle = {
     border: "none",
     zIndex: "0",
   };
-  const [style, setStyle] = useState(initialStyle);
+  const selectedStyle = {
+    border: "2px solid #999999",
+    zIndex: "5",
+  };
+  const [cardSelected, setCardSelected] = useState(false);
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -50,18 +53,13 @@ export default function BlogCard({
     }
   }
   function selectCard() {
-    const newStyle = {
-      border: "2px solid #999999",
-      zIndex: "5",
-    };
-    setStyle(newStyle);
+    setCardSelected(true);
     handleSelection();
   }
 
   function undoSelectCard(e) {
     e.stopPropagation();
-    const newStyle = { ...initialStyle };
-    setStyle(newStyle);
+    setCardSelected(false);
     handleUndoSelection();
   }
   return (
@@ -70,13 +68,15 @@ export default function BlogCard({
       className="post-card"
       key={post._id}
       id={post._id}
-      style={style}
+      style={cardSelected ? selectedStyle : initialStyle}
       onClick={selectCard}
     >
-      <CloseButton
-        closingFunction={undoSelectCard}
-        additionalClass="--corner-post-card"
-      />
+      {cardSelected && (
+        <CloseButton
+          closingFunction={undoSelectCard}
+          additionalClass="--corner-post-card"
+        />
+      )}
       <h2 className="post-card-title">Title: {post.title}</h2>
       <p className="post-card-category">Category: {post.category.name}</p>
       <p className="post-card-date">
@@ -89,16 +89,7 @@ export default function BlogCard({
         >
           EDIT
         </button>
-        <button
-          className="btn-danger"
-          type="submit"
-          id={post._id}
-          onClick={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          X
-        </button>
+        <DeletePostButton deletionFunction={handleSubmit} postid={post._id} />
       </div>
     </div>
   );

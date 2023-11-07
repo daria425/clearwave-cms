@@ -1,5 +1,7 @@
 @use "../abstracts/" as *;
-
+.page-heading {
+  text-align: center;
+}
 .wrapper {
   position: relative;
   @include respond-to("m") {

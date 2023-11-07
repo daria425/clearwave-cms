@@ -5,6 +5,7 @@ import BlogCard from "./components/BlogCard";
 import Layout from "../PageComponents/Layout";
 import Overlay from "../PageComponents/Overlay";
 import LoadingPage from "../LoadingPage/LoadingPage";
+import PageHeading from "../PageComponents/PageHeading";
 import { useState } from "react";
 export default function Dashboard() {
   const [postSelected, setPostSelected] = useState(false);
@@ -22,6 +23,7 @@ export default function Dashboard() {
         <LoadingPage /> // Display a loading message or spinner while loading
       ) : (
         <main className="content">
+          <PageHeading heading={"All Posts"} />
           <section className="posts">
             <div className="posts-wrapper">
               {blogPosts.map((post) => (

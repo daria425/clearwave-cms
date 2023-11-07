@@ -2,6 +2,7 @@ import { useParams, Outlet } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { contentContext } from "../../App";
 import { useState } from "react";
+import PageHeading from "../PageComponents/PageHeading";
 import Layout from "../PageComponents/Layout";
 
 export default function EditPage() {
@@ -97,6 +98,7 @@ export default function EditPage() {
   return (
     <Layout>
       <section className="content--edit-page">
+        <PageHeading heading={"Edit Post"} />
         <Outlet context={outletContext} />
       </section>
     </Layout>

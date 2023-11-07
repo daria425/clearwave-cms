@@ -82,9 +82,16 @@
   @include btn-default(0px, 0px);
   color: $danger-300;
   box-shadow: none;
-  width: 100%;
   &:hover {
     color: $danger;
+  }
+  &--delete-image {
+    @extend .btn-danger;
+    width: 100%;
+  }
+  &--delete-post {
+    @extend .btn-danger;
+    padding: 5px 5px;
   }
 }
 // .btn-primary-colorswap {
