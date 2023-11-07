@@ -25,6 +25,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  &--category-details {
+    @extend .tag-card;
+    background-color: $gray-600;
+    flex-grow: 0;
+  }
 }
 
 .tag-input-tageditor {
