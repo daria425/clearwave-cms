@@ -18,6 +18,7 @@
 
 .tag-card {
   @extend .category--card;
+  text-align: center;
   flex: 1 1 0px;
   padding: 5px 5px;
   font-size: $font-xs;
@@ -32,6 +33,7 @@
 
 .tag-card--tageditor {
   @extend .category--card;
+  text-align: center;
   background-color: $gray-600;
   margin-top: 10px;
   font-size: $font-m;

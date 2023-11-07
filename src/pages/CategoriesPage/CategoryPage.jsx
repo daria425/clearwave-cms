@@ -19,8 +19,11 @@ export default function CategoryPage() {
                 <Category key={category._id} category={category} />
               ))}
             </ul>
-            <button onClick={() => navigate(`/new-category`)}>
-              new category
+            <button
+              className="btn-primary--new-item"
+              onClick={() => navigate(`/new-category`)}
+            >
+              +
             </button>
           </section>
         </main>

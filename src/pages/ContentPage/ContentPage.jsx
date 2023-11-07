@@ -36,7 +36,7 @@ export default function Dashboard() {
               ))}
             </div>
             <button
-              className="btn-primary--new-post"
+              className="btn-primary--new-item"
               onClick={() => navigate(`/new`)}
             >
               +

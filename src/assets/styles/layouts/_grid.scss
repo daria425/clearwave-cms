@@ -29,7 +29,8 @@
 }
 
 .categories {
-  margin-top: calc(($btn-radius / 2) + 10px);
+  // margin-top: calc(($btn-radius / 2) + 10px);
+  position: relative;
 }
 .categories-wrapper {
   display: grid;

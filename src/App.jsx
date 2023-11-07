@@ -13,6 +13,7 @@ import CategoryPage from "./pages/CategoriesPage/CategoryPage";
 import SummaryView from "./pages/EditPost/components/SummaryView";
 import PostDetailsCard from "./pages/EditPost/components/PostDetailsCard";
 import TextEditor from "./pages/EditPost/components/TextEditor";
+import CategoryDetailPage from "./pages/CategoryDetailsPage/CategoryDetailPage";
 export const appContext = createContext({
   blogPosts: [],
   accessToken: "",
@@ -172,6 +173,10 @@ function App() {
           {
             path: "new-category",
             element: <NewCategoryPage />,
+          },
+          {
+            path: "category/:id",
+            element: <CategoryDetailPage />,
           },
         ],
       },

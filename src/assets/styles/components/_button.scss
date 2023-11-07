@@ -21,7 +21,7 @@
   &:hover {
     background-color: $primary-500;
   }
-  &--new-post {
+  &--new-item {
     @extend .btn-primary;
     padding: 0px;
     border-radius: 50%;
