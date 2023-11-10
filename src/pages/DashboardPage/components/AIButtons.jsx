@@ -8,7 +8,7 @@ export default function AIButtons({ handlerFunction }) {
     overflow: "hidden",
   };
   const secondStyle = {
-    height: "25vh",
+    height: "100%",
     overflow: "auto",
   };
   function handleShowBtns() {

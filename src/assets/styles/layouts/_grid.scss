@@ -38,3 +38,20 @@
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 10px;
 }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(30vw, 1rem) repeat(4, 1fr);
+  grid-template-rows: minmax(30vw, 1rem) auto;
+  .colorful-wrapper {
+    grid-column: 3 / span 3;
+    grid-row-start: span 2;
+  }
+  .dropdown-wrapper {
+    grid-column-start: span 5;
+  }
+  .chart-container {
+    height: 200px;
+    grid-column: 1 / span 5;
+  }
+}

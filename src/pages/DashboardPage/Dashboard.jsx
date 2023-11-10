@@ -1,7 +1,7 @@
 import Layout from "../PageComponents/Layout";
+import PageHeading from "../PageComponents/PageHeading";
 import DashboardGrid from "./components/DashboardGrid";
 import { useTokenRefresh } from "../../helpers/Hooks";
-import AIButtons from "./components/AIButtons";
 import { useContext, useState, useEffect } from "react";
 import { appContext, contentContext } from "../../App";
 import {
@@ -63,6 +63,7 @@ export default function Dashboard() {
     <Layout>
       {dataReady > 0 && (
         <section className="content">
+          <PageHeading heading={"Dashboard"} />
           <DashboardGrid
             widgetFunctions={{ sumObjectProps, handleContentGPTQuery }}
             blogPosts={blogPosts}
