@@ -1,8 +1,8 @@
 export default function SquareWidget({ widgetTitle, widgetContent }) {
   return (
-    <div>
-      <h3>{widgetTitle}</h3>
-      <p>{widgetContent}</p>
+    <div className="square-card">
+      <h3 className="square-card-title">{widgetTitle}</h3>
+      <p className="square-card-text">{widgetContent}</p>
     </div>
   );
 }

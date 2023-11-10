@@ -49,7 +49,7 @@ export default function PostDetailsCard() {
         )}
         <button className="btn-outline--accordion" onClick={handleShowMainText}>
           VIEW CONTENT
-          <AccordionIcon showMainText={showMainText} />
+          <AccordionIcon showContent={showMainText} />
         </button>
         <p
           className="post-details-content--main-text-panel"

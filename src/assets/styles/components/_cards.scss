@@ -6,8 +6,6 @@
   line-height: 1.5;
   padding: 30px 30px;
   position: relative;
-  transition: left 0.2s;
-  transition: top 0.2s;
 }
 
 .post-card-title {
@@ -38,4 +36,26 @@
   background-color: $surface;
   padding: 30px 30px;
   line-height: 1.5;
+}
+
+.square-card {
+  @extend .post-details-card;
+  padding: 20px 20px;
+  width: 15vw;
+  height: 15vw;
+}
+
+.square-card-title {
+  font-weight: 700;
+  font-size: $font-ml;
+}
+
+.square-card-text {
+  text-align: center;
+}
+
+.colorful-wrapper {
+  @include rounded;
+  background-color: $primary-500;
+  padding: 0.5rem 0.5rem;
 }

@@ -1,9 +1,7 @@
 import Layout from "../PageComponents/Layout";
-import ChatButton from "./components/ChatButton";
-import PageHeading from "../PageComponents/PageHeading";
-import SquareWidget from "./components/SquareWidget.jsx";
-import TopPostWidget from "./components/TopPostWidget";
+import DashboardGrid from "./components/DashboardGrid";
 import { useTokenRefresh } from "../../helpers/Hooks";
+import AIButtons from "./components/AIButtons";
 import { useContext, useState, useEffect } from "react";
 import { appContext, contentContext } from "../../App";
 import {
@@ -64,22 +62,13 @@ export default function Dashboard() {
   return (
     <Layout>
       {dataReady > 0 && (
-        <>
-          <PageHeading heading={"Dashboard"} />
-          <SquareWidget
-            widgetTitle={"Total Likes"}
-            widgetContent={sumObjectProps(blogPosts, "likes")}
+        <section className="content">
+          <DashboardGrid
+            widgetFunctions={{ sumObjectProps, handleContentGPTQuery }}
+            blogPosts={blogPosts}
+            top={top}
           />
-          <TopPostWidget post={top.top_post} />
-          <ChatButton
-            handlerFunction={handleContentGPTQuery}
-            gptRequest={"CONTENT IDEAS"}
-          />
-          <ChatButton
-            handlerFunction={() => {}}
-            gptRequest={"KEYWORD RESEARCH"}
-          />
-        </>
+        </section>
       )}
     </Layout>
   );

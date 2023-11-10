@@ -21,6 +21,13 @@
   &:hover {
     background-color: $primary-500;
   }
+  &--accordion {
+    @extend .btn-primary;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   &--new-item {
     @extend .btn-primary;
     padding: 0px;
