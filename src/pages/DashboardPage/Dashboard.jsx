@@ -1,17 +1,32 @@
 import Layout from "../PageComponents/Layout";
 import ChatButton from "./components/ChatButton";
 import PageHeading from "../PageComponents/PageHeading";
+import SquareWidget from "./components/SquareWidget.jsx";
+import TopPostWidget from "./components/TopPostWidget";
 import { useTokenRefresh } from "../../helpers/Hooks";
-import { useContext, useState } from "react";
-import { appContext } from "../../App";
-
+import { useContext, useState, useEffect } from "react";
+import { appContext, contentContext } from "../../App";
+import {
+  sumObjectProps,
+  sortPostsbyGreatestValue,
+} from "../../helpers/helper-functions";
 export default function Dashboard() {
+  const { blogPosts, postsLoading } = useContext(contentContext);
   const { accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
+  const [dataReady, setDataReady] = useState(false);
   const [userTheme, setUserTheme] = useState(["Finance"]);
+  const [top, setTop] = useState({});
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
-
-  async function handleGPTQuery(e) {
+  useEffect(() => {
+    if (blogPosts.length > 0) {
+      setTop({
+        top_post: sortPostsbyGreatestValue(blogPosts),
+      });
+      setDataReady(true);
+    }
+  }, [blogPosts]);
+  async function handleContentGPTQuery(e) {
     e.preventDefault();
 
     try {
@@ -45,12 +60,27 @@ export default function Dashboard() {
       console.log(err.message);
     }
   }
-
+  console.log(top);
   return (
     <Layout>
-      <PageHeading heading={"Dashboard"} />
-      <p>hi nothing here yet</p>
-      <ChatButton handlerFunction={handleGPTQuery} />
+      {dataReady > 0 && (
+        <>
+          <PageHeading heading={"Dashboard"} />
+          <SquareWidget
+            widgetTitle={"Total Likes"}
+            widgetContent={sumObjectProps(blogPosts, "likes")}
+          />
+          <TopPostWidget post={top.top_post} />
+          <ChatButton
+            handlerFunction={handleContentGPTQuery}
+            gptRequest={"CONTENT IDEAS"}
+          />
+          <ChatButton
+            handlerFunction={() => {}}
+            gptRequest={"KEYWORD RESEARCH"}
+          />
+        </>
+      )}
     </Layout>
   );
 }

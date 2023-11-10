@@ -1,4 +1,4 @@
-export default function ChatButton({ theme = ["Finance"], handlerFunction }) {
+export default function ChatButton({ gptRequest, handlerFunction }) {
   return (
     <button
       className="btn-outline"
@@ -6,7 +6,7 @@ export default function ChatButton({ theme = ["Finance"], handlerFunction }) {
         handlerFunction(e);
       }}
     >
-      Call GPT!
+      {gptRequest}
     </button>
   );
 }
