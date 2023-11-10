@@ -4,19 +4,21 @@ import { contentContext } from "../../App";
 import { useState } from "react";
 import PageHeading from "../PageComponents/PageHeading";
 import Layout from "../PageComponents/Layout";
-
+import { useSelectedPost } from "../../helpers/Hooks";
 export default function EditPage() {
-  const [selectedPost, setSelectedPost] = useState(false);
+  const { responseLoading, setResponseLoading, selectedPost, setSelectedPost } =
+    useSelectedPost();
+  // const [selectedPost, setSelectedPost] = useState(false);
 
-  const [responseLoading, setResponseLoading] = useState(false);
-  const { id } = useParams();
-  const { blogPosts, postsLoading } = useContext(contentContext);
-  useEffect(() => {
-    if (!postsLoading) {
-      const post = blogPosts.find((post) => post._id === id);
-      setSelectedPost(post); // If post is not found, set an empty object
-    }
-  }, [blogPosts, id, postsLoading]);
+  // const [responseLoading, setResponseLoading] = useState(false);
+  // const { id } = useParams();
+  // const { blogPosts, postsLoading } = useContext(contentContext);
+  // useEffect(() => {
+  //   if (!postsLoading) {
+  //     const post = blogPosts.find((post) => post._id === id);
+  //     setSelectedPost(post); // If post is not found, set an empty object
+  //   }
+  // }, [blogPosts, id, postsLoading]);
 
   function handleChange(e) {
     setSelectedPost({ ...selectedPost, [e.target.name]: e.target.value });

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useContext } from "react";
 import jwtDecode from "jwt-decode";
-
+import { contentContext } from "../App";
 function useTokenRefresh(accessToken, refreshToken, updateAccessToken) {
   const [error, setError] = useState(false);
   useEffect(() => {
@@ -93,4 +95,20 @@ function useAuth() {
   return userLogin;
 }
 
-export { useData, useTokenRefresh, useAuth };
+function useSelectedPost() {
+  const [selectedPost, setSelectedPost] = useState(false);
+  const [responseLoading, setResponseLoading] = useState(false);
+  const { id } = useParams();
+  const { blogPosts, postsLoading } = useContext(contentContext);
+
+  useEffect(() => {
+    if (!postsLoading) {
+      const post = blogPosts.find((post) => post._id === id);
+      setSelectedPost(post || {}); // If post is not found, set an empty object
+    }
+  }, [blogPosts, id, postsLoading]);
+
+  return { selectedPost, responseLoading, setResponseLoading, setSelectedPost };
+}
+
+export { useData, useTokenRefresh, useAuth, useSelectedPost };
