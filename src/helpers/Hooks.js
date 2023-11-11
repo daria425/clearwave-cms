@@ -100,6 +100,18 @@ function useSelectedPost() {
   return { selectedPost, responseLoading, setResponseLoading, setSelectedPost };
 }
 
+function useSelectedCategory() {
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const { id } = useParams();
+  const { categories, categoriesLoading } = useContext(contentContext);
+  useEffect(() => {
+    if (!categoriesLoading) {
+      const category = categories.find((category) => category._id === id);
+      setSelectedCategory(category); // If post is not found, set an empty object
+    }
+  }, [categoriesLoading, id, categories]);
+  return { selectedCategory, setSelectedCategory };
+}
 function useAuth() {
   const [user, setUser] = useState({});
   const [userLogin, setUserLogin] = useState(false);
@@ -117,4 +129,10 @@ function useAuth() {
   }, []);
   return { user, setUser, userLogin, setUserLogin };
 }
-export { useData, useTokenRefresh, useAuth, useSelectedPost };
+export {
+  useData,
+  useTokenRefresh,
+  useAuth,
+  useSelectedPost,
+  useSelectedCategory,
+};
