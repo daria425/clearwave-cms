@@ -84,17 +84,6 @@ function useData(query) {
   return { data, error, isLoading };
 }
 
-function useAuth() {
-  const [userLogin, setUserLogin] = useState(false);
-  useEffect(() => {
-    const loggedInUser = document.cookie;
-    if (loggedInUser) {
-      setUserLogin(true);
-    }
-  }, []);
-  return userLogin;
-}
-
 function useSelectedPost() {
   const [selectedPost, setSelectedPost] = useState(false);
   const [responseLoading, setResponseLoading] = useState(false);
@@ -111,4 +100,21 @@ function useSelectedPost() {
   return { selectedPost, responseLoading, setResponseLoading, setSelectedPost };
 }
 
+function useAuth() {
+  const [user, setUser] = useState({});
+  const [userLogin, setUserLogin] = useState(false);
+  useEffect(() => {
+    const cookies = document.cookie;
+    if (cookies) {
+      const indexToSlice = cookies.indexOf("=") + 1;
+      const userData = decodeURIComponent(cookies.slice(indexToSlice));
+      const userString = userData.replaceAll("j:", "");
+      const userJson = `${userString}`;
+      const user = JSON.parse(userJson);
+      setUser(user);
+      setUserLogin(true);
+    }
+  }, []);
+  return { user, setUser, userLogin, setUserLogin };
+}
 export { useData, useTokenRefresh, useAuth, useSelectedPost };

@@ -1,5 +1,5 @@
 import Index from "./pages/Index/Index";
-import { useData } from "./helpers/Hooks";
+import { useData, useAuth } from "./helpers/Hooks";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
@@ -41,8 +41,7 @@ export const loginContext = createContext({
 function App() {
   const [accessToken, setAccessToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
-  const [userLogin, setUserLogin] = useState(false);
-  const [user, setUser] = useState({});
+  const { user, setUser, userLogin, setUserLogin } = useAuth();
   const {
     data: categoryData,
     error: categoryError,
@@ -61,18 +60,6 @@ function App() {
       setCategories(categoryData);
     }
   }, [postData, postsLoading, categoriesLoading, categoryData]);
-  useEffect(() => {
-    const cookies = document.cookie;
-    if (cookies) {
-      const indexToSlice = cookies.indexOf("=") + 1;
-      const userData = decodeURIComponent(cookies.slice(indexToSlice));
-      const userString = userData.replaceAll("j:", "");
-      const userJson = `${userString}`;
-      const user = JSON.parse(userJson);
-      setUser(user);
-      setUserLogin(true);
-    }
-  }, []);
   function updateAccessToken(newToken) {
     setAccessToken(newToken);
   }
