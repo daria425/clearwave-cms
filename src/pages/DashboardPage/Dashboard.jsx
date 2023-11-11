@@ -24,6 +24,7 @@ export default function Dashboard() {
       setDataReady(true);
     }
   }, [blogPosts]);
+
   async function handleContentGPTQuery(e) {
     e.preventDefault();
 
@@ -58,7 +59,7 @@ export default function Dashboard() {
       console.log(err.message);
     }
   }
-  console.log(top);
+
   return (
     <Layout>
       {dataReady > 0 && (
