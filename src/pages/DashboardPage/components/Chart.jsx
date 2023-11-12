@@ -1,106 +1,77 @@
-import { scaleLinear, scaleUtc } from "@visx/scale";
-import { GridRows, GridColumns } from "@visx/grid";
-import { AxisLeft, AxisBottom } from "@visx/axis";
-import { LinePath } from "@visx/shape";
-import { extent } from "d3-array";
-import { timeDay } from "d3-time";
-import {
-  primary500,
-  primary050,
-} from "../../../assets/styles/modules/_variables.module.scss";
-import { timeFormat } from "d3-time-format";
-import { Group } from "@visx/group";
-import { max } from "d3-array";
-export default function Chart({ data, width, height }) {
-  const margin = { top: 20, right: 40, bottom: 20, left: 40 };
-  // defining inner measurements
-  const innerWidth = width - margin.left - margin.right;
-  const innerHeight = height - margin.top - margin.bottom;
-  const dateFormatter = timeFormat("%b %d");
-  //accessor functions
-  const getRD = (d) => d.page_views;
-  const getDate = (d) => new Date(d.date);
-  const timeScale = scaleUtc({
-    range: [0, innerWidth],
-    domain: extent(data, getDate),
-    nice: false,
+import { ResponsiveLine } from "@nivo/line";
+export default function Chart({ data }) {
+  const renderData = data.map((value) => {
+    return { x: value.date, y: value.page_views };
   });
-
-  const maxValue = max(data, (d) => d.page_views);
-  // vertical, y scale
-  const rdScale = scaleLinear({
-    range: [innerHeight, 0],
-    domain: [0, maxValue],
-    nice: true,
-  });
-  return width <= 0 || height <= 0 ? null : ( //renders with 0 as height first, make it not do that
-    <svg width={width} height={height}>
-      <rect
-        x={0}
-        y={0}
-        width={width}
-        height={height}
-        fill={primary500}
-        rx={3}
-      />
-      <Group left={margin.left} top={margin.top}>
-        <rect
-          x={0}
-          y={0}
-          width={innerWidth}
-          height={innerHeight}
-          fill={primary050}
-          rx={3}
-        />
-        <GridRows
-          scale={rdScale}
-          width={innerWidth}
-          height={innerHeight - margin.top}
-          stroke="#000"
-          strokeOpacity={0.2}
-        />
-        <GridColumns
-          scale={timeScale}
-          width={innerWidth}
-          height={innerHeight}
-          stroke="#000"
-          strokeOpacity={0.2}
-        />
-        <AxisLeft
-          tickTextFill={"#000"}
-          stroke={"#000"}
-          tickStroke={"#000"}
-          scale={rdScale}
-          tickLabelProps={() => ({
-            fill: "#000",
-            fontSize: 11,
-            textAnchor: "end",
-          })}
-        />
-
-        <AxisBottom
-          scale={timeScale}
-          stroke={"#000"}
-          tickStroke={"#000"}
-          tickFormat={dateFormatter}
-          numTicks={data.length}
-          tickTextFill={"#000"}
-          top={innerHeight}
-          tickLabelProps={() => ({
-            fill: "#000",
-            fontSize: 11,
-            textAnchor: "middle",
-          })}
-        />
-
-        <LinePath
-          stroke={"#000"}
-          strokeWidth={3}
-          data={data}
-          x={(d) => timeScale(getDate(d)) ?? 0}
-          y={(d) => rdScale(getRD(d)) ?? 0}
-        />
-      </Group>
-    </svg>
+  const dataObject = [
+    {
+      id: "blog_analytics",
+      data: renderData,
+    },
+  ];
+  return (
+    <ResponsiveLine
+      data={dataObject}
+      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+      xScale={{ type: "point" }}
+      yScale={{
+        type: "linear",
+        min: "auto",
+        max: "auto",
+        stacked: true,
+        reverse: false,
+      }}
+      yFormat=" >-.2f"
+      axisTop={null}
+      axisRight={null}
+      axisBottom={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: "transportation",
+        legendOffset: 36,
+        legendPosition: "middle",
+      }}
+      axisLeft={{
+        tickSize: 5,
+        tickPadding: 5,
+        tickRotation: 0,
+        legend: "count",
+        legendOffset: -40,
+        legendPosition: "middle",
+      }}
+      pointSize={10}
+      pointColor={{ theme: "background" }}
+      pointBorderWidth={2}
+      pointBorderColor={{ from: "serieColor" }}
+      pointLabelYOffset={-12}
+      useMesh={true}
+      legends={[
+        {
+          anchor: "bottom-right",
+          direction: "column",
+          justify: false,
+          translateX: 100,
+          translateY: 0,
+          itemsSpacing: 0,
+          itemDirection: "left-to-right",
+          itemWidth: 80,
+          itemHeight: 20,
+          itemOpacity: 0.75,
+          symbolSize: 12,
+          symbolShape: "circle",
+          symbolBorderColor: "rgba(0, 0, 0, .5)",
+          effects: [
+            {
+              on: "hover",
+              style: {
+                itemBackground: "rgba(0, 0, 0, .03)",
+                itemOpacity: 1,
+              },
+            },
+          ],
+        },
+      ]}
+    />
   );
 }
