@@ -1,34 +1,63 @@
 import { ResponsiveLine } from "@nivo/line";
+import {
+  primary,
+  primary050,
+} from "../../../assets/styles/modules/_variables.module.scss";
+import format from "date-fns/format";
 export default function Chart({ data }) {
   const renderData = data.map((value) => {
-    return { x: value.date, y: value.page_views };
+    return { x: format(new Date(value.date), "MMM dd"), y: value.page_views };
   });
   const dataObject = [
     {
-      id: "blog_analytics",
+      id: "Page views",
       data: renderData,
     },
   ];
+  const chartTheme = {
+    "axis": {
+      "ticks": {
+        "text": {
+          "fill": "#fff",
+          "fontSize": "clamp(0.75rem, 0.6364rem + 0.4848vw, 1rem)",
+        },
+        "line": {
+          "stroke": "#ffffff",
+          "strokeWidth": 1,
+        },
+      },
+      "domain": {
+        "line": {
+          "stroke": "#ffffff",
+          "strokeWidth": 1,
+        },
+      },
+    },
+  };
   return (
     <ResponsiveLine
       data={dataObject}
-      margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+      theme={chartTheme}
+      margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
       xScale={{ type: "point" }}
       yScale={{
         type: "linear",
-        min: "auto",
+        min: 0,
         max: "auto",
         stacked: true,
         reverse: false,
       }}
       yFormat=" >-.2f"
+      curve="cardinal"
+      enableGridX={false}
+      enableGridY={false}
       axisTop={null}
       axisRight={null}
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "transportation",
+
         legendOffset: 36,
         legendPosition: "middle",
       }}
@@ -36,42 +65,18 @@ export default function Chart({ data }) {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "count",
+        tickValues: 4,
         legendOffset: -40,
         legendPosition: "middle",
       }}
-      pointSize={10}
+      pointSize={5}
+      animate={false}
+      colors={primary050}
       pointColor={{ theme: "background" }}
       pointBorderWidth={2}
+      pointLabel={(d) => `${d.y}`}
       pointBorderColor={{ from: "serieColor" }}
-      pointLabelYOffset={-12}
-      useMesh={true}
-      legends={[
-        {
-          anchor: "bottom-right",
-          direction: "column",
-          justify: false,
-          translateX: 100,
-          translateY: 0,
-          itemsSpacing: 0,
-          itemDirection: "left-to-right",
-          itemWidth: 80,
-          itemHeight: 20,
-          itemOpacity: 0.75,
-          symbolSize: 12,
-          symbolShape: "circle",
-          symbolBorderColor: "rgba(0, 0, 0, .5)",
-          effects: [
-            {
-              on: "hover",
-              style: {
-                itemBackground: "rgba(0, 0, 0, .03)",
-                itemOpacity: 1,
-              },
-            },
-          ],
-        },
-      ]}
+      pointLabelYOffset={-10}
     />
   );
 }

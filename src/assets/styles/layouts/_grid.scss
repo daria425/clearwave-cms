@@ -41,8 +41,8 @@
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(30vw, 1rem) repeat(4, 1fr);
-  grid-template-rows: minmax(30vw, 1rem) auto;
+  grid-template-columns: min-content repeat(4, 1fr);
+
   .colorful-wrapper {
     grid-column: 3 / span 3;
     grid-row-start: span 2;
@@ -51,7 +51,9 @@
     grid-column-start: span 5;
   }
   .chart-container {
+    @include rounded;
     height: 200px;
     grid-column: 1 / span 5;
+    background-color: $surface;
   }
 }
