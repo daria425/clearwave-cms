@@ -5,4 +5,7 @@ const blog_analytics = [
   { page_views: 930, date: "2023-11-12" },
 ];
 
-export { blog_analytics };
+const blog_data = {
+  followers: 345,
+};
+export { blog_analytics, blog_data };

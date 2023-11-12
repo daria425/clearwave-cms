@@ -5,7 +5,10 @@ export default function ChartContainer() {
   const [data, setData] = useState(blog_analytics);
   return (
     <div className="chart-container">
-      <Chart data={data} />
+      <h1>Recent views:</h1>
+      <div className="chart-container--chart-area">
+        <Chart data={data} />
+      </div>
     </div>
   );
 }

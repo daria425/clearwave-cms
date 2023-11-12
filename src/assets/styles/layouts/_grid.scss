@@ -41,10 +41,10 @@
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: min-content repeat(4, 1fr);
+  grid-template-columns: min-content repeat(3, 1fr);
 
   .colorful-wrapper {
-    grid-column: 3 / span 3;
+    grid-column: 2 / span 3;
     grid-row-start: span 2;
   }
   .dropdown-wrapper {
@@ -52,7 +52,7 @@
   }
   .chart-container {
     @include rounded;
-    height: 200px;
+    padding: 0.5rem 0.5rem;
     grid-column: 1 / span 5;
     background-color: $surface;
   }

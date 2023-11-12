@@ -19,7 +19,7 @@ export default function Dashboard() {
   useEffect(() => {
     if (blogPosts.length > 0) {
       setTop({
-        top_post: sortPostsbyGreatestValue(blogPosts),
+        top_post: sortPostsbyGreatestValue(blogPosts, "likes"),
       });
       setDataReady(true);
     }

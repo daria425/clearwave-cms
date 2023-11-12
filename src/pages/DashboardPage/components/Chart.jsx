@@ -38,7 +38,7 @@ export default function Chart({ data }) {
     <ResponsiveLine
       data={dataObject}
       theme={chartTheme}
-      margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+      margin={{ top: 10, right: 50, bottom: 30, left: 50 }}
       xScale={{ type: "point" }}
       yScale={{
         type: "linear",
