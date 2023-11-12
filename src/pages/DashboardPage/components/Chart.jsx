@@ -10,6 +10,7 @@ import {
 } from "../../../assets/styles/modules/_variables.module.scss";
 import { timeFormat } from "d3-time-format";
 import { Group } from "@visx/group";
+import { max } from "d3-array";
 export default function Chart({ data, width, height }) {
   const margin = { top: 20, right: 40, bottom: 20, left: 40 };
   // defining inner measurements
@@ -25,10 +26,11 @@ export default function Chart({ data, width, height }) {
     nice: false,
   });
 
+  const maxValue = max(data, (d) => d.page_views);
   // vertical, y scale
   const rdScale = scaleLinear({
     range: [innerHeight, 0],
-    domain: extent(data, getRD),
+    domain: [0, maxValue],
     nice: true,
   });
   return width <= 0 || height <= 0 ? null : ( //renders with 0 as height first, make it not do that
