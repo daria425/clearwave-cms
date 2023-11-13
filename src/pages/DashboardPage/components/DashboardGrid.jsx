@@ -3,7 +3,9 @@ import AIButtons from "./AIButtons";
 import ChartContainer from "./ChartContainer";
 import TopPostWidget from "./TopPostWidget";
 import { blog_data } from "../../../helpers/mock-data";
-export default function DashboardGrid({ widgetFunctions, blogPosts, top }) {
+import { useOutletContext } from "react-router-dom";
+export default function DashboardGrid() {
+  const { widgetFunctions, blogPosts, top } = useOutletContext();
   return (
     <section className="dashboard-grid">
       <SquareWidget

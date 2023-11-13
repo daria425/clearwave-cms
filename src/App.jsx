@@ -14,6 +14,7 @@ import SummaryView from "./pages/EditPost/components/SummaryView";
 import PostDetailsCard from "./pages/EditPost/components/PostDetailsCard";
 import TextEditor from "./pages/EditPost/components/TextEditor";
 import CategoryDetailPage from "./pages/CategoryDetailsPage/CategoryDetailPage";
+import DashboardGrid from "./pages/DashboardPage/components/DashboardGrid";
 export const appContext = createContext({
   blogPosts: [],
   accessToken: "",
@@ -135,6 +136,7 @@ function App() {
           {
             path: "dashboard",
             element: <Dashboard />,
+            children: [{ path: "", element: <DashboardGrid /> }],
           },
           {
             path: "content",

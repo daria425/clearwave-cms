@@ -4,6 +4,8 @@ import DashboardGrid from "./components/DashboardGrid";
 import { useTokenRefresh } from "../../helpers/Hooks";
 import { useContext, useState, useEffect } from "react";
 import { appContext, contentContext } from "../../App";
+import { Outlet } from "react-router-dom";
+
 import {
   sumObjectProps,
   sortPostsbyGreatestValue,
@@ -59,17 +61,18 @@ export default function Dashboard() {
       console.log(err.message);
     }
   }
+  const outletContext = {
+    blogPosts,
+    top,
+    widgetFunctions: { sumObjectProps, handleContentGPTQuery },
+  };
 
   return (
     <Layout>
       {dataReady > 0 && (
         <section className="content">
           <PageHeading heading={"Dashboard"} />
-          <DashboardGrid
-            widgetFunctions={{ sumObjectProps, handleContentGPTQuery }}
-            blogPosts={blogPosts}
-            top={top}
-          />
+          <Outlet context={outletContext} />
         </section>
       )}
     </Layout>
