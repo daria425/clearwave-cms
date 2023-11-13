@@ -2,6 +2,7 @@
 
 .post-card {
   @include rounded;
+  @include card-transition;
   background-color: $surface;
   line-height: 1.5;
   padding: 30px 30px;
@@ -25,6 +26,7 @@
 
 .category--card {
   @include rounded;
+  @include card-transition;
   background-color: $surface;
   padding: 10px 10px;
   font-weight: 700;
@@ -33,21 +35,31 @@
 
 .post-details-card {
   @include rounded;
+  @include card-transition;
   background-color: $surface;
   padding: 30px 30px;
   line-height: 1.5;
 }
 
 .square-card {
-  @extend .post-details-card;
+  @include rounded;
+  @include card-transition;
+  background-color: $surface;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px 20px;
+
+  &--followers {
+    @extend .square-card;
+    grid-row: 2;
+  }
 }
 
 .square-card-title {
   font-weight: 700;
-  font-size: $font-ml;
+  font-size: $font-l;
 }
-
 .square-card-text {
   text-align: center;
 }

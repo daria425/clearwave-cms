@@ -41,7 +41,8 @@
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: min-content repeat(3, 1fr);
+  grid-template-columns: min(40%, 200px) repeat(3, 1fr);
+  gap: 0.5rem;
 
   .colorful-wrapper {
     grid-column: 2 / span 3;
@@ -52,6 +53,7 @@
   }
   .chart-container {
     @include rounded;
+    @include card-transition;
     padding: 0.5rem 0.5rem;
     grid-column: 1 / span 5;
     background-color: $surface;
