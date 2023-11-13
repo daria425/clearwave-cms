@@ -5,7 +5,8 @@ import TopPostWidget from "./TopPostWidget";
 import { blog_data } from "../../../helpers/mock-data";
 import { useOutletContext } from "react-router-dom";
 export default function DashboardGrid() {
-  const { widgetFunctions, blogPosts, top } = useOutletContext();
+  const { buttonFunctions, widgetFunctions, blogPosts, top } =
+    useOutletContext();
   return (
     <section className="dashboard-grid">
       <SquareWidget
@@ -19,7 +20,7 @@ export default function DashboardGrid() {
       />
       <TopPostWidget post={top.top_post} />
       <ChartContainer />
-      <AIButtons handlerFunction={widgetFunctions.handleContentGPTQuery} />
+      <AIButtons handleModalFunction={buttonFunctions.handleModal} />
     </section>
   );
 }

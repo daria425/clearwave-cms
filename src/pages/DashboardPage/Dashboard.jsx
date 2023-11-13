@@ -1,11 +1,11 @@
 import Layout from "../PageComponents/Layout";
 import PageHeading from "../PageComponents/PageHeading";
-import DashboardGrid from "./components/DashboardGrid";
+import HelpModal from "./components/HelpModal";
 import { useTokenRefresh } from "../../helpers/Hooks";
 import { useContext, useState, useEffect } from "react";
 import { appContext, contentContext } from "../../App";
 import { Outlet } from "react-router-dom";
-
+import Overlay from "../PageComponents/Overlay";
 import {
   sumObjectProps,
   sortPostsbyGreatestValue,
@@ -16,7 +16,22 @@ export default function Dashboard() {
     useContext(appContext);
   const [dataReady, setDataReady] = useState(false);
   const [userTheme, setUserTheme] = useState(["Finance"]);
+  const [modalOpen, setModalOpen] = useState(false);
   const [top, setTop] = useState({});
+  const modalText = {
+    heading: "AI Assitance",
+    body: "Press any of the buttons to open a chat window and get blogging help from an AI Assistant.",
+    list: [
+      {
+        heading: "Content ideas",
+        body: "Generate an intial content strategy, tailored to your blog topic/theme",
+      },
+      {
+        heading: "Keyword research",
+        body: "Conduct comprehensive keyword research for your blog topic/theme ",
+      },
+    ],
+  };
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
   useEffect(() => {
     if (blogPosts.length > 0) {
@@ -27,6 +42,9 @@ export default function Dashboard() {
     }
   }, [blogPosts]);
 
+  function handleModal() {
+    setModalOpen(!modalOpen);
+  }
   async function handleContentGPTQuery(e) {
     e.preventDefault();
 
@@ -64,14 +82,16 @@ export default function Dashboard() {
   const outletContext = {
     blogPosts,
     top,
-    widgetFunctions: { sumObjectProps, handleContentGPTQuery },
+    widgetFunctions: { sumObjectProps },
+    buttonFunctions: { handleModal },
   };
 
   return (
     <Layout>
-      {dataReady > 0 && (
+      {dataReady && (
         <section className="content">
           <PageHeading heading={"Dashboard"} />
+          {modalOpen && <HelpModal modalText={modalText} />}
           <Outlet context={outletContext} />
         </section>
       )}

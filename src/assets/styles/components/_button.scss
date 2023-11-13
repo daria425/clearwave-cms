@@ -53,6 +53,11 @@
     width: 75px;
     margin-top: 10px;
   }
+  &--questionbtn {
+    @extend .btn-primary;
+    min-height: 2.5rem;
+    min-width: 2.5rem;
+  }
   &--new-post-form {
     @extend .btn-primary;
     position: fixed;
