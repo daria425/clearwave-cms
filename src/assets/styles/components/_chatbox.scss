@@ -1,0 +1,50 @@
+@use "../abstracts/" as *;
+
+.chatbox {
+  @include rounded;
+  background: $surface;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
+}
+
+.chatbox-chatinterface {
+  @include rounded;
+  position: relative;
+  flex-grow: 1;
+  background-color: $gray-300;
+  padding: 10px 10px;
+}
+
+.chatbox-message {
+  @include rounded;
+  background-color: $primary-050;
+  max-width: 75%;
+  padding: 10px 10px;
+  box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
+}
+
+.chatbot-heading {
+  font-weight: 700;
+}
+.chatbox-text {
+  color: $surface;
+}
+
+.chatbox-inputarea {
+  display: flex;
+}
+
+.chatbox-input {
+  @include rounded;
+  display: block;
+  border: none;
+  color: $surface;
+  background-color: $primary-050;
+  padding: 10px 5px;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+.chatbox-input:focus {
+  border: 2px solid $primary-400;
+}

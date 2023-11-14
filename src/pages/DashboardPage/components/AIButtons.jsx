@@ -40,13 +40,13 @@ export default function AIButtons({ handleModalFunction }) {
       >
         <ChatButton
           navigationFunction={chatNavigation}
-          feature="content-ideas"
+          feature="content_ideas"
           gptRequest={"CONTENT IDEAS"}
         />
         <ChatButton
           navigationFunction={chatNavigation}
           gptRequest={"KEYWORD RESEARCH"}
-          feature="keyword-research"
+          feature="keyword_research"
         />
       </div>
     </div>

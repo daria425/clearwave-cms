@@ -13,7 +13,12 @@
 
 .content {
   position: relative;
-  padding: 0px 20px;
+  padding: 20px 20px;
+  &--chat {
+    @extend .content;
+    display: grid;
+    grid-template-rows: min-content minmax(50vh, 1fr);
+  }
 }
 .dashboard {
   padding: 0px 20px;
