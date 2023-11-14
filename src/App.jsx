@@ -15,6 +15,7 @@ import PostDetailsCard from "./pages/EditPost/components/PostDetailsCard";
 import TextEditor from "./pages/EditPost/components/TextEditor";
 import CategoryDetailPage from "./pages/CategoryDetailsPage/CategoryDetailPage";
 import DashboardGrid from "./pages/DashboardPage/components/DashboardGrid";
+import ChatPage from "./pages/ChatPage/ChatPage";
 export const appContext = createContext({
   blogPosts: [],
   accessToken: "",
@@ -136,7 +137,7 @@ function App() {
           {
             path: "dashboard",
             element: <Dashboard />,
-            children: [{ path: "", element: <DashboardGrid /> }],
+            children: [{ path: "", element: <DashboardGrid /> }, { path: "" }],
           },
           {
             path: "content",
@@ -167,6 +168,7 @@ function App() {
             path: "category/:id",
             element: <CategoryDetailPage />,
           },
+          { path: "chat/:feature", element: <ChatPage /> },
         ],
       },
     ]);

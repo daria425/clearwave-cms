@@ -1,8 +1,10 @@
 import ChatButton from "./ChatButton";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AccordionIcon from "../../PageComponents/Icons/AccordionIcon";
 export default function AIButtons({ handleModalFunction }) {
   const [showBtns, setShowBtns] = useState(false);
+  const nav = useNavigate();
   const initialStyle = {
     height: "0px",
     overflow: "hidden",
@@ -14,6 +16,10 @@ export default function AIButtons({ handleModalFunction }) {
   function handleShowBtns() {
     setShowBtns(!showBtns);
   }
+
+  function chatNavigation(feature) {
+    nav(`/chat/${feature}`);
+  }
   return (
     <div className="dropdown-wrapper">
       <div className="dropdown-btns-container">
@@ -23,9 +29,7 @@ export default function AIButtons({ handleModalFunction }) {
         </button>
         <button
           className="btn-primary--questionbtn"
-          onClick={() => {
-            handleModalFunction;
-          }}
+          onClick={handleModalFunction}
         >
           ?
         </button>
@@ -34,10 +38,15 @@ export default function AIButtons({ handleModalFunction }) {
         className="dropdown-content-ai-buttons"
         style={showBtns ? secondStyle : initialStyle}
       >
-        <ChatButton handlerFunction={() => {}} gptRequest={"CONTENT IDEAS"} />
         <ChatButton
-          handlerFunction={() => {}}
+          navigationFunction={chatNavigation}
+          feature="content-ideas"
+          gptRequest={"CONTENT IDEAS"}
+        />
+        <ChatButton
+          navigationFunction={chatNavigation}
           gptRequest={"KEYWORD RESEARCH"}
+          feature="keyword-research"
         />
       </div>
     </div>

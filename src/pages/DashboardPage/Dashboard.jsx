@@ -43,6 +43,7 @@ export default function Dashboard() {
   }, [blogPosts]);
 
   function handleModal() {
+    console.log("btn clicked");
     setModalOpen(!modalOpen);
   }
   async function handleContentGPTQuery(e) {
@@ -91,8 +92,11 @@ export default function Dashboard() {
       {dataReady && (
         <section className="content">
           <PageHeading heading={"Dashboard"} />
-          {modalOpen && <HelpModal modalText={modalText} />}
+          {modalOpen && (
+            <HelpModal modalText={modalText} handleModal={handleModal} />
+          )}
           <Outlet context={outletContext} />
+          {modalOpen && <Overlay />}
         </section>
       )}
     </Layout>

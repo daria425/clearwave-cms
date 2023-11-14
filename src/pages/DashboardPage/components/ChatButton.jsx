@@ -1,9 +1,13 @@
-export default function ChatButton({ gptRequest, handlerFunction }) {
+export default function ChatButton({
+  gptRequest,
+  feature,
+  navigationFunction,
+}) {
   return (
     <button
       className="btn-outline"
-      onClick={(e) => {
-        handlerFunction(e);
+      onClick={() => {
+        navigationFunction(feature);
       }}
     >
       {gptRequest}

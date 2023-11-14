@@ -134,6 +134,10 @@
     @extend .btn-icon-light;
     @include corner-button(10px, 10px);
   }
+  &--ai-help {
+    @extend .btn-icon-light;
+    @include corner-button(10px, 10px);
+  }
 }
 
 .btn-icon-dark {
