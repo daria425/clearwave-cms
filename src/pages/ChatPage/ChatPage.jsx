@@ -1,6 +1,7 @@
 import Layout from "../PageComponents/Layout";
 import PageHeading from "../PageComponents/PageHeading";
 import Loader from "../PageComponents/Loader";
+import { mockResponse } from "../../helpers/mock-data";
 import { useParams } from "react-router-dom";
 import { useState, useContext } from "react";
 import { appContext, contentContext } from "../../App";
@@ -9,7 +10,7 @@ import ChatBox from "./components/ChatBox";
 export default function ChatPage() {
   const { feature } = useParams(); //set the feature to use based on url params
   const [userTheme, setUserTheme] = useState("");
-  const [GPTResponse, setGPTResponse] = useState(null);
+  const [GPTResponse, setGPTResponse] = useState(mockResponse);
   const [loading, setLoading] = useState(false);
   const { accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);

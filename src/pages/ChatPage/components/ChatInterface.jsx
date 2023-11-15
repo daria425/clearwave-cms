@@ -8,6 +8,7 @@ export default function ChatInterface({ settings, loading, GPTResponse }) {
         <p className="chatbox-text">{settings.instructions}</p>
       </div>
       {GPTResponse && <ResponseList GPTresponse={GPTResponse} />}
+
       {loading && (
         <div className="loader-container">
           <Loader />

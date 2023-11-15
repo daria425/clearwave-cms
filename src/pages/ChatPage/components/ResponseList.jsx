@@ -1,5 +1,4 @@
 import ResponseMessage from "./ResponseMessage";
-
 export default function ResponseList({ GPTresponse }) {
   return (
     <ul className="response-messagelist">

@@ -1,12 +1,11 @@
 import ChatInterface from "./ChatInterface";
 import ChatCommunication from "./ChatCommunication";
-import { mockResponse } from "../../../helpers/mock-data";
 export default function ChatBox({
   settings,
   userTheme,
   loading,
   handleThemeChange,
-  GPTResponse = mockResponse,
+  GPTResponse,
 }) {
   return (
     <section className="chatbox">
