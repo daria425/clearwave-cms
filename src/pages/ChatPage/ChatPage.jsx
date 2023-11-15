@@ -1,5 +1,6 @@
 import Layout from "../PageComponents/Layout";
 import PageHeading from "../PageComponents/PageHeading";
+import Loader from "../PageComponents/Loader";
 import { useParams } from "react-router-dom";
 import { useState, useContext } from "react";
 import { appContext, contentContext } from "../../App";
@@ -8,6 +9,8 @@ import ChatBox from "./components/ChatBox";
 export default function ChatPage() {
   const { feature } = useParams(); //set the feature to use based on url params
   const [userTheme, setUserTheme] = useState("");
+  const [GPTResponse, setGPTResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
   useTokenRefresh(accessToken, updateAccessToken, refreshToken);
@@ -16,6 +19,7 @@ export default function ChatPage() {
   }
   async function handleContentGPTQuery(e) {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const theme = JSON.stringify(userTheme);
@@ -39,6 +43,12 @@ export default function ChatPage() {
         console.log(data);
         const content = JSON.parse(data.message.content);
         console.log(content);
+        if (content && content.content_ideas) {
+          setGPTResponse(content.content_ideas);
+          console.log(content.content_ideas);
+        } else {
+          setGPTResponse({ content_ideas: content });
+        }
       } else {
         throw new Error(
           `Server response failed with status code: ${response.statusText}`
@@ -46,6 +56,8 @@ export default function ChatPage() {
       }
     } catch (err) {
       console.log(err.message);
+    } finally {
+      setLoading(false);
     }
   }
   const availableFeatures = {
@@ -55,7 +67,7 @@ export default function ChatPage() {
         heading: "Welcome to AI Assisted Content Strategy Development",
         instructions:
           "Simply enter the theme or topic of your blog below and recieve a content strategy plan",
-        handlerFunction: () => {},
+        handlerFunction: handleContentGPTQuery,
       },
     },
     keyword_research: {
@@ -75,6 +87,8 @@ export default function ChatPage() {
           settings={availableFeatures[feature].settings}
           userTheme={userTheme}
           handleThemeChange={handleThemeChange}
+          loading={loading}
+          GPTResponse={GPTResponse}
         />
       </main>
     </Layout>
