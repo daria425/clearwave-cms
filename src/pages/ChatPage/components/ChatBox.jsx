@@ -8,6 +8,7 @@ export default function ChatBox({
   GPTResponse,
   message,
   handleSendMessage,
+  submitHandler,
 }) {
   return (
     <section className="chatbox">
@@ -21,8 +22,9 @@ export default function ChatBox({
       <ChatCommunication
         userTheme={userTheme}
         handlerFunction={handleThemeChange}
-        submitHandler={settings.handlerFunction}
+        submitHandler={submitHandler}
         handleSendMessage={handleSendMessage}
+        endpoint={settings.endpoint}
       />
     </section>
   );

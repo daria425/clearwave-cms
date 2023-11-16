@@ -3,6 +3,7 @@ export default function ChatCommunication({
   handlerFunction,
   submitHandler,
   handleSendMessage,
+  endpoint,
 }) {
   return (
     <form className="chatbox-inputarea">
@@ -21,7 +22,7 @@ export default function ChatCommunication({
         className="btn-primary"
         onClick={(e) => {
           handleSendMessage(userTheme);
-          submitHandler(e);
+          submitHandler(e, endpoint);
         }}
       >
         GENERATE

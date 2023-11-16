@@ -21,4 +21,21 @@ function sortPostsbyGreatestValue(objectArr, propertyName) {
   );
 }
 
-export { sumObjectProps, sortPostsbyGreatestValue };
+function handleObjectResponse(data) {
+  const contentJSON = JSON.parse(data.message.content);
+  const content = Object.values(contentJSON)[0];
+  return content;
+}
+
+function handleStringResponse(data) {
+  const list = data.message.content;
+  const content = list.split(/\d+\. /).filter(Boolean);
+  return content;
+}
+
+export {
+  sumObjectProps,
+  sortPostsbyGreatestValue,
+  handleObjectResponse,
+  handleStringResponse,
+};
