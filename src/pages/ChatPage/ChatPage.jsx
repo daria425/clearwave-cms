@@ -11,7 +11,7 @@ export default function ChatPage() {
   const { feature } = useParams(); //set the feature to use based on url params
   const [userTheme, setUserTheme] = useState("");
   const [message, setMessage] = useState(null);
-  const [GPTResponse, setGPTResponse] = useState(mockResponse);
+  const [GPTResponse, setGPTResponse] = useState(null);
   const [loading, setLoading] = useState(false);
   const { accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
@@ -45,12 +45,7 @@ export default function ChatPage() {
         console.log(data);
         const content = JSON.parse(data.message.content);
         console.log(content);
-        if (content && content.content_ideas) {
-          setGPTResponse(content.content_ideas);
-          console.log(content.content_ideas);
-        } else {
-          setGPTResponse(Object.values(content));
-        }
+        setGPTResponse(Object.values(content)[0]);
       } else {
         throw new Error(
           `Server response failed with status code: ${response.statusText}`

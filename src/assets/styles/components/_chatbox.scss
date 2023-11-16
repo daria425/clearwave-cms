@@ -22,9 +22,9 @@
   max-width: 75%;
   padding: 10px 10px;
   box-shadow: 0px 3px 8px 2px rgba(0, 0, 0, 0.2);
+  transition: left 1.5s;
   &--response {
     @extend .chatbox-message;
-    background-color: $primary-500;
   }
 }
 
@@ -35,7 +35,8 @@
     font-size: $font-ml;
   }
 }
-.chatbox-text {
+.chatbox-text,
+.response-label-span {
   color: $surface;
 }
 
@@ -67,4 +68,16 @@
 
 .response-label-span {
   font-weight: 700;
+}
+
+//user message
+
+.user-message-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.user-message {
+  @extend .chatbox-message;
+  background-color: $primary-500;
 }
