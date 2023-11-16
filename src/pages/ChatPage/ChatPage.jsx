@@ -10,6 +10,7 @@ import ChatBox from "./components/ChatBox";
 export default function ChatPage() {
   const { feature } = useParams(); //set the feature to use based on url params
   const [userTheme, setUserTheme] = useState("");
+  const [message, setMessage] = useState(null);
   const [GPTResponse, setGPTResponse] = useState(mockResponse);
   const [loading, setLoading] = useState(false);
   const { accessToken, updateAccessToken, refreshToken } =
@@ -48,7 +49,7 @@ export default function ChatPage() {
           setGPTResponse(content.content_ideas);
           console.log(content.content_ideas);
         } else {
-          setGPTResponse({ content_ideas: content });
+          setGPTResponse(Object.values(content));
         }
       } else {
         throw new Error(
@@ -65,9 +66,9 @@ export default function ChatPage() {
     content_ideas: {
       page_heading: "Get Content Ideas",
       settings: {
-        heading: "Welcome to AI Assisted Content Strategy Development",
+        heading: "Welcome to the AI Assisted Content Idea Generator",
         instructions:
-          "Simply enter the theme or topic of your blog below and recieve a content strategy plan",
+          "Simply enter the theme or topic of your blog below and recieve potential impactful posts for your topic",
         handlerFunction: handleContentGPTQuery,
       },
     },
@@ -80,6 +81,9 @@ export default function ChatPage() {
       },
     },
   };
+  function handleSendMessage(msg) {
+    setMessage(msg);
+  }
   return (
     <Layout>
       <main className="content--chat">
@@ -90,6 +94,8 @@ export default function ChatPage() {
           handleThemeChange={handleThemeChange}
           loading={loading}
           GPTResponse={GPTResponse}
+          message={message}
+          handleSendMessage={handleSendMessage}
         />
       </main>
     </Layout>
