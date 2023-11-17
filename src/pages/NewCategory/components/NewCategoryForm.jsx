@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { appContext, contentContext } from "../../../App";
 import { useTokenRefresh } from "../../../helpers/Hooks";
+import { domain } from "../../../helpers/domain";
 export default function NewCategoryForm({ handleNameChange, category }) {
   const { accessToken, updateAccessToken, refreshToken } =
     useContext(appContext);
@@ -13,7 +14,7 @@ export default function NewCategoryForm({ handleNameChange, category }) {
         name: category.name,
         posts: JSON.stringify(category.posts),
       };
-      const response = await fetch(`http://localhost:3000/api/category/new`, {
+      const response = await fetch(`${domain}/api/category/new`, {
         method: "POST",
         credentials: "include",
         headers: {

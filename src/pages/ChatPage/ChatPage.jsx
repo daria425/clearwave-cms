@@ -9,6 +9,7 @@ import {
   handleObjectResponse,
 } from "../../helpers/helper-functions";
 import { useNavigate } from "react-router-dom";
+import { domain } from "../../helpers/domain";
 import ChatBox from "./components/ChatBox";
 export default function ChatPage() {
   const { feature } = useParams(); //set the feature to use based on url params
@@ -28,21 +29,18 @@ export default function ChatPage() {
 
     try {
       const theme = JSON.stringify(userTheme);
-      const response = await fetch(
-        `http://localhost:3000/api/gpt/${endpoint}`,
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${accessToken}`,
-            "x-api-key": "svintus", // Include your API key
-          },
-          body: JSON.stringify({
-            theme: theme,
-          }),
-        }
-      );
+      const response = await fetch(`${domain}/api/gpt/${endpoint}`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${accessToken}`,
+          "x-api-key": "svintus", // Include your API key
+        },
+        body: JSON.stringify({
+          theme: theme,
+        }),
+      });
       if (response.ok) {
         const data = await response.json();
         console.log(data);

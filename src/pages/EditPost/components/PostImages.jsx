@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { appContext, contentContext } from "../../../App";
 import DeleteButton from "../../PageComponents/Icons/DeleteButton";
+import { domain } from "../../../helpers/domain";
 export default function PostImages({ selectedPost }) {
   const { accessToken } = useContext(appContext);
   const { syncImageDelete } = useContext(contentContext);
@@ -9,7 +10,7 @@ export default function PostImages({ selectedPost }) {
     console.log(e.target);
     try {
       const response = await fetch(
-        `http://localhost:3000/api/posts/${selectedPost._id}/imagedelete`,
+        `${domain}/api/posts/${selectedPost._id}/imagedelete`,
         {
           method: "POST",
           credentials: "include",

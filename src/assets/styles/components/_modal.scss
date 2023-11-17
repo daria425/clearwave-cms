@@ -9,5 +9,22 @@
   padding: 10px 10px;
   &--ai-help {
     @extend .modal;
+
+    ul {
+      li {
+        list-style: none; //ew
+      }
+    }
   }
+}
+
+.modal--ai-help-body {
+  margin-bottom: 1rem;
+}
+.ai-functionality-name {
+  font-weight: 700;
+}
+
+.ai-functionality-description {
+  font-weight: 400;
 }

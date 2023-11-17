@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useContext } from "react";
 import { appContext, loginContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
+import { domain } from "../../../helpers/domain";
 export default function LoginForm() {
   const nav = useNavigate();
   const { updateAccessToken, updateRefreshToken } = useContext(appContext);
@@ -18,7 +19,7 @@ export default function LoginForm() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/api/login", {
+      const response = await fetch(`${domain}/api/login`, {
         method: "POST",
         credentials: "include",
         headers: {

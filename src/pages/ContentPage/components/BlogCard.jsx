@@ -4,6 +4,7 @@ import { appContext, contentContext } from "../../../App";
 import { format, parseISO } from "date-fns";
 import { useTokenRefresh } from "../../../helpers/Hooks";
 import CloseButton from "../../PageComponents/Icons/CloseButton";
+import { domain } from "../../../helpers/domain";
 import DeletePostButton from "../../PageComponents/Icons/DeletePostButton";
 export default function BlogCard({
   post,
@@ -29,7 +30,7 @@ export default function BlogCard({
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/api/posts/delete", {
+      const response = await fetch(`${domain}/api/posts/delete`, {
         method: "POST",
         credentials: "include",
         headers: {

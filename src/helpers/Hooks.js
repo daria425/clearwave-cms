@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import jwtDecode from "jwt-decode";
+import { domain } from "./domain";
 import { contentContext } from "../App";
 function useTokenRefresh(accessToken, refreshToken, updateAccessToken) {
   const [error, setError] = useState(false);
@@ -17,7 +18,7 @@ function useTokenRefresh(accessToken, refreshToken, updateAccessToken) {
             // Access token is expired
             console.log("Access token is expired. Refreshing...");
 
-            const response = await fetch("http://localhost:3000/api/refresh", {
+            const response = await fetch(`${domain}/api/refresh`, {
               method: "POST",
               credentials: "include",
               headers: {
@@ -59,7 +60,7 @@ function useData(query) {
 
     async function startFetching() {
       try {
-        const json = await fetch(`http://localhost:3000/${query}`);
+        const json = await fetch(`${domain}/${query}`);
         const data = await json.json();
         if (!ignore) {
           setData(data);

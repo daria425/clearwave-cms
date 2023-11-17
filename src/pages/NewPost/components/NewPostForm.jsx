@@ -4,6 +4,7 @@ import { useTokenRefresh } from "../../../helpers/Hooks";
 import NewPostTextEditor from "./NewPostTextEditor";
 import NewPostData from "./NewPostData";
 import PageHeading from "../../PageComponents/PageHeading";
+import { domain } from "../../../helpers/domain";
 export default function NewPostForm({
   newPost,
   handleChange,
@@ -48,7 +49,7 @@ export default function NewPostForm({
         formData.append("image_sources", file);
       }
 
-      const response = await fetch(`http://localhost:3000/api/posts/new`, {
+      const response = await fetch(`${domain}/api/posts/new`, {
         method: "POST",
         credentials: "include",
         headers: {

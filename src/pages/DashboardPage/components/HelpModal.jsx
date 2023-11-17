@@ -9,7 +9,7 @@ export default function HelpModal({ modalText, handleModal }) {
         {modalText.list.map((listitem, index) => (
           <li key={index}>
             <p className="ai-functionality-name">
-              {listitem.heading}:
+              {listitem.heading}:{" "}
               <span className="ai-functionality-description">
                 {listitem.body}
               </span>

@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { appContext, contentContext } from "../../../App";
 import { useTokenRefresh } from "../../../helpers/Hooks";
+import { domain } from "../../../helpers/domain";
 export default function EditForm({
   handleDataUpdate,
   handleResponse,
@@ -52,7 +53,7 @@ export default function EditForm({
         formData.append("image_sources", file);
       }
       const response = await fetch(
-        `http://localhost:3000/api/posts/${selectedPost._id}/update`,
+        `${domain}/api/posts/${selectedPost._id}/update`,
         {
           method: "POST",
           credentials: "include",
@@ -107,7 +108,7 @@ export default function EditForm({
   return (
     <>
       <form
-        action={`http://localhost:3000/api/posts/${id}/update`}
+        action={`${domain}/api/posts/${id}/update`}
         encType="multipart/form-data"
         className="edit-form"
       >
