@@ -1,7 +1,7 @@
 import Loader from "../../PageComponents/Loader";
 import ResponseList from "./ResponseList";
 import UserMessage from "./UserMessage";
-import SimpleList from "../SimpleList";
+import SimpleList from "./SimpleList";
 import { useParams } from "react-router-dom";
 export default function ChatInterface({
   settings,
@@ -31,7 +31,7 @@ export default function ChatInterface({
       {message && <UserMessage message={message} />}
       {GPTResponse && (
         <>
-          {feature === "content_strategy" && (
+          {feature === "content_ideas" && (
             <ResponseList GPTresponse={GPTResponse} />
           )}
           {feature === "keyword_research" && (

@@ -17,7 +17,7 @@
   &--chat {
     @extend .content;
     display: grid;
-    grid-template-rows: min-content minmax(50vh, 1fr);
+    grid-template-rows: min-content 50vh;
   }
 }
 .dashboard {

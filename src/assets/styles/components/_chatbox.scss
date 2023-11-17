@@ -3,9 +3,9 @@
 .chatbox {
   @include rounded;
   background: $surface;
+  padding: 10px 10px;
   display: flex;
   flex-direction: column;
-  padding: 10px 10px;
 }
 
 .chatbox-chatinterface {
@@ -14,6 +14,8 @@
   flex-grow: 1;
   background-color: $gray-300;
   padding: 10px 10px;
+  max-height: calc(50vh - 40px);
+  overflow: auto;
 }
 
 .chatbox-message {
@@ -38,6 +40,7 @@
 .chatbox-text,
 .response-label-span {
   color: $surface;
+  display: block;
 }
 
 .chatbox-inputarea {
@@ -81,3 +84,5 @@
   @extend .chatbox-message;
   background-color: $primary-500;
 }
+
+//

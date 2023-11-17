@@ -8,6 +8,7 @@ import {
   handleStringResponse,
   handleObjectResponse,
 } from "../../helpers/helper-functions";
+import { mockResponse } from "../../helpers/mock-data";
 import ChatBox from "./components/ChatBox";
 export default function ChatPage() {
   const { feature } = useParams(); //set the feature to use based on url params
@@ -83,7 +84,7 @@ export default function ChatPage() {
       settings: {
         heading: "Welcome to AI Assisted Keyword Research",
         instructions:
-          "Simply enter the theme or topic of your blog below and recieve a content strategy plan",
+          "Simply enter the theme or topic of your blog below and recieve a list of 20 high-ranking keywords",
         endpoint: "keyword-strategy",
       },
     },
