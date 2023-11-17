@@ -18,7 +18,8 @@
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.16.0"
+    "react-router-dom": "^6.16.0",
+    "sass": "^1.69.5"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.4",
@@ -32,7 +33,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "jsdom": "^22.1.0",
-    "sass": "^1.69.4",
     "vite": "^4.4.5",
     "vitest": "^0.34.6"
   }
