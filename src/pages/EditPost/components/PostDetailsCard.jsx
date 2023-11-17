@@ -1,5 +1,5 @@
 import PostImages from "./PostImages";
-import BackButton from "../../PageComponents/Icons/BackButton";
+
 import AccordionIcon from "../../PageComponents/Icons/AccordionIcon";
 import { useState } from "react";
 
@@ -21,9 +21,7 @@ export default function PostDetailsCard() {
   function handleShowMainText() {
     setShowMainText(!showMainText);
   }
-  function handleBackNavigation() {
-    nav(`../../${selectedPost._id}/edit`, { relative: "path" });
-  }
+
   if (!selectedPost) {
     return <p>Loading...</p>;
   }
@@ -70,7 +68,6 @@ export default function PostDetailsCard() {
           ))}
         </ul>
       </section>
-      <BackButton navigationFunction={handleBackNavigation} />
     </>
   );
 }

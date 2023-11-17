@@ -64,3 +64,14 @@
     background-color: $surface;
   }
 }
+
+.page-top {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  border-bottom: 2px solid #fff;
+  &--no-btn {
+    @extend .page-top;
+    place-items: baseline;
+  }
+}

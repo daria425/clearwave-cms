@@ -8,7 +8,7 @@ import {
   handleStringResponse,
   handleObjectResponse,
 } from "../../helpers/helper-functions";
-import { mockResponse } from "../../helpers/mock-data";
+import { useNavigate } from "react-router-dom";
 import ChatBox from "./components/ChatBox";
 export default function ChatPage() {
   const { feature } = useParams(); //set the feature to use based on url params

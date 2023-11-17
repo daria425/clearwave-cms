@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { contentContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import Category from "./components/Category";
+import PageHeading from "../PageComponents/PageHeading";
 
 export default function CategoryPage() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ export default function CategoryPage() {
         <p>Loading...</p> // Display a loading message or spinner while loading
       ) : (
         <main>
+          <PageHeading heading={"Categories"} />
           <section className="categories">
             <ul className="categories-wrapper">
               {categories.map((category) => (
