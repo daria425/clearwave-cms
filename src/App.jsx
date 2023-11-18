@@ -16,6 +16,7 @@ import TextEditor from "./pages/EditPost/components/TextEditor";
 import CategoryDetailPage from "./pages/CategoryDetailsPage/CategoryDetailPage";
 import DashboardGrid from "./pages/DashboardPage/components/DashboardGrid";
 import ChatPage from "./pages/ChatPage/ChatPage";
+import "./assets/styles/main.scss";
 export const appContext = createContext({
   blogPosts: [],
   accessToken: "",
