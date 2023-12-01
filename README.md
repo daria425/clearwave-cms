@@ -9,6 +9,6 @@
 </ul>
 <h5>Test Login Info:</h5>
 <ul>
-  <li><h6>Username: daria</h6></li>
+  <li><h6>Username: test</h6></li>
   <li><h6>Password: 123</h6></li>
 </ul>
